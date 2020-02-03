@@ -1,0 +1,19 @@
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "_assets": "./assets/",
+          "_components": "./screens/components/",
+          "_typography": "./theme/typography.js",
+          "_palette": "./theme/palette.js",
+          "_metrics": "./theme/metrics.js",
+          "_globals": "./theme/globals",
+          "_zIndex": "./theme/zIndex"
+        }
+      }
+    ]
+  ]
+}
