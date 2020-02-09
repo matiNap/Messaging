@@ -1,9 +1,9 @@
 export default {
-  primary: "#1779ba",
-  secondary: "#767676",
+  primary: "#811cb0",
+  secondary: "#fff",
   text: {
-    primary: "#000",
-    secondary: "fff"
+    primary: "#303030",
+    secondary: "#e8e8e8"
   },
   actions: {
     succes: "#3adb76",

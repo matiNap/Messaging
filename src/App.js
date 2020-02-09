@@ -21,7 +21,8 @@ export default class App extends React.Component {
   async componentDidMount() {
     if (!this.state.fontLoaded) {
       await Font.loadAsync({
-        prompt: require("./assets/fonts/Prompt.ttf")
+        prompt: require("./assets/fonts/Prompt.ttf"),
+        rubik: require("./assets/fonts/rubik.ttf")
       });
       this.setState({ fontLoaded: true });
     }

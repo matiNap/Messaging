@@ -9,6 +9,7 @@ module.exports = {
         paths: [""],
         alias: {
           _assets: "./assets",
+          _helpers: "./helpers",
           _components: "./screens/components",
           _typography: "./theme/typography.js",
           _palette: "./theme/palette.js",

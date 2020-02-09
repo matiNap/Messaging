@@ -5,6 +5,7 @@
       {
         "root": ["./"],
         "alias": {
+          "_helpers": "./helpers/",
           "_assets": "./assets/",
           "_components": "./screens/components/",
           "_typography": "./theme/typography.js",
