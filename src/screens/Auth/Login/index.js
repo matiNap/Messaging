@@ -16,18 +16,21 @@ import {
   followPointer,
   getProgress
 } from "./animationHelpers";
+import { runTiming } from "_helpers/animations";
 
-const { event, Value, sub } = Animated;
+const { event, Value, sub, set } = Animated;
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    this.back = new Value(0);
     this.x = new Value(metrics.screenWidth / 2);
     this.y = new Value(0);
     this.velocityY = new Value(0);
     this.pageX = new Value(metrics.screenWidth / 2);
     this.pageY = new Value(0);
     this.opened = new Value(0);
+
     this.gestureState = new Value(State.UNDETERMINED);
     this.gestureHandler = event([
       {
@@ -43,11 +46,16 @@ class Login extends React.Component {
     ]);
   }
   render() {
-    const swipeY = waveSwipeY(this.gestureState, this.y, this.opened);
+    const swipeY = waveSwipeY(
+      this.gestureState,
+      this.y,
+      this.opened,
+      this.back
+    );
     const { svgHeight } = metrics.login;
     const waveHeight = svgHeight / 2;
     const centerX = followPointer(this.pageX);
-    const progress = getProgress(this.y);
+    const progress = getProgress(swipeY, this.opened);
     const verticalRadius = waveVerticalRadius(
       progress,
       this.gestureState,
@@ -67,7 +75,13 @@ class Login extends React.Component {
         >
           <Animated.View style={{ flex: 1 }}>
             <SignIn translateY={sub(swipeY, metrics.screenHeight)} />
-            <SignUp translateY={swipeY} />
+            <SignUp
+              translateY={swipeY}
+              backToSignIn={() => {
+                this.back.setValue(1);
+                this.opened.setValue(0);
+              }}
+            />
             <Wave
               centerX={centerX}
               waveHeight={waveHeight}

@@ -2,6 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "_actions": ["./actions/*"],
+      "_hocs": ["./hocs/*"],
+      "_apis": ["./apis/*"],
       "_assets": ["./assets/*"],
       "_helpers": ["./helpers/*"],
       "_components": ["./screens/components/*"],
@@ -11,5 +14,4 @@
       "_globals": ["./theme/globals.js"],
       "_zIndex": ["./theme/zIndex.js"]
     }
-  }
 }

@@ -8,8 +8,12 @@ module.exports = {
       node: {
         paths: [""],
         alias: {
-          _assets: "./assets",
-          _helpers: "./helpers",
+          _actions: "./actions/*",
+          _navigation: "./navigationService.js",
+          _hocs: "./hocs/",
+          _apis: "./apis/*",
+          _assets: "./assets/",
+          _helpers: "./helpers/",
           _components: "./screens/components",
           _typography: "./theme/typography.js",
           _palette: "./theme/palette.js",

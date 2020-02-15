@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet, Button, Text } from "react-native";
-import { navigate } from "../../navigationService";
+import { navigate } from "_navigation";
 
 const Screen2 = props => {
   return (

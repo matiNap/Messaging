@@ -5,11 +5,12 @@ import * as Font from "expo-font";
 import { View } from "react-native";
 import { StyleProvider } from "native-base";
 
+import { SafeAreaProvider } from "react-native-safe-area-view";
+import * as navigationService from "./navigationService";
 import getTheme from "./native-base-theme/components";
 import AppContainer from "./screens/AppContainer";
-import { SafeAreaProvider } from "react-native-safe-area-view";
 import { store, persistor } from "./store";
-import * as navigationService from "./screens/navigationService";
+import reactotron from "reactotron-react-native";
 
 console.disableYellowBox = true;
 

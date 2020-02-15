@@ -4,15 +4,18 @@ import { StyleSheet } from "react-native";
 import metrics from "_metrics";
 import palette from "_palette";
 import typography from "_typography";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 const Button = props => {
-  const { style, secondary } = props;
+  const { style, secondary, onPress } = props;
   const backgroundColor = secondary ? palette.secondary : palette.primary;
   const color = secondary ? palette.primary : palette.secondary;
   return (
-    <View style={[styles.container, { backgroundColor }, style]}>
-      <Text style={[styles.text, { color }]}>Sign in</Text>
-    </View>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={[styles.container, { backgroundColor }, style]}>
+        <Text style={[styles.text, { color }]}>Sign in</Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

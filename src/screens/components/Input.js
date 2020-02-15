@@ -7,12 +7,25 @@ import metrics from "_metrics";
 import typography from "_typography";
 
 const Input = props => {
-  const { placeholder, style, textInputStyle, secondary } = props;
+  const {
+    placeholder,
+    style,
+    type,
+    secureTextEntry,
+    textInputStyle,
+    secondary,
+    onChangeText,
+    value
+  } = props;
   const borderColor = secondary ? palette.secondary : palette.primary;
   const color = secondary ? palette.text.secondary : palette.grayscale.medium;
   return (
     <View style={[styles.container, { borderColor }, style]}>
       <TextInput
+        value={value}
+        secureTextEntry={secureTextEntry}
+        textContentType={type}
+        onChangeText={onChangeText}
         placeholder={placeholder}
         style={[styles.textInput, { color }, textInputStyle]}
       />
@@ -30,7 +43,8 @@ const styles = StyleSheet.create({
   textInput: {
     fontSize: typography.fontSize.normal,
     padding: 5,
-    marginLeft: metrics.margin.small
+    marginLeft: metrics.margin.small,
+    flexGrow: 2
   }
 });
 

@@ -2,6 +2,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "_actions": ["./actions/*"],
+      "_navigation": ["./navigationService.js"],
+      "_hocs": ["./hocs/*"],
+      "_apis": ["./apis/*"],
       "_assets": ["./assets/*"],
       "_helpers": ["./helpers/*"],
       "_components": ["./screens/components/*"],

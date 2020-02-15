@@ -5,6 +5,10 @@
       {
         "root": ["./"],
         "alias": {
+          "_navigation": "./navigationService.js",
+          "_apis": "./apis/",
+          "_actions": "./actions/",
+          "_hocs": "./hocs/",
           "_helpers": "./helpers/",
           "_assets": "./assets/",
           "_components": "./screens/components/",

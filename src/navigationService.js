@@ -1,4 +1,5 @@
 import { NavigationActions } from "react-navigation";
+import reactotron from "reactotron-react-native";
 
 let _navigator;
 

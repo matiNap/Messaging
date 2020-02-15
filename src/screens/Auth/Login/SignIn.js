@@ -18,12 +18,12 @@ class SignIn extends Component {
         <Text style={styles.title}>Sign in</Text>
         <View style={styles.inputContainer}>
           <Input
-            placeholder="email"
+            placeholder="Email"
             style={styles.input}
             textInputStyle={styles.textInput}
           />
           <Input
-            placeholder="password"
+            placeholder="Password"
             style={styles.input}
             textInputStyle={styles.textInput}
           />

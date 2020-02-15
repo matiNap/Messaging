@@ -74,7 +74,6 @@ export const runSpring = (
       startClock(clock)
     ]),
     spring(clock, state, config),
-    cond(state.finished, [stopClock(clock)]),
-    state.finished
+    cond(state.finished, [stopClock(clock)])
   ];
 };

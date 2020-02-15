@@ -38,47 +38,50 @@ const {
 export const waveSwipeY = (
   gestureState: State,
   y: Animated.Node<number>,
-  opened: Animated.Node<number>
+  opened: Animated.Node<number>,
+  back: Animated.Node<number>
 ) => {
   const swipeY = new Value(metrics.screenHeight);
   return block([
-    cond(eq(gestureState, State.ACTIVE), [
-      cond(
-        eq(opened, 0),
-        [
+    cond(
+      eq(back, 0),
+      [
+        cond(eq(gestureState, State.ACTIVE), [
           cond(
-            lessThan(y, 0),
-            set(swipeY, add(0, add(metrics.screenHeight, y)))
+            eq(opened, 0),
+            [
+              cond(
+                lessThan(y, 0),
+                set(swipeY, add(0, add(metrics.screenHeight, y)))
+              )
+            ],
+            [cond(greaterThan(y, 0), set(swipeY, add(0, y)))]
           )
-        ],
-        [cond(greaterThan(y, 0), set(swipeY, add(0, y)))]
-      )
-    ]),
-    cond(eq(gestureState, State.END), [
-      cond(
-        greaterThan(y, metrics.login.swipe),
-        [
-          runTiming(swipeY, metrics.screenHeight, () => {
-            opened.setValue(0);
-          }),
-          set(opened, 0)
-        ],
-        cond(
-          lessThan(y, -metrics.login.swipe),
-          [
-            runTiming(swipeY, 0, () => {
-              opened.setValue(1);
-            }),
-            set(opened, 1)
-          ],
+        ]),
+        cond(eq(gestureState, State.END), [
           cond(
-            eq(opened, 1),
-            [runTiming(swipeY, 0)],
-            [runTiming(swipeY, metrics.screenHeight)]
+            greaterThan(y, metrics.login.swipe),
+            [
+              runTiming(swipeY, metrics.screenHeight, () => {
+                opened.setValue(0);
+              }),
+              set(opened, 0)
+            ],
+            cond(
+              lessThan(y, -metrics.login.swipe),
+              [
+                runTiming(swipeY, 0, () => {
+                  opened.setValue(1);
+                }),
+                set(opened, 1)
+              ],
+              cond(eq(opened, 1), [runTiming(swipeY, 0)])
+            )
           )
-        )
-      )
-    ]),
+        ])
+      ],
+      cond(runTiming(swipeY, metrics.screenHeight), [set(back, 0)])
+    ),
     swipeY
   ]);
 };

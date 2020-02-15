@@ -7,28 +7,157 @@ import palette from "_palette";
 import metrics from "_metrics";
 import Button from "_components/Button";
 import Animated from "react-native-reanimated";
+import { connect } from "react-redux";
+import validator from "email-validator";
+import { createUser } from "_actions/creators/app";
+import Loader from "_components/Loader";
+import ConnectionInfo from "./components/ConnectionInfo";
+
+// Input names
+const USERNAME = "username";
+const EMAIL = "email";
+const FNAME = "fname";
+const SNAME = "sname";
+const PASS = "pass";
+const RPASS = "rpass";
 
 class SignUp extends Component {
+  state = {
+    inputs: {
+      [USERNAME]: "mati579",
+      [EMAIL]: "matipl578@gmail.com",
+      [FNAME]: "Mati",
+      [SNAME]: "Nap",
+      [PASS]: "mati123",
+      [RPASS]: "mati123"
+    },
+    message: "",
+    visible: false
+  };
+
+  onInputChange = (name, text) => {
+    this.setState(prevState => ({
+      inputs: {
+        ...prevState.inputs,
+        [name]: text
+      }
+    }));
+  };
+
+  setMessage = message => {
+    this.setState({ message });
+  };
+
+  handleForms = () => {
+    const { username, email, fname, sname, pass, rpass } = this.state.inputs;
+    if (!username || !email || !fname || !sname || !pass || !rpass) {
+      this.setMessage("Enter valid data");
+    } else if (!validator.validate(email)) {
+      this.setMessage("Inavlid email");
+    } else if (pass.length < 6) {
+      this.setMessage("Password must be at least 6 characters");
+    } else if (pass !== rpass) {
+      this.setMessage("Passwords are diffren");
+    } else {
+      this.props.createUser(
+        { username, email, fname, sname, password: pass },
+        () => {
+          this.props.backToSignIn();
+          this.setState({ inputs: {} });
+          this.setState({ visible: false });
+        },
+        error => {
+          this.setMessage("Can not create account");
+          this.setState({ visible: false });
+        }
+      );
+      this.setState({ visible: true });
+    }
+  };
+
   render() {
-    const { style, translateY } = this.props;
+    const { translateY } = this.props;
+    const { message, inputs, visible } = this.state;
     return (
       <Animated.View style={[styles.container, { translateY }]}>
         <Text style={styles.title}>Sign up</Text>
         <View style={styles.inputContainer}>
-          <Input placeholder="Username" style={styles.input} secondary />
-          <Input placeholder="email" style={styles.input} secondary />
+          <Input
+            value={inputs[USERNAME]}
+            type="username"
+            placeholder="Username"
+            style={styles.input}
+            secondary
+            onChangeText={text => {
+              this.onInputChange(USERNAME, text);
+            }}
+          />
+          <Input
+            value={inputs[EMAIL]}
+            type="emailAddress"
+            placeholder="email"
+            style={styles.input}
+            secondary
+            onChangeText={text => {
+              this.onInputChange(EMAIL, text);
+            }}
+          />
           <View style={styles.inputNameContainer}>
             <Input
+              value={inputs[FNAME]}
+              type="name"
               placeholder="First name"
               style={styles.fnameInput}
               secondary
+              onChangeText={text => {
+                this.onInputChange(FNAME, text);
+              }}
             />
-            <Input placeholder="Surname" style={styles.snameInput} secondary />
+            <Input
+              value={inputs[SNAME]}
+              type="name"
+              placeholder="Surname"
+              style={styles.snameInput}
+              secondary
+              onChangeText={text => {
+                this.onInputChange(SNAME, text);
+              }}
+            />
           </View>
-          <Input placeholder="Password" style={styles.input} secondary />
-          <Input placeholder="Repeat password" style={styles.input} secondary />
+          <Input
+            value={inputs[PASS]}
+            secureTextEntry
+            type="password"
+            placeholder="Password"
+            style={styles.input}
+            secondary
+            onChangeText={text => {
+              this.onInputChange(PASS, text);
+            }}
+          />
+          <Input
+            value={inputs[RPASS]}
+            secureTextEntry
+            type="password"
+            placeholder="Repeat password"
+            style={styles.input}
+            secondary
+            onChangeText={text => {
+              this.onInputChange(RPASS, text);
+            }}
+          />
         </View>
-        <Button title="Create" style={styles.button} secondary />
+
+        <Text style={styles.warningText}>{message}</Text>
+
+        <Button
+          title="Create"
+          style={styles.button}
+          secondary
+          onPress={this.handleForms}
+        />
+        <Loader visible={visible} />
+        <ConnectionInfo />
       </Animated.View>
     );
   }
@@ -73,8 +202,14 @@ const styles = StyleSheet.create({
   button: {
     width: "70%",
     alignSelf: "center",
-    marginTop: metrics.margin.big
+    marginTop: metrics.margin.medium
+  },
+  warningText: {
+    color: palette.actions.error,
+    fontSize: typography.fontSize.small,
+    alignSelf: "center",
+    marginTop: metrics.margin.small
   }
 });
 
-export default SignUp;
+export default connect(null, { createUser })(SignUp);
