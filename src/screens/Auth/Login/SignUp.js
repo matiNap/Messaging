@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import validator from "email-validator";
 import { createUser } from "_actions/creators/app";
 import Loader from "_components/Loader";
-import ConnectionInfo from "./components/ConnectionInfo";
+import ConnectionInfo from "_components/ConnectionInfo";
 
 // Input names
 const USERNAME = "username";

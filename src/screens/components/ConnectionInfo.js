@@ -13,18 +13,18 @@ class ConnectionInfo extends Component {
   constructor(props) {
     super(props);
     this.value = new Value(0);
-    this.unsubscribe = NetInfo.addEventListener(state => {
-      console.log(state);
-      if (state.isConnected) {
-        runTiming(this.value, 10);
-      } else {
-        runTiming(this.value, 0);
-      }
+    // this.unsubscribe = NetInfo.addEventListener(state => {
+    //   console.log(state);
+    //   if (state.isConnected) {
+    //     runTiming(this.value, 10);
+    //   } else {
+    //     runTiming(this.value, 0);
+    //   }
+    // });
+    NetInfo.fetch().then(state => {
+      console.log("Connection type", state.type);
+      console.log("Is connected?", state.isConnected);
     });
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
   }
 
   render() {
