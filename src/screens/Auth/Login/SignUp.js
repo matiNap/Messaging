@@ -1,46 +1,46 @@
-import React, { Component } from "react";
-import { Container, Text, View } from "native-base";
-import Input from "_components/Input";
-import { StyleSheet } from "react-native";
-import typography from "_typography";
-import palette from "_palette";
-import metrics from "_metrics";
-import Button from "_components/Button";
-import Animated from "react-native-reanimated";
-import { connect } from "react-redux";
-import validator from "email-validator";
-import { createUser } from "_actions/creators/app";
-import Loader from "_components/Loader";
-import ConnectionInfo from "_components/ConnectionInfo";
+import React, { Component } from 'react';
+import { Container, Text, View } from 'native-base';
+import Input from '_components/Input';
+import { StyleSheet } from 'react-native';
+import typography from '_typography';
+import palette from '_palette';
+import metrics from '_metrics';
+import Button from '_components/Button';
+import Animated from 'react-native-reanimated';
+import { connect } from 'react-redux';
+import validator from 'email-validator';
+import { createUser } from '_actions/creators/app';
+import Loader from '_components/Loader';
+import ConnectionInfo from '_components/ConnectionInfo';
 
 // Input names
-const USERNAME = "username";
-const EMAIL = "email";
-const FNAME = "fname";
-const SNAME = "sname";
-const PASS = "pass";
-const RPASS = "rpass";
+const USERNAME = 'username';
+const EMAIL = 'email';
+const FNAME = 'fname';
+const SNAME = 'sname';
+const PASS = 'pass';
+const RPASS = 'rpass';
 
 class SignUp extends Component {
   state = {
     inputs: {
-      [USERNAME]: "mati579",
-      [EMAIL]: "matipl578@gmail.com",
-      [FNAME]: "Mati",
-      [SNAME]: "Nap",
-      [PASS]: "mati123",
-      [RPASS]: "mati123"
+      [USERNAME]: 'mati579',
+      [EMAIL]: 'matipl578@gmail.com',
+      [FNAME]: 'Mati',
+      [SNAME]: 'Nap',
+      [PASS]: 'mati123',
+      [RPASS]: 'mati123',
     },
-    message: "",
-    visible: false
+    message: '',
+    visible: false,
   };
 
   onInputChange = (name, text) => {
     this.setState(prevState => ({
       inputs: {
         ...prevState.inputs,
-        [name]: text
-      }
+        [name]: text,
+      },
     }));
   };
 
@@ -49,15 +49,22 @@ class SignUp extends Component {
   };
 
   handleForms = () => {
-    const { username, email, fname, sname, pass, rpass } = this.state.inputs;
+    const {
+      username,
+      email,
+      fname,
+      sname,
+      pass,
+      rpass,
+    } = this.state.inputs;
     if (!username || !email || !fname || !sname || !pass || !rpass) {
-      this.setMessage("Enter valid data");
+      this.setMessage('Enter valid data');
     } else if (!validator.validate(email)) {
-      this.setMessage("Inavlid email");
+      this.setMessage('Inavlid email');
     } else if (pass.length < 6) {
-      this.setMessage("Password must be at least 6 characters");
+      this.setMessage('Password must be at least 6 characters');
     } else if (pass !== rpass) {
-      this.setMessage("Passwords are diffren");
+      this.setMessage('Passwords are diffren');
     } else {
       this.props.createUser(
         { username, email, fname, sname, password: pass },
@@ -67,9 +74,9 @@ class SignUp extends Component {
           this.setState({ visible: false });
         },
         error => {
-          this.setMessage("Can not create account");
+          this.setMessage('Can not create account');
           this.setState({ visible: false });
-        }
+        },
       );
       this.setState({ visible: true });
     }
@@ -78,6 +85,7 @@ class SignUp extends Component {
   render() {
     const { translateY } = this.props;
     const { message, inputs, visible } = this.state;
+
     return (
       <Animated.View style={[styles.container, { translateY }]}>
         <Text style={styles.title}>Sign up</Text>
@@ -165,51 +173,51 @@ class SignUp extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
+    position: 'absolute',
     backgroundColor: palette.primary,
     width: metrics.screenWidth,
     height: metrics.screenHeight,
     top: 0,
-    left: 0
+    left: 0,
   },
   title: {
     fontSize: typography.fontSize.big,
     color: palette.secondary,
-    alignSelf: "center",
-    marginTop: 70
+    alignSelf: 'center',
+    marginTop: 70,
   },
   inputContainer: {
     marginTop: 30,
-    width: "85%",
-    alignSelf: "center"
+    width: '85%',
+    alignSelf: 'center',
   },
   inputNameContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginVertical: metrics.margin.normal
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: metrics.margin.normal,
   },
   fnameInput: {
     flex: 1,
-    marginRight: 5
+    marginRight: 5,
   },
   snameInput: {
     flex: 1,
-    marginLeft: 5
+    marginLeft: 5,
   },
   input: {
-    marginVertical: metrics.margin.normal
+    marginVertical: metrics.margin.normal,
   },
   button: {
-    width: "70%",
-    alignSelf: "center",
-    marginTop: metrics.margin.medium
+    width: '70%',
+    alignSelf: 'center',
+    marginTop: metrics.margin.medium,
   },
   warningText: {
     color: palette.actions.error,
     fontSize: typography.fontSize.small,
-    alignSelf: "center",
-    marginTop: metrics.margin.small
-  }
+    alignSelf: 'center',
+    marginTop: metrics.margin.small,
+  },
 });
 
 export default connect(null, { createUser })(SignUp);

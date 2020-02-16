@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { StyleSheet } from "react-native";
-import { Text, View, Container } from "native-base";
-import Button from "_components/Button";
-import Input from "_components/Input";
-import globals from "_globals";
-import typography from "_typography";
-import palette from "_palette";
-import metrics from "_metrics";
-import Animated from "react-native-reanimated";
+import React, { Component } from 'react';
+import { StyleSheet } from 'react-native';
+import { Text, View, Container } from 'native-base';
+import Button from '_components/Button';
+import Input from '_components/Input';
+import globals from '_globals';
+import typography from '_typography';
+import metrics from '_metrics';
+import Animated from 'react-native-reanimated';
+import palette from '_palette';
 
 class SignIn extends Component {
   render() {
@@ -38,32 +38,32 @@ const styles = StyleSheet.create({
   appName: {
     fontSize: 55,
     color: palette.primary,
-    alignSelf: "center",
+    alignSelf: 'center',
     marginTop: 60,
-    padding: metrics.padding.normal
+    padding: metrics.padding.normal,
   },
   title: {
     fontSize: typography.fontSize.big,
     color: palette.primary,
     marginTop: 30,
-    alignSelf: "center"
+    alignSelf: 'center',
   },
   input: {
-    marginVertical: metrics.margin.medium
+    marginVertical: metrics.margin.medium,
   },
   inputContainer: {
-    alignSelf: "center",
-    width: "70%",
-    marginTop: metrics.margin.medium
+    alignSelf: 'center',
+    width: '70%',
+    marginTop: metrics.margin.medium,
   },
   textInput: {
-    fontSize: typography.fontSize.medium
+    fontSize: typography.fontSize.medium,
   },
   button: {
-    width: "45%",
-    alignSelf: "center",
-    marginTop: metrics.margin.big
-  }
+    width: '45%',
+    alignSelf: 'center',
+    marginTop: metrics.margin.big,
+  },
 });
 
 export default SignIn;

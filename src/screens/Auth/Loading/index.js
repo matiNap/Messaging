@@ -1,13 +1,18 @@
-import React, { Component } from "react";
-import { Text, View, StyleSheet, TouchableWithoutFeedback } from "react-native";
-import withAuth from "_hocs/withAuth";
-import Wave from "./componenets/Wave";
-import { waveVerticalRadius } from "./animationHelpers";
-import { connect } from "react-redux";
-import { navigate } from "../../../navigationService";
-import globals from "_globals";
-import palette from "_palette";
-import metrics from "_metrics";
+import React, { Component } from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from 'react-native';
+import withAuth from '_hocs/withAuth';
+import Wave from './componenets/Wave';
+import { waveVerticalRadius } from './animationHelpers';
+import { connect } from 'react-redux';
+import { navigate } from '../../../navigationService';
+import globals from '_globals';
+import palette from '_palette';
+import metrics from '_metrics';
 
 class Loading extends React.Component {
   componentDidMount() {
@@ -24,11 +29,16 @@ class Loading extends React.Component {
     return (
       <TouchableWithoutFeedback
         onPress={() => {
-          navigate("login");
+          navigate('login');
         }}
       >
         <View style={{ flex: 1 }}>
-          <View style={[StyleSheet.absoluteFill, { justifyContent: "center" }]}>
+          <View
+            style={[
+              StyleSheet.absoluteFill,
+              { justifyContent: 'center' },
+            ]}
+          >
             <Wave verticalRadius={verticalRadius}>
               <Text style={styles.loading}>Loading</Text>
             </Wave>
@@ -43,24 +53,24 @@ const styles = StyleSheet.create({
   appName: {
     fontSize: 50,
     color: palette.secondary,
-    alignSelf: "center",
-    fontWeight: "bold",
-    position: "absolute",
-    top: metrics.screenHeight / 3
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    position: 'absolute',
+    top: metrics.screenHeight / 3,
   },
   loading: {
     fontSize: 35,
     color: palette.primary,
-    alignSelf: "center",
-    fontWeight: "bold",
-    position: "absolute",
-    top: metrics.screenHeight / 2.2
-  }
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    position: 'absolute',
+    top: metrics.screenHeight / 2.2,
+  },
 });
 
 const mapStateToProps = state => {
   return {
-    signedIn: state.app.user.signedIn
+    signedIn: state.app.user.signedIn,
   };
 };
 
