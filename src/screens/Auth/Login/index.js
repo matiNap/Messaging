@@ -1,22 +1,26 @@
-import React from "react";
-import { StyleSheet } from "react-native";
-import { View } from "native-base";
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { View } from 'native-base';
 
-import SignUp from "./SignUp";
-import Wave from "./components/Wave";
-import SignIn from "./SignIn";
-import { PanGestureHandler, State } from "react-native-gesture-handler";
-import Animated from "react-native-reanimated";
-import metrics from "_metrics";
-import palette from "_palette";
+import SignUp from './SignUp';
+import Wave from './components/Wave';
+import SignIn from './SignIn';
+import {
+  PanGestureHandler,
+  State,
+} from 'react-native-gesture-handler';
+import Animated from 'react-native-reanimated';
+import metrics from '_metrics';
+import palette from '_palette';
 import {
   waveSwipeY,
   waveHorizontalRadius,
   waveVerticalRadius,
   followPointer,
-  getProgress
-} from "./animationHelpers";
-import { runTiming } from "_helpers/animations";
+  getProgress,
+} from './animationHelpers';
+import { runTiming } from '_helpers/animations';
+import ConnectionInfo from '_components/ConnectionInfo';
 
 const { event, Value, sub, set } = Animated;
 
@@ -40,9 +44,9 @@ class Login extends React.Component {
           velocityY: this.velocityY,
           x: this.pageX,
           y: this.pageY,
-          state: this.gestureState
-        }
-      }
+          state: this.gestureState,
+        },
+      },
     ]);
   }
   render() {
@@ -50,7 +54,7 @@ class Login extends React.Component {
       this.gestureState,
       this.y,
       this.opened,
-      this.back
+      this.back,
     );
     const { svgHeight } = metrics.login;
     const waveHeight = svgHeight / 2;
@@ -59,12 +63,12 @@ class Login extends React.Component {
     const verticalRadius = waveVerticalRadius(
       progress,
       this.gestureState,
-      this.opened
+      this.opened,
     );
     const horizontalRadius = waveHorizontalRadius(
       progress,
       this.gestureState,
-      this.opened
+      this.opened,
     );
 
     return (
@@ -93,6 +97,7 @@ class Login extends React.Component {
             />
           </Animated.View>
         </PanGestureHandler>
+        <ConnectionInfo />
       </View>
     );
   }

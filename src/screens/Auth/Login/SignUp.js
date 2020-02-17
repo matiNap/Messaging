@@ -3,15 +3,14 @@ import { Container, Text, View } from 'native-base';
 import Input from '_components/Input';
 import { StyleSheet } from 'react-native';
 import typography from '_typography';
-import palette from '_palette';
 import metrics from '_metrics';
+import palette from '_palette';
 import Button from '_components/Button';
 import Animated from 'react-native-reanimated';
 import { connect } from 'react-redux';
 import validator from 'email-validator';
 import { createUser } from '_actions/creators/app';
 import Loader from '_components/Loader';
-import ConnectionInfo from '_components/ConnectionInfo';
 
 // Input names
 const USERNAME = 'username';
@@ -24,12 +23,12 @@ const RPASS = 'rpass';
 class SignUp extends Component {
   state = {
     inputs: {
-      [USERNAME]: 'mati579',
-      [EMAIL]: 'matipl578@gmail.com',
-      [FNAME]: 'Mati',
-      [SNAME]: 'Nap',
-      [PASS]: 'mati123',
-      [RPASS]: 'mati123',
+      [USERNAME]: '',
+      [EMAIL]: '',
+      [FNAME]: '',
+      [SNAME]: '',
+      [PASS]: '',
+      [RPASS]: '',
     },
     message: '',
     visible: false,
@@ -165,7 +164,6 @@ class SignUp extends Component {
           onPress={this.handleForms}
         />
         <Loader visible={visible} />
-        <ConnectionInfo />
       </Animated.View>
     );
   }

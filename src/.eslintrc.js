@@ -15,7 +15,7 @@ module.exports = {
         _navigation: './navigationService.js',
         _typography: './theme/typography.js',
         _palette: './theme/palette',
-        _metrics: './theme/metrics',
+        // _metrics: './theme/metrics',
         _globals: './theme/globals',
         _zIndex: './theme/zIndex',
       },

@@ -11,10 +11,10 @@
       "_helpers/*": ["./helpers/*"],
       "_components/*": ["./screens/components/*"],
       "_typography": ["./theme/typography"],
-      "_palette": ["./theme/palette"],
-      "_metrics": ["./theme/metrics"],
-      "_globals": ["./theme/globals"],
-      "_zIndex": ["./theme/zIndex"]
+      "_palette": ["./theme/palette.js"],
+      "_metrics": ["./theme/metrics.js"],
+      "_globals": ["./theme/globals.js"],
+      "_zIndex": ["./theme/zIndex.js"]
     },
     "jsx": "react-native",
     "lib": ["dom", "esnext"],
