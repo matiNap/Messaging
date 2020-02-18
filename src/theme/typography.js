@@ -13,7 +13,7 @@ export default {
   fontSize: {
     small: scaleFont(15),
     normal: scaleFont(18),
-    medium: scaleFont(20),
-    big: scaleFont(22)
+    medium: scaleFont(22),
+    big: scaleFont(28)
   }
 };
