@@ -1,20 +1,27 @@
-import { REHYDRATE } from "redux-persist/es/constants";
-import * as types from "_actions/app";
+import { REHYDRATE } from 'redux-persist/es/constants';
+import * as types from '_actions/app';
+import reactotron from 'reactotron-react-native';
 
 const initState = {
   user: {
     signedIn: false,
-    token: null
-  }
+    token: null,
+  },
 };
 
 export default (state = initState, action) => {
   switch (action.type) {
     case REHYDRATE: {
-      return { ...state };
+      const { user } = action.payload.app
+        ? action.payload.app
+        : initState.user;
+      return { ...state, user: initState.user };
     }
     case types.SIGN_IN: {
-      return { ...state, user: action.payload };
+      return {
+        ...state,
+        user: { ...action.payload, signedIn: true },
+      };
     }
     case types.SIGN_OUT: {
       return { ...state, user: null };
@@ -24,8 +31,8 @@ export default (state = initState, action) => {
         ...state,
         user: {
           ...state.user,
-          token: action.payload.token
-        }
+          token: action.payload.token,
+        },
       };
     }
     default:

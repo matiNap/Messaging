@@ -1,7 +1,7 @@
-import database from "_apis/database";
-import * as types from "../app";
-import { navigate } from "_navigation";
-import reactotron from "reactotron-react-native";
+import database from '_apis/database';
+import * as types from '../app';
+import { navigate } from '_navigation';
+import reactotron from 'reactotron-react-native';
 
 export const createUser = (
   userData: {
@@ -12,13 +12,14 @@ export const createUser = (
     password: string;
   },
   onCreate: Function,
-  onFailed: Function
+  onFailed: Function,
 ) => async () => {
   // onCreate();
 
   try {
-    const response = await database.post("createUser", { ...userData });
-    reactotron.log(response);
+    const response = await database.post('createUser', {
+      ...userData,
+    });
     onCreate();
   } catch (err) {
     reactotron.log(err);
@@ -29,56 +30,67 @@ export const createUser = (
 export const signIn = (
   username: string,
   password: string,
-  onSignInFailed: Function
+  onSignInFailed: Function,
 ) => async dispatch => {
   try {
-    const response = await database.post("signIn", { username, password });
+    const response = await database.post('signIn', {
+      email: username,
+      password,
+    });
+
     const { data } = response;
-    navigate("login");
+    navigate('latest');
     dispatch({
       type: types.SIGN_IN,
       payload: {
-        ...data
-      }
+        ...data,
+      },
     });
-  } catch (err) {
-    onSignInFailed();
+  } catch (error) {
+    const { data } = error.response;
+    onSignInFailed('Invalid password or email');
   }
 };
-export const signOut = (onFailed: Function) => async (dispatch, getState) => {
+export const signOut = (onFailed: Function) => async (
+  dispatch,
+  getState,
+) => {
   const state = getState();
   try {
     const { uid } = state.app.user;
-    await database.post("signOut", { uid });
+    await database.post('signOut', { uid });
   } catch (error) {
     onFailed();
   }
 };
-export const checkAuth = (onAuthFailed: Function) => async (
-  dispatch,
-  getState
-) => {
+export const checkAuth = (
+  onAuthSucces: Function,
+  onAuthFailed: Function,
+) => async (dispatch, getState) => {
   const state = getState();
   try {
     const { token, uid } = state.app.user;
-    const response = await database.post("checkAuth", { uid, token });
+    const response = await database.post('checkAuth', { uid, token });
     const { data } = response;
     const { newToken } = data;
-
+    onAuthSucces();
     dispatch({
       type: types.CHECK_AUTH,
       payload: {
-        token: newToken
-      }
+        token: newToken,
+      },
     });
   } catch (error) {
     onAuthFailed();
   }
 };
 
-export const deleteUser = async (uid: number, onDeleteFailed: Function) => {
+export const deleteUser = async (
+  uid: number,
+  onDeleteFailed: Function,
+) => {
   try {
-    await database.post("deleteUser", { uid });
+    await database.post('deleteUser', { uid });
   } catch (error) {
     onDeleteFailed();
   }

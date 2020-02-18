@@ -13,39 +13,71 @@ import { navigate } from '../../../navigationService';
 import globals from '_globals';
 import palette from '_palette';
 import metrics from '_metrics';
+import NetInfo from '@react-native-community/netinfo';
+import { checkAuth } from '_actions/creators/app';
 
 class Loading extends React.Component {
-  componentDidMount() {
-    const { signedIn } = this.props;
-    if (signedIn) {
-      //Navigate to main
-    } else {
-      // navigate("login");
-    }
+  state = {
+    isConnected: false,
+  };
+
+  constructor(props) {
+    super(props);
+    this.unsubscribe = NetInfo.addEventListener(state => {
+      this.setState({ isConnected: state.isConnected });
+    });
   }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.navigateScreens();
+    }, 500);
+  }
+
+  componentDidUpdate() {
+    this.navigateScreens();
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
+  navigateScreens = () => {
+    const { isConnected } = this.state;
+    const { signedIn } = this.props;
+    console.log(signedIn);
+    if (signedIn) {
+      if (isConnected) {
+        this.props.checkAuth(
+          () => {
+            navigate('latest');
+          },
+          () => {
+            navigate('signIn');
+          },
+        );
+      } else navigate('latest');
+    } else {
+      navigate('login');
+    }
+  };
 
   render() {
     const verticalRadius = waveVerticalRadius();
     return (
-      <TouchableWithoutFeedback
-        onPress={() => {
-          navigate('login');
-        }}
-      >
-        <View style={{ flex: 1 }}>
-          <View
-            style={[
-              StyleSheet.absoluteFill,
-              { justifyContent: 'center' },
-            ]}
-          >
-            <Wave verticalRadius={verticalRadius}>
-              <Text style={styles.loading}>Loading</Text>
-            </Wave>
-            <Text style={styles.appName}>{globals.appName}</Text>
-          </View>
+      <View style={{ flex: 1 }}>
+        <View
+          style={[
+            StyleSheet.absoluteFill,
+            { justifyContent: 'center' },
+          ]}
+        >
+          <Wave verticalRadius={verticalRadius}>
+            <Text style={styles.loading}>Loading</Text>
+          </Wave>
+          <Text style={styles.appName}>{globals.appName}</Text>
         </View>
-      </TouchableWithoutFeedback>
+      </View>
     );
   }
 }
@@ -74,4 +106,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(withAuth(Loading));
+export default connect(mapStateToProps)(Loading);

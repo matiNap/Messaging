@@ -1,5 +1,5 @@
-import { NavigationActions } from "react-navigation";
-import reactotron from "reactotron-react-native";
+import { NavigationActions } from 'react-navigation';
+import reactotron from 'reactotron-react-native';
 
 let _navigator;
 
@@ -8,10 +8,12 @@ export const setTopLevelNavigator = navigatorRef => {
 };
 
 export const navigate = (routeName, params) => {
-  _navigator.dispatch(
-    NavigationActions.navigate({
-      routeName,
-      params
-    })
-  );
+  if (_navigator) {
+    _navigator.dispatch(
+      NavigationActions.navigate({
+        routeName,
+        params,
+      }),
+    );
+  }
 };

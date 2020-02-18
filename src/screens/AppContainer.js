@@ -1,9 +1,14 @@
-import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import {
+  createAppContainer,
+  createSwitchNavigator,
+} from 'react-navigation';
 
-import authNav from "./Auth/nav";
+import authNav from './Auth/nav';
+import mainNav from './Main/nav';
 
 const navigator = createSwitchNavigator({
-  auth: authNav
+  auth: authNav,
+  main: mainNav,
 });
 
 export default createAppContainer(navigator);
