@@ -2,7 +2,7 @@ export default {
   primary: '#811cb0',
   secondary: '#fff',
   text: {
-    primary: '#303030',
+    primary: '#404040',
     secondary: '#e8e8e8',
   },
   actions: {
@@ -11,8 +11,8 @@ export default {
     error: '#cc4b37',
   },
   grayscale: {
-    light: '#e6e6e6',
-    medium: '#cacaca',
-    dark: '#8a8a8a',
+    light: '#bdbdbd',
+    medium: '#8a8a8a',
+    dark: '#616161',
   },
 };

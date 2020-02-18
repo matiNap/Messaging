@@ -15,7 +15,7 @@ export default (state = initState, action) => {
       const { user } = action.payload.app
         ? action.payload.app
         : initState.user;
-      return { ...state, user: initState.user };
+      return { ...state, user };
     }
     case types.SIGN_IN: {
       return {
