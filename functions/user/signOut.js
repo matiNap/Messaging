@@ -11,6 +11,6 @@ module.exports = function(req, res) {
     .ref(`users/${uid}`)
     .set({ token: null })
     .catch(error => {
-      return res.status(422).send(error);
+      return res.error(error);
     });
 };

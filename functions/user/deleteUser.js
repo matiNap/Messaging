@@ -9,6 +9,6 @@ module.exports = function(req, res) {
     .deleteUser(req.body.id)
     .then(() => res.send({ deleted: true }))
     .catch(err => {
-      return res.send({ error: err });
+      return res.error(err);
     });
 };

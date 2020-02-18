@@ -18,7 +18,7 @@ module.exports = function(req, res) {
 
       return res.status(200).send({ newToken });
     } else {
-      return res.status(422).send("Invalid token");
+      return res.error("Invalid token");
     }
   });
 };

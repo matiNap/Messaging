@@ -26,12 +26,12 @@ module.exports = function(req, res) {
         })
         .catch(error => {
           return res
-            .status(422)
+            .status(404)
             .send({ error, message: "Cannot find user by uid" });
         });
       return res.send({ uid });
     })
     .catch(err => {
-      return res.status(422).send({ error: err });
+      return res.error(err);
     });
 };

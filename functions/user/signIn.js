@@ -29,6 +29,6 @@ module.exports = function(req, res) {
       return res.status(200).send({ displayName, uid, photoURL });
     })
     .catch(err => {
-      return res.status(422).send({ error: err });
+      return res.status(401).send(err);
     });
 };
