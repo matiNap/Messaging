@@ -19,8 +19,12 @@ interface Props {
   style: CSSProperties;
   secondary: boolean;
   primary: boolean;
+  noOutlined: boolean;
   secureTextEntry: boolean;
   textInputStyle: CSSProperties;
+  color?: string | undefined;
+  placeholderColor: string;
+  rightIcon: React.Component;
 }
 
 const Input = (props: Props) => {
@@ -33,20 +37,38 @@ const Input = (props: Props) => {
     secondary,
     onChangeText,
     value,
+    noOutlined,
+    color,
+    placeholderColor,
   } = props;
   const borderColor = secondary ? palette.secondary : palette.primary;
-  const color = secondary
+  const customContainerStyle = {
+    borderColor: noOutlined ? null : borderColor,
+    borderWidth: noOutlined ? 0 : 2,
+  };
+  const inputThemeColor = secondary
     ? palette.text.secondary
     : palette.grayscale.medium;
+  const inputColor = color ? color : inputThemeColor;
+  const RightIcon = props.rightIcon ? props.rightIcon : null;
   return (
-    <View style={[styles.container, { borderColor }, style]}>
+    <View style={[styles.container, customContainerStyle, style]}>
+      <View style={styles.rightIcon}>
+        <RightIcon />
+      </View>
       <TextInput
+        placeholderTextColor={placeholderColor}
         value={value}
         secureTextEntry={secureTextEntry}
         textContentType={type}
         onChangeText={onChangeText}
         placeholder={placeholder}
-        style={[styles.textInput, { color }, textInputStyle]}
+        style={[
+          styles.textInput,
+          textInputStyle,
+          { color: inputColor },
+          { color },
+        ]}
       />
     </View>
   );
@@ -64,6 +86,11 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: metrics.margin.small,
     flexGrow: 2,
+  },
+  rightIcon: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginLeft: metrics.margin.normal,
   },
 });
 

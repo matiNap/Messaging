@@ -47,7 +47,6 @@ export const signIn = (
       },
     });
   } catch (error) {
-    const { data } = error.response;
     onSignInFailed('Invalid password or email');
   }
 };
