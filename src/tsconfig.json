@@ -14,7 +14,8 @@
       "_palette": ["./theme/palette.js"],
       "_metrics": ["./theme/metrics.js"],
       "_globals": ["./theme/globals.js"],
-      "_zIndex": ["./theme/zIndex.js"]
+      "_zIndex": ["./theme/zIndex.js"],
+      "_navigation": ["./navigationService.js"]
     },
     "jsx": "react-native",
     "lib": ["dom", "esnext"],

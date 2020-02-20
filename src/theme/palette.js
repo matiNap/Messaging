@@ -11,8 +11,8 @@ export default {
     error: '#cc4b37',
   },
   grayscale: {
-    light: '#bdbdbd',
-    medium: '#8a8a8a',
-    dark: '#616161',
+    light: '#e6e6e6',
+    medium: '#b0b0b0',
+    dark: '#858585',
   },
 };

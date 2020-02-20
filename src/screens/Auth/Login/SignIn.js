@@ -45,6 +45,7 @@ class SignIn extends Component {
         <Text style={styles.title}>Sign in</Text>
         <View style={styles.inputContainer}>
           <Input
+            color={palette.text.primary}
             placeholder="Email"
             type="emailAddress"
             style={styles.input}
@@ -55,6 +56,7 @@ class SignIn extends Component {
             textInputStyle={styles.textInput}
           />
           <Input
+            color={palette.text.primary}
             placeholder="Password"
             secureTextEntry
             value={password}
@@ -97,7 +99,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     alignSelf: 'center',
-    width: '70%',
+    width: '80%',
     marginTop: metrics.margin.medium,
   },
   textInput: {

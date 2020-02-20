@@ -8,49 +8,43 @@ import { Container } from 'native-base';
 import metrics from '_metrics';
 import typography from '_typography';
 import { FontAwesome } from '@expo/vector-icons';
+import ListItem from './components/ListItem';
+import FriendSearch from '../components/FriendSearch';
 
 class Latest extends Component {
-  renderSearchIcon = () => {
-    return (
-      <FontAwesome
-        name="search"
-        color={palette.grayscale.dark}
-        size={22}
-      />
-    );
-  };
   render() {
     return (
       <Container>
         <List>
           <Header title="Chat" iconName="settings" />
-          <View style={styles.inputContainer}>
-            <Input
-              placeholder="Search"
-              style={styles.inputStyle}
-              placeholderColor={palette.grayscale.dark}
-              textInputStyle={{
-                fontSize: typography.fontSize.medium,
-              }}
-              rightIcon={this.renderSearchIcon}
-              noOutlined
-            />
-          </View>
+          <FriendSearch />
+          <ListItem
+            name="Mateusz Napieralski"
+            subText="No w sumie tak"
+            fname="Mateusz"
+            avatarUri="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg"
+            date="7:03 PM"
+          />
+          <ListItem
+            name="Mateusz Napieralski"
+            subText="No w sumie tak"
+            fname="Mateusz"
+            avatarUri="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg"
+            date="7:03 PM"
+          />
+          <ListItem
+            name="Mateusz Napieralski"
+            subText="No w sumie tak"
+            fname="Mateusz"
+            avatarUri="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg"
+            date="7:03 PM"
+          />
         </List>
       </Container>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  inputContainer: {
-    alignSelf: 'center',
-    marginTop: metrics.margin.normal,
-  },
-  inputStyle: {
-    width: '85%',
-    backgroundColor: palette.grayscale.light,
-  },
-});
+const styles = StyleSheet.create({});
 
 export default Latest;

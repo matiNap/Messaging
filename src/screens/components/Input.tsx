@@ -1,10 +1,5 @@
 import React, { CSSProperties } from 'react';
-import {
-  Container,
-  Item,
-  Input as BaseInput,
-  View,
-} from 'native-base';
+import { View } from 'native-base';
 import { TextInput } from 'react-native-gesture-handler';
 import palette from '_palette';
 import { StyleSheet } from 'react-native';
@@ -50,12 +45,14 @@ const Input = (props: Props) => {
     ? palette.text.secondary
     : palette.grayscale.medium;
   const inputColor = color ? color : inputThemeColor;
-  const RightIcon = props.rightIcon ? props.rightIcon : null;
+  const RightIcon = props.rightIcon;
   return (
     <View style={[styles.container, customContainerStyle, style]}>
-      <View style={styles.rightIcon}>
-        <RightIcon />
-      </View>
+      {RightIcon && (
+        <View style={styles.rightIcon}>
+          <RightIcon />
+        </View>
+      )}
       <TextInput
         placeholderTextColor={placeholderColor}
         value={value}

@@ -13,6 +13,11 @@ import palette from '_palette';
 import metrics from '_metrics';
 import typography from '_typography';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import IconBackground from '_components/IconBackground';
+import StatusBar from '_components/StatusBar';
+import Touchable from '_components/Touchable';
+import Profile from '../Profile';
+import { navigate } from '_navigation';
 
 interface Props {
   title?: string;
@@ -21,24 +26,36 @@ interface Props {
 
 const MainHeader = (props: Props) => {
   const { title, iconName } = props;
+
   return (
     <Header style={styles.header}>
-      <Thumbnail
-        source={{
-          uri:
-            'https://ramcotubular.com/wp-content/uploads/default-avatar.jpg',
+      <StatusBar />
+      <Touchable
+        onPress={() => {
+          navigate('profile');
         }}
-        style={styles.avatar}
-      />
+      >
+        <Thumbnail
+          source={{
+            uri:
+              'https://ramcotubular.com/wp-content/uploads/default-avatar.jpg',
+          }}
+          style={styles.avatar}
+        />
+      </Touchable>
 
       <Text style={styles.title}>{title}</Text>
 
       <Right>
-        <MaterialCommunityIcons
-          name="settings"
-          size={35}
-          color={palette.text.primary}
-        />
+        <Touchable>
+          <IconBackground size={37}>
+            <MaterialCommunityIcons
+              name={iconName}
+              size={30}
+              color={palette.secondary}
+            />
+          </IconBackground>
+        </Touchable>
       </Right>
     </Header>
   );
@@ -55,8 +72,8 @@ const styles = StyleSheet.create({
     paddingTop: metrics.padding.medium,
     height: 65 + metrics.statusBarHeight,
     backgroundColor: palette.secondary,
-    borderBottomColor: palette.grayscale.medium,
-    borderBottomWidth: 0.43,
+    borderBottomColor: palette.grayscale.light,
+    borderBottomWidth: 0.3,
   },
   left: {
     justifyContent: 'flex-start',

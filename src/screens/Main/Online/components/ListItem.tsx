@@ -17,17 +17,20 @@ import Touchable from '_components/Touchable';
 
 interface Props {
   name: string;
-  fname: string;
-  subText: string;
   avatarUri: string;
   state: Object;
-  string: date;
 }
+const STATE_SIZE = 16;
+
+const renderOnlineState = state => {
+  if (state) {
+    return <View style={styles.stateOnline} />;
+  }
+  return <View style={styles.stateOffline} />;
+};
 
 const LatestListItem = (props: Props) => {
-  const { name, subText, avatarUri, state, fname, date } = props;
-  //TODO: Check which user typed last message
-  const who = fname;
+  const { name, avatarUri, state } = props;
   return (
     <Touchable>
       <ListItem itemDivider={false} style={styles.listItem} avatar>
@@ -41,22 +44,10 @@ const LatestListItem = (props: Props) => {
         </Left>
         <View style={styles.body}>
           <Text style={styles.mainText}>{name}</Text>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={{ width: '55%' }}>
-              <Text
-                style={styles.subText}
-              >{`${who}: ${subText}`}</Text>
-            </View>
-            <Text style={styles.date}>{date}</Text>
-          </View>
         </View>
-
-        <Thumbnail
-          style={styles.subAvatar}
-          source={{
-            uri: avatarUri,
-          }}
-        />
+        <View style={styles.stateContainer}>
+          {renderOnlineState(state)}
+        </View>
       </ListItem>
     </Touchable>
   );
@@ -68,25 +59,34 @@ const styles = StyleSheet.create({
     marginTop: metrics.margin.normal,
   },
   mainAvatar: { width: 42, height: 42 },
-  subAvatar: { width: 20, height: 20 },
   mainText: {
     fontSize: typography.fontSize.normal,
     color: palette.text.primary,
   },
-  subText: {
-    fontSize: typography.fontSize.verySmall,
-    color: palette.grayscale.medium,
 
-    flex: 1,
-  },
-  date: {
-    fontSize: typography.fontSize.verySmall,
-    color: palette.grayscale.medium,
-    marginLeft: metrics.margin.small,
-  },
   body: {
     marginTop: metrics.margin.normal,
     marginLeft: metrics.margin.medium,
+    width: '70%',
+  },
+  stateOnline: {
+    width: STATE_SIZE,
+    height: STATE_SIZE,
+    borderRadius: STATE_SIZE,
+    borderColor: palette.actions.succes,
+    backgroundColor: palette.actions.succes,
+    borderWidth: 1,
+  },
+  stateOffline: {
+    width: STATE_SIZE,
+    height: STATE_SIZE,
+    borderRadius: STATE_SIZE,
+    borderColor: palette.grayscale.dark,
+    backgroundColor: palette.secondary,
+    borderWidth: 2,
+  },
+  stateContainer: {
+    alignSelf: 'center',
   },
 });
 
