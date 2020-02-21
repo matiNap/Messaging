@@ -10,10 +10,11 @@ interface Props {
   style: CSSProperties;
   secondary: boolean;
   onPress(event: GestureResponderEvent): void;
+  title: string;
 }
 
 const Button = (props: Props) => {
-  const { style, secondary, onPress } = props;
+  const { style, secondary, onPress, title } = props;
   const backgroundColor = secondary
     ? palette.secondary
     : palette.primary;
@@ -21,7 +22,7 @@ const Button = (props: Props) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={[styles.container, { backgroundColor }, style]}>
-        <Text style={[styles.text, { color }]}>Sign in</Text>
+        <Text style={[styles.text, { color }]}>{title}</Text>
       </View>
     </TouchableWithoutFeedback>
   );

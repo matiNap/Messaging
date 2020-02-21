@@ -8,49 +8,54 @@ import {
   Thumbnail,
   Right,
   Icon,
+  Body,
 } from 'native-base';
 import palette from '_palette';
 import metrics from '_metrics';
 import typography from '_typography';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import IconBackground from '_components/IconBackground';
 import StatusBar from '_components/StatusBar';
 import Touchable from '_components/Touchable';
-import Profile from '../Profile';
 import { navigate } from '_navigation';
 
 interface Props {
   title?: string;
-  iconName: string;
 }
 
 const MainHeader = (props: Props) => {
-  const { title, iconName } = props;
+  const { title } = props;
 
   return (
     <Header style={styles.header}>
       <StatusBar />
-      <Touchable
-        onPress={() => {
-          navigate('profile');
-        }}
-      >
-        <Thumbnail
-          source={{
-            uri:
-              'https://ramcotubular.com/wp-content/uploads/default-avatar.jpg',
+      <Left style={{ flexDirection: 'row' }}>
+        <Touchable
+          onPress={() => {
+            navigate('profile');
           }}
           style={styles.avatar}
-        />
-      </Touchable>
-
-      <Text style={styles.title}>{title}</Text>
+        >
+          <Thumbnail
+            style={styles.avatar}
+            source={{
+              uri:
+                'https://ramcotubular.com/wp-content/uploads/default-avatar.jpg',
+            }}
+          />
+        </Touchable>
+        <Text style={styles.title}>{title}</Text>
+      </Left>
 
       <Right>
-        <Touchable>
+        <Touchable
+          onPress={() => {
+            navigate('friendAdd');
+          }}
+        >
           <IconBackground size={37}>
-            <MaterialCommunityIcons
-              name={iconName}
+            <Ionicons
+              name="ios-person-add"
               size={30}
               color={palette.secondary}
             />
@@ -65,8 +70,6 @@ const styles = StyleSheet.create({
   avatar: {
     width: 43,
     height: 43,
-    alignSelf: 'center',
-    borderColor: palette.text.primary,
   },
   header: {
     paddingTop: metrics.padding.medium,

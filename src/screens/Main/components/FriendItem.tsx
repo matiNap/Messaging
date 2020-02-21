@@ -1,28 +1,22 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  View,
-  Item,
-  Text,
-  ListItem,
-  Thumbnail,
-  Left,
-  Body,
-  Right,
-} from 'native-base';
+import { View, Text, ListItem, Thumbnail, Left } from 'native-base';
 import palette from '_palette';
 import metrics from '_metrics';
 import typography from '_typography';
 import Touchable from '_components/Touchable';
+import Button from '_components/Button';
+import { Ionicons } from '@expo/vector-icons';
 
 interface Props {
   name: string;
   avatarUri: string;
   state: Object;
+  addFriend?: boolean;
 }
 const STATE_SIZE = 16;
 
-const renderOnlineState = state => {
+const renderOnlineState = (state: boolean) => {
   if (state) {
     return <View style={styles.stateOnline} />;
   }
@@ -30,7 +24,7 @@ const renderOnlineState = state => {
 };
 
 const LatestListItem = (props: Props) => {
-  const { name, avatarUri, state } = props;
+  const { name, avatarUri, state, addFriend } = props;
   return (
     <Touchable>
       <ListItem itemDivider={false} style={styles.listItem} avatar>
@@ -45,9 +39,20 @@ const LatestListItem = (props: Props) => {
         <View style={styles.body}>
           <Text style={styles.mainText}>{name}</Text>
         </View>
-        <View style={styles.stateContainer}>
-          {renderOnlineState(state)}
-        </View>
+        {!addFriend && (
+          <View style={styles.stateContainer}>
+            {renderOnlineState(state)}
+          </View>
+        )}
+        {addFriend && (
+          <Touchable
+            onPress={() => {
+              console.log('Add friend');
+            }}
+          >
+            <Ionicons name="ios-add" style={styles.addIcon} />
+          </Touchable>
+        )}
       </ListItem>
     </Touchable>
   );
@@ -63,7 +68,10 @@ const styles = StyleSheet.create({
     fontSize: typography.fontSize.normal,
     color: palette.text.primary,
   },
-
+  addIcon: {
+    fontSize: 38,
+    color: palette.text.primary,
+  },
   body: {
     marginTop: metrics.margin.normal,
     marginLeft: metrics.margin.medium,

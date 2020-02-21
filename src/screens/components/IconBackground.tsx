@@ -5,15 +5,22 @@ import palette from '_palette';
 
 interface Props {
   size: number;
+  color?: string | undefined;
 }
 
 const IconBackground = (props: Props) => {
-  const { children, size } = props;
+  const { children, size, color } = props;
+  const backgroundColor = color ? color : palette.grayscale.dark;
   return (
     <View
       style={[
         styles.container,
-        { width: size, height: size, borderRadius: size },
+        {
+          width: size,
+          height: size,
+          borderRadius: size,
+          backgroundColor,
+        },
       ]}
     >
       {children}
@@ -23,7 +30,6 @@ const IconBackground = (props: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: palette.grayscale.dark,
     justifyContent: 'center',
     alignItems: 'center',
   },

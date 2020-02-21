@@ -7,6 +7,7 @@ import TabBarComponent from './components/TabBarComponent';
 import LatestButton from './components/LatestButton';
 import OnlineButton from './components/OnlineButton';
 import Profile from './Profile';
+import FriendAdd from './FriendAdd';
 
 export default createStackNavigator(
   {
@@ -30,6 +31,7 @@ export default createStackNavigator(
       },
     ),
     profile: Profile,
+    friendAdd: FriendAdd,
   },
   {
     headerMode: 'none',

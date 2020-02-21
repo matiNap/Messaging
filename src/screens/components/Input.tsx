@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: metrics.margin.small,
     flexGrow: 2,
+    color: palette.text.primary,
   },
   rightIcon: {
     justifyContent: 'center',

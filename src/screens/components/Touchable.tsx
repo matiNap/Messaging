@@ -1,10 +1,11 @@
-import React from 'react';
-import { Animated, View } from 'react-native';
+import React, { CSSProperties } from 'react';
+import { Animated } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { Easing } from 'react-native-reanimated';
 
 interface Props {
-  onPress: Function;
+  onPress?: Function;
+  style?: CSSProperties;
 }
 
 export default class Touchable extends React.Component<Props> {
@@ -14,7 +15,7 @@ export default class Touchable extends React.Component<Props> {
     this.opacity = new Animated.Value(1);
   }
   render() {
-    const { children, onPress } = this.props;
+    const { children, onPress, style } = this.props;
     const opacity = this.opacity.interpolate({
       inputRange: [0, 0.7, 1],
       outputRange: [1, 0.7, 1],
@@ -32,7 +33,15 @@ export default class Touchable extends React.Component<Props> {
           if (onPress) onPress();
         }}
       >
-        <Animated.View style={{ opacity: opacity }}>
+        <Animated.View
+          style={[
+            style,
+            {
+              opacity: opacity,
+              justifyContent: 'center',
+            },
+          ]}
+        >
           {children}
         </Animated.View>
       </TouchableWithoutFeedback>
