@@ -67,6 +67,7 @@ export const checkAuth = (
   onAuthFailed: Function,
 ) => async (dispatch, getState) => {
   const state = getState();
+  console.log('Check');
   try {
     const { token, uid } = state.app.user;
     const response = await database.post('checkAuth', { uid, token });
@@ -76,6 +77,7 @@ export const checkAuth = (
     dispatch({
       type: types.CHECK_AUTH,
       payload: {
+        ...data,
         token: newToken,
       },
     });

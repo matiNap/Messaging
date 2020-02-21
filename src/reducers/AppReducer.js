@@ -31,7 +31,7 @@ export default (state = initState, action) => {
         ...state,
         user: {
           ...state.user,
-          token: action.payload.token,
+          ...action.payload,
         },
       };
     }

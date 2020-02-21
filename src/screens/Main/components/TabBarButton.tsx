@@ -11,7 +11,7 @@ interface Props {
   onPress: Function;
 }
 //Notification size
-const NOT_SIZE = 18;
+const NOT_SIZE = 22;
 const ICON_SIZE = 35;
 
 const TabBarButton = (props: Props) => {
@@ -49,6 +49,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     translateX: ICON_SIZE * 0.6,
     translateY: -ICON_SIZE * 0.04,
+    borderWidth: 3,
+    borderColor: palette.secondary,
   },
   info: {
     fontSize: typography.fontSize.small,

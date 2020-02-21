@@ -15,7 +15,8 @@
       "_metrics": ["./theme/metrics.js"],
       "_globals": ["./theme/globals.js"],
       "_zIndex": ["./theme/zIndex.js"],
-      "_navigation": ["./navigationService.js"]
+      "_navigation": ["./navigationService.js"],
+      "_UserInterface": ["./interfaces/user.tsx"]
     },
     "jsx": "react-native",
     "lib": ["dom", "esnext"],

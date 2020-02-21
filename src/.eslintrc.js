@@ -18,6 +18,7 @@ module.exports = {
         // _metrics: './theme/metrics',
         _globals: './theme/globals',
         _zIndex: './theme/zIndex',
+        _UserInterface: './interfaces/user.tsx',
       },
     },
   ],

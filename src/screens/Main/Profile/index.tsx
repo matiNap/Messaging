@@ -16,22 +16,31 @@ import {
   AntDesign,
 } from '@expo/vector-icons';
 import Touchable from '_components/Touchable';
+import UserInterface from '_UserInterface';
 
 interface Props {
-  user: Object;
+  user: UserInterface;
 }
 
 const ICON_SIZE = 30;
 
 const Profile = (props: Props) => {
   const { user } = props;
-  const { displayName, email } = user;
+  const { displayName, email, name } = user;
+
   return (
     <Animatable.View
       style={[StyleSheet.absoluteFill, styles.container]}
       animation="fadeIn"
       duration={300}
     >
+      <Touchable
+        onPress={() => {
+          props.navigation.goBack();
+        }}
+      >
+        <Ionicons name="ios-arrow-back" style={styles.backIcon} />
+      </Touchable>
       <Thumbnail
         source={{
           uri:
@@ -39,7 +48,7 @@ const Profile = (props: Props) => {
         }}
         style={styles.avatar}
       />
-      <Text style={styles.name}>Mateusz Napieralski</Text>
+      <Text style={styles.name}>{name}</Text>
 
       <List>
         <ItemDivider title="Informations" />
@@ -105,40 +114,7 @@ const Profile = (props: Props) => {
             title="Help"
             icon={() => (
               <IconBackground size={ICON_SIZE}>
-                <AntDesign
-                  name="
-                infocirlceo"
-                  style={styles.icon}
-                />
-              </IconBackground>
-            )}
-          />
-        </Touchable>
-        <Touchable>
-          <Option
-            title="Status"
-            icon={() => (
-              <IconBackground
-                size={ICON_SIZE}
-                color={palette.grayscale.light}
-              >
-                <MaterialCommunityIcons
-                  name="settings"
-                  style={styles.icon}
-                />
-              </IconBackground>
-            )}
-          />
-        </Touchable>
-        <Touchable>
-          <Option
-            title="Status"
-            icon={() => (
-              <IconBackground size={ICON_SIZE}>
-                <MaterialCommunityIcons
-                  name="settings"
-                  style={styles.icon}
-                />
+                <AntDesign name="infocirlceo" style={styles.icon} />
               </IconBackground>
             )}
           />
@@ -164,13 +140,19 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 120,
     alignSelf: 'center',
-    marginTop: metrics.margin.big,
+    marginTop: metrics.margin.medium,
     borderWidth: 5.5,
     borderColor: palette.primary,
   },
   icon: {
     color: palette.secondary,
     fontSize: typography.fontSize.medium,
+  },
+  backIcon: {
+    color: palette.text.primary,
+    fontSize: 40,
+    marginLeft: metrics.margin.medium,
+    marginTop: metrics.margin.normal,
   },
 });
 
