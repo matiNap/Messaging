@@ -8,6 +8,8 @@ import LatestButton from './components/LatestButton';
 import OnlineButton from './components/OnlineButton';
 import Profile from './Profile';
 import FriendAdd from './FriendAdd';
+import SearchFriend from './SearchFriend';
+import Chat from './Chat';
 
 export default createStackNavigator(
   {
@@ -30,8 +32,11 @@ export default createStackNavigator(
         tabBarComponent: props => <TabBarComponent {...props} />,
       },
     ),
+    chat: Chat,
+    //Modals:
     profile: Profile,
     friendAdd: FriendAdd,
+    searchFriend: SearchFriend,
   },
   {
     headerMode: 'none',

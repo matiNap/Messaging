@@ -2,7 +2,11 @@ import React, { CSSProperties } from 'react';
 import { View } from 'native-base';
 import { TextInput } from 'react-native-gesture-handler';
 import palette from '_palette';
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+} from 'react-native';
 import metrics from '_metrics';
 import typography from '_typography';
 

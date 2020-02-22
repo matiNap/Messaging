@@ -14,6 +14,7 @@ import palette from '_palette';
 import metrics from '_metrics';
 import typography from '_typography';
 import Touchable from '_components/Touchable';
+import { navigate } from '_navigation';
 
 interface Props {
   name: string;
@@ -21,7 +22,7 @@ interface Props {
   subText: string;
   avatarUri: string;
   state: Object;
-  string: date;
+  date: string;
 }
 
 const LatestListItem = (props: Props) => {
@@ -29,7 +30,11 @@ const LatestListItem = (props: Props) => {
   //TODO: Check which user typed last message
   const who = fname;
   return (
-    <Touchable>
+    <Touchable
+      onPress={() => {
+        navigate('chat');
+      }}
+    >
       <ListItem itemDivider={false} style={styles.listItem} avatar>
         <Left>
           <Thumbnail

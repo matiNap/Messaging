@@ -18,7 +18,7 @@ import { checkAuth } from '_actions/creators/app';
 
 class Loading extends React.Component {
   state = {
-    isConnected: true,
+    isConnected: false,
   };
 
   constructor(props) {

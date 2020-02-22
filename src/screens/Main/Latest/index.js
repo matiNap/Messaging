@@ -10,6 +10,7 @@ import typography from '_typography';
 import { FontAwesome } from '@expo/vector-icons';
 import ListItem from './components/ListItem';
 import FriendSearch from '../components/FriendSearch';
+import { navigate } from '_navigation';
 
 class Latest extends Component {
   render() {

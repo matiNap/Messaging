@@ -9,9 +9,8 @@ import Touchable from '_components/Touchable';
 import FriendItem from '../components/FriendItem';
 import ContentLoader from '_components/ContentLoader';
 import { List } from 'native-base';
-import Back from '_components/Back';
 
-const FriendAdd = props => {
+const SearchFriend = props => {
   return (
     <View
       style={[
@@ -21,9 +20,15 @@ const FriendAdd = props => {
     >
       <View style={styles.container}>
         <View style={styles.search}>
-          <Back />
+          <Touchable
+            onPress={() => {
+              props.navigation.goBack();
+            }}
+          >
+            <Ionicons name="ios-arrow-back" style={styles.icon} />
+          </Touchable>
           <Input
-            placeholder="Search friend"
+            placeholder="Search"
             noOutlined
             style={styles.input}
             textInputStyle={styles.textInputStyle}
@@ -32,17 +37,14 @@ const FriendAdd = props => {
         <ContentLoader />
         <List scrollEnabled>
           <FriendItem
-            addFriend
             name="Mateusz Napieralski"
             avatarUri="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg"
           />
           <FriendItem
-            addFriend
             name="Mateusz Napieralski"
             avatarUri="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg"
           />
           <FriendItem
-            addFriend
             name="Mateusz Napieralski"
             avatarUri="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg"
           />
@@ -61,6 +63,10 @@ const styles = StyleSheet.create({
   search: {
     flexDirection: 'row',
   },
+  icon: {
+    color: palette.text.primary,
+    fontSize: 35,
+  },
   input: {
     marginLeft: metrics.margin.medium,
   },
@@ -69,4 +75,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FriendAdd;
+export default SearchFriend;

@@ -34,13 +34,7 @@ const Profile = (props: Props) => {
       animation="fadeIn"
       duration={300}
     >
-      <Touchable
-        onPress={() => {
-          props.navigation.goBack();
-        }}
-      >
-        <Ionicons name="ios-arrow-back" style={styles.backIcon} />
-      </Touchable>
+      <Back />
       <Thumbnail
         source={{
           uri:
