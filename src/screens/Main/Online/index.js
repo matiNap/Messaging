@@ -6,6 +6,7 @@ import Input from '_components/Input';
 import FriendSearch from '../components/FriendSearch';
 import { List, Container } from 'native-base';
 import FriendItem from '../components/FriendItem';
+import FriendState from './components/FriendState';
 
 class Online extends Component {
   render() {
@@ -14,22 +15,10 @@ class Online extends Component {
         <Header title="Online" iconName="add" />
         <List>
           <FriendSearch />
-          <FriendItem
+          <FriendState
             name="Mateusz Napieralski"
             avatarUri="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg"
             state={true}
-            showState
-          />
-          <FriendItem
-            name="Mateusz Napieralski"
-            avatarUri="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg"
-            state={true}
-            showState
-          />
-          <FriendItem
-            name="Mateusz Napieralski"
-            avatarUri="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg"
-            state={false}
             showState
           />
         </List>

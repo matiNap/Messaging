@@ -10,8 +10,14 @@ import FriendItem from '../components/FriendItem';
 import ContentLoader from '_components/ContentLoader';
 import { List } from 'native-base';
 import Back from '_components/Back';
+import Requests from './components/Requests';
+import Results from './components/Results';
+import ItemAdd from './components/ItemAdd';
 
 const FriendAdd = props => {
+  const { results } = props;
+  // const results = 1;
+
   return (
     <View
       style={[
@@ -31,21 +37,8 @@ const FriendAdd = props => {
         </View>
         <ContentLoader />
         <List scrollEnabled>
-          <FriendItem
-            addFriend
-            name="Mateusz Napieralski"
-            avatarUri="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg"
-          />
-          <FriendItem
-            addFriend
-            name="Mateusz Napieralski"
-            avatarUri="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg"
-          />
-          <FriendItem
-            addFriend
-            name="Mateusz Napieralski"
-            avatarUri="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg"
-          />
+          {!results && <Requests />}
+          {results && <Results />}
         </List>
       </View>
     </View>

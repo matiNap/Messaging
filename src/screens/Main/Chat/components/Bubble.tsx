@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 import { Bubble, BubbleProps } from 'react-native-gifted-chat';
 import palette from '_palette';
 

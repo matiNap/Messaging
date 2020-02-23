@@ -6,6 +6,7 @@ import palette from '_palette';
 import metrics from '_metrics';
 import typography from '_typography';
 import { Entypo } from '@expo/vector-icons';
+import Touchable from '_components/Touchable';
 
 interface Props {
   name: string;
@@ -26,7 +27,12 @@ const ChatHeader = (props: Props) => {
       </Left>
 
       <Right>
-        <Entypo name="dots-three-vertical" style={styles.menuIcon} />
+        <Touchable>
+          <Entypo
+            name="dots-three-vertical"
+            style={styles.menuIcon}
+          />
+        </Touchable>
       </Right>
     </Header>
   );

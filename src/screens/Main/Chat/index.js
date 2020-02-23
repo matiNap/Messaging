@@ -9,14 +9,16 @@ import {
   GiftedChat,
   MessageText,
   Message,
+  Send,
 } from 'react-native-gifted-chat';
 import Bubble from './components/Bubble';
 import palette from '_palette';
 import typography from '_typography';
 import metrics from '_metrics';
 import Input from '_components/Input';
-import BottomInput from './components/BottomInput';
 import ChatHeader from './components/ChatHeader';
+import Touchable from '_components/Touchable';
+import { MaterialIcons, SimpleLineIcons } from '@expo/vector-icons';
 
 class Chat extends Component {
   state = {
@@ -28,8 +30,7 @@ class Chat extends Component {
       messages: [
         {
           _id: 1,
-          text:
-            'My messagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessagemessage',
+          text: 'It is example message.',
           createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
           isTyping: true,
           user: {
@@ -55,20 +56,62 @@ class Chat extends Component {
 
   renderMessageText = props => {
     return (
-      <MessageText {...props} customTextStyle={styles.textStyle} />
+      <MessageText
+        {...props}
+        customTextStyle={{
+          fontSize: typography.fontSize.small,
+          fontFamily: typography.fonts.primary,
+        }}
+        textStyle={{
+          left: { color: palette.text.primary },
+          right: {
+            color: palette.text.secondary,
+          },
+        }}
+      />
     );
   };
 
   renderFooter = props => {
-    return (
-      <View style={styles.isTypingBubble}>
-        <Text style={styles.isTypingText}>...</Text>
-      </View>
-    );
+    const { isTyping } = props;
+    if (isTyping) {
+      return (
+        <View style={styles.isTypingBubble}>
+          <Text style={styles.isTypingText}>...</Text>
+        </View>
+      );
+    } else {
+      return <View />;
+    }
   };
 
   renderInput = props => {
     return <BottomInput {...props} />;
+  };
+
+  renderSend = props => {
+    const { onSend, text, isTyping } = props;
+
+    return (
+      <Touchable
+        onPress={() => {
+          if (text && onSend) {
+            onSend({ text: text.trim() }, true);
+          }
+        }}
+        style={{ margin: 5 }}
+      >
+        <MaterialIcons name="send" style={styles.sendIcon} />
+      </Touchable>
+    );
+  };
+
+  renderActions = () => {
+    return (
+      <Touchable style={{ padding: 5 }}>
+        <SimpleLineIcons name="emotsmile" style={styles.icon} />
+      </Touchable>
+    );
   };
 
   render() {
@@ -87,10 +130,11 @@ class Chat extends Component {
           renderMessageText={this.renderMessageText}
           renderTime={() => <View />}
           renderFooter={this.renderFooter}
+          renderSend={this.renderSend}
           user={{
             _id: 1,
           }}
-          renderInputToolbar={this.renderInput}
+          renderActions={this.renderActions}
         />
       </KeyboardAvoidingView>
     );
@@ -118,6 +162,14 @@ const styles = StyleSheet.create({
   isTypingText: {
     color: palette.text.primary,
     fontSize: typography.fontSize.big,
+  },
+  sendIcon: {
+    color: palette.primary,
+    fontSize: 30,
+  },
+  icon: {
+    color: palette.text.primary,
+    fontSize: 30,
   },
 });
 

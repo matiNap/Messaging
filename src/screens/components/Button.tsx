@@ -8,13 +8,14 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 interface Props {
   style: CSSProperties;
+  buttonStyle: CSSProperties;
   secondary: boolean;
   onPress(event: GestureResponderEvent): void;
   title: string;
 }
 
 const Button = (props: Props) => {
-  const { style, secondary, onPress, title } = props;
+  const { style, secondary, onPress, title, buttonStyle } = props;
   const backgroundColor = secondary
     ? palette.secondary
     : palette.primary;
@@ -22,7 +23,9 @@ const Button = (props: Props) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={[styles.container, { backgroundColor }, style]}>
-        <Text style={[styles.text, { color }]}>{title}</Text>
+        <Text style={[styles.text, { color }, buttonStyle]}>
+          {title}
+        </Text>
       </View>
     </TouchableWithoutFeedback>
   );
