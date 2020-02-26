@@ -4,13 +4,35 @@ import { View, Text } from 'native-base';
 import typography from '_typography';
 import palette from '_palette';
 import metrics from '_metrics';
-import ItemAdd from './ItemRequest';
+import ItemAdd from './ItemAdd';
+import { connect } from 'react-redux';
+import { sendFriendRequest } from '_actions/creators/notifications';
 
-const Results = (props: any) => {
+interface Props {
+  uid: string;
+  name: string;
+  avatartUri: string;
+  sendFriendRequest: typeof sendFriendRequest;
+}
+
+const Results = (props: Props) => {
+  const { uid, name, avatartUri } = props;
+
   return (
     <View>
       <Text style={styles.title}>Results</Text>
       <ItemAdd
+        onPress={() => {
+          props.sendFriendRequest(
+            uid,
+            () => {
+              console.log('succes');
+            },
+            () => {
+              console.log('Failed');
+            },
+          );
+        }}
         addFriend
         name="Mateusz Napieralski"
         avatarUri="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg"
@@ -28,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Results;
+export default connect(null, { sendFriendRequest })(Results);

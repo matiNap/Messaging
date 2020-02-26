@@ -13,11 +13,16 @@ import Back from '_components/Back';
 import Requests from './components/Requests';
 import Results from './components/Results';
 import ItemAdd from './components/ItemAdd';
+import { connect } from 'react-redux';
+import { RootState } from '_rootReducer';
+import FriendRequest from '_interfaces/friendReqest';
 
-const FriendAdd = props => {
-  const { results } = props;
-  // const results = 1;
+interface Props {
+  requests: FriendRequest[];
+}
 
+const FriendAdd = (props: Props) => {
+  const { requests } = props;
   return (
     <View
       style={[
@@ -37,8 +42,8 @@ const FriendAdd = props => {
         </View>
         <ContentLoader />
         <List scrollEnabled>
-          {!results && <Requests />}
-          {results && <Results />}
+          {requests && <Requests requests={requests} />}
+          {!requests && <Results />}
         </List>
       </View>
     </View>
@@ -62,4 +67,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FriendAdd;
+const mapStateToProps = (state: RootState) => {
+  const { friendRequests } = state.notifications;
+  return {
+    requests: friendRequests.length !== 0 ? friendRequests : null,
+  };
+};
+
+export default connect(mapStateToProps)(FriendAdd);

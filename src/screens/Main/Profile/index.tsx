@@ -17,6 +17,7 @@ import {
 } from '@expo/vector-icons';
 import Touchable from '_components/Touchable';
 import UserInterface from '_UserInterface';
+import Back from '_components/Back';
 
 interface Props {
   user: UserInterface;

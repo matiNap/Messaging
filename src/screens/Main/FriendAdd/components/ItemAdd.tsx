@@ -9,6 +9,7 @@ interface Props {
   state: 'added' | 'toAdd';
   name: string;
   avatarUri: string;
+  onPress: Function;
 }
 
 const ItemAdd = (props: Props) => {

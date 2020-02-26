@@ -16,7 +16,8 @@
       "_globals": ["./theme/globals.js"],
       "_zIndex": ["./theme/zIndex.js"],
       "_navigation": ["./navigationService.js"],
-      "_UserInterface": ["./interfaces/user.tsx"]
+      "_interfaces/*": ["./interfaces/*"],
+      "_rootReducer": ["./reducers/index.ts"]
     },
     "jsx": "react-native",
     "lib": ["dom", "esnext"],

@@ -3,13 +3,12 @@ import { StyleSheet } from 'react-native';
 import Touchable from '_components/Touchable';
 import FriendItem from '../../components/FriendItem';
 import palette from '_palette';
-import { Ionicons, AntDesign } from '@expo/vector-icons';
-import Button from '_components/Button';
-import { View } from 'native-base';
+import { AntDesign } from '@expo/vector-icons';
+import { View, Text } from 'native-base';
 import typography from '_typography';
+import metrics from '_metrics';
 
 interface Props {
-  state: 'added' | 'toAdd';
   name: string;
   avatarUri: string;
   onReject: Function;
@@ -23,6 +22,7 @@ const renderRightComponent = (props: {
   onReject: Function;
 }) => {
   const { onReject, onAccept } = props;
+
   return (
     <View style={{ flexDirection: 'row' }}>
       <Touchable onPress={onAccept}>
@@ -35,16 +35,14 @@ const renderRightComponent = (props: {
   );
 };
 
-const ItemAdd = (props: Props) => {
-  const { onAccept, onReject } = props;
+const ItemRequest = (props: Props) => {
   return (
     <FriendItem
       {...props}
       noTouch
-      rightComponent={props => {
+      rightComponent={() => {
         return renderRightComponent({
           ...props,
-          ...{ onAccept, onReject },
         });
       }}
     />
@@ -60,6 +58,12 @@ const styles = StyleSheet.create({
     fontSize: ICON_SIZE,
     color: palette.actions.error,
   },
+  acceptedText: {
+    fontSize: typography.fontSize.small,
+    color: palette.actions.succes,
+    marginRight: metrics.margin.normal,
+    alignSelf: 'center',
+  },
 });
 
-export default ItemAdd;
+export default ItemRequest;

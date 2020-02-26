@@ -11,8 +11,14 @@ import { FontAwesome } from '@expo/vector-icons';
 import ListItem from './components/ListItem';
 import FriendSearch from '../components/FriendSearch';
 import { navigate } from '_navigation';
+import { listenFriendRequests } from '_actions/creators/notifications';
+import { connect } from 'react-redux';
 
 class Latest extends Component {
+  componentDidMount() {
+    this.props.listenFriendRequests();
+  }
+
   render() {
     return (
       <Container>
@@ -48,4 +54,4 @@ class Latest extends Component {
 
 const styles = StyleSheet.create({});
 
-export default Latest;
+export default connect(null, { listenFriendRequests })(Latest);

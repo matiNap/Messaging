@@ -2,6 +2,7 @@ import database from '_apis/database';
 import * as types from '../app';
 import { navigate } from '_navigation';
 import reactotron from 'reactotron-react-native';
+import { AppThunk } from '_interfaces/appThunk';
 
 export const createUser = (
   userData: {
@@ -31,7 +32,7 @@ export const signIn = (
   username: string,
   password: string,
   onSignInFailed: Function,
-) => async dispatch => {
+): AppThunk => async dispatch => {
   try {
     const response = await database.post('signIn', {
       email: username,
@@ -50,7 +51,7 @@ export const signIn = (
     onSignInFailed('Invalid password or email');
   }
 };
-export const signOut = (onFailed: Function) => async (
+export const signOut = (onFailed: Function): AppThunk => async (
   dispatch,
   getState,
 ) => {
@@ -65,7 +66,7 @@ export const signOut = (onFailed: Function) => async (
 export const checkAuth = (
   onAuthSucces: Function,
   onAuthFailed: Function,
-) => async (dispatch, getState) => {
+): AppThunk => async (dispatch, getState) => {
   const state = getState();
   console.log('Check');
   try {
