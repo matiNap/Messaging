@@ -1,28 +1,32 @@
-const admin = require("firebase-admin");
+import * as admin from "firebase-admin";
+import * as functions from "firebase-functions";
 const TokenGenerator = require("uuid-token-generator");
 
-module.exports = function(req, res) {
+export default (req: functions.Request, res: functions.Response) => {
   if (!req.body.password || !req.body.email || !req.body.username) {
     return res.status(422).send({ error: "Pass email,username and password" });
   }
-  admin
+  const { fname, sname, email, password, username } = req.body;
+  return admin
     .auth()
     .createUser({
-      password: req.body.password,
-      displayName: req.body.username,
-      email: req.body.email,
-      fName: req.body.fname,
-      sname: req.body.sname,
+      password: password,
+      displayName: username,
+      email: email,
+
       disabled: false
     })
-    .then(userRecord => {
+    .then((userRecord: admin.auth.UserRecord) => {
       const { uid } = userRecord;
       const tokgen = new TokenGenerator(256, TokenGenerator.BASE62);
       admin
         .database()
         .ref(`users/${uid}`)
         .set({
-          token: tokgen.generate()
+          token: tokgen.generate(),
+          fName: fname,
+          sname: sname,
+          name: `${fname} ${sname}`
         })
         .catch(error => {
           return res
@@ -32,6 +36,6 @@ module.exports = function(req, res) {
       return res.send({ uid });
     })
     .catch(err => {
-      return res.error(err);
+      return res.status(422).send(err);
     });
 };

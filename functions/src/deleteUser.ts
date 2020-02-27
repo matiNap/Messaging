@@ -1,6 +1,7 @@
-const admin = require("firebase-admin");
+import * as admin from "firebase-admin";
+import * as functions from "firebase-functions";
 
-module.exports = function(req, res) {
+export default (req: functions.Request, res: functions.Response) => {
   if (!req.body.userToken || !req.body.id) {
     res.status(422).send("Pass id and user token");
   }
@@ -9,6 +10,6 @@ module.exports = function(req, res) {
     .deleteUser(req.body.id)
     .then(() => res.send({ deleted: true }))
     .catch(err => {
-      return res.error(err);
+      return res.status(409).send(err);
     });
 };

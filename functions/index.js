@@ -1,14 +1,18 @@
-const functions = require("firebase-functions");
-const admin = require("firebase-admin");
+import * as functions from "firebase-functions";
+import * as admin from "firebase-admin";
 const firebase = require("firebase");
-const serviceAccount = require("./service_account.json");
-const firebaseConfig = require("./firebase_config");
+import serviceAccount from "../service_account.json";
+import firebaseConfig from "../firebase_config";
 
-const createUser = require("./user/createUser.js");
-const deleteUser = require("./user/deleteUser.js");
-const signIn = require("./user/signIn.js");
-const signOut = require("./user/signOut.js");
-const checkAuth = require("./user/checkAuth");
+import createUserFunction from "./createUser";
+import deleteUserFunction from "./deleteUser";
+import signInFunction from "./signIn";
+import signOutFunction from "./signOut";
+import checkAuthFunction from "./checkAuth";
+import sendFriendRequestFunction from "./sendFriendRequest";
+import listenFriendRequestsFunction from "./listenFriendRequests";
+import acceptRequestFunction from "./acceptRequest";
+import rejectRequestFunction from "./rejectRequest";
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -17,8 +21,16 @@ admin.initializeApp({
 
 firebase.initializeApp(firebaseConfig);
 
-exports.createUser = functions.https.onRequest(createUser);
-exports.deleteUser = functions.https.onRequest(deleteUser);
-exports.signIn = functions.https.onRequest(signIn);
-exports.signOut = functions.https.onRequest(signOut);
-exports.checkAuth = functions.https.onRequest(checkAuth);
+export const createUser = functions.https.onRequest(createUserFunction);
+export const deleteUser = functions.https.onRequest(deleteUserFunction);
+export const signIn = functions.https.onRequest(signInFunction);
+export const signOut = functions.https.onRequest(signOutFunction);
+export const checkAuth = functions.https.onRequest(checkAuthFunction);
+export const sendFriendRequest = functions.https.onRequest(
+  sendFriendRequestFunction
+);
+export const listenFriendRequests = functions.https.onRequest(
+  listenFriendRequestsFunction
+);
+export const acceptRequest = functions.https.onRequest(acceptRequestFunction);
+export const rejectRequest = functions.https.onRequest(rejectRequestFunction);
