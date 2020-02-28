@@ -1,7 +1,7 @@
 import * as firebase from "firebase";
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
-import * as TokenGenerator from "uuid-token-generator";
+import TokenGenerator from "uuid-token-generator";
 
 export default (req: functions.Request, res: functions.Response): any => {
   const { email, password } = req.body;
@@ -13,7 +13,7 @@ export default (req: functions.Request, res: functions.Response): any => {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(userRecord => {
+    .then((userRecord: any) => {
       const { displayName, uid, photoURL } = userRecord.user;
       const tokgen = new TokenGenerator(256, TokenGenerator.BASE62);
       const ref = admin.database().ref(`users/${uid}`);
@@ -27,7 +27,7 @@ export default (req: functions.Request, res: functions.Response): any => {
             .status(422)
             .send({ error, message: "Cannot find user by uid" });
         });
-      return ref.on("value", (snapshot: admin.database.DataSnapshot) => {
+      return ref.on("value", (snapshot: any) => {
         const { fname, sname, name } = snapshot.val();
         return res.status(200).send({
           displayName,

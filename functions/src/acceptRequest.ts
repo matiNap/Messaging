@@ -1,7 +1,10 @@
-import admin from "firebase-admin";
-import functions from "firebase-functions";
+import * as admin from "firebase-admin";
+import * as functions from "firebase-functions";
 
-export default async function(req: functions.Request, res: functions.Response) {
+export default async function(
+  req: functions.Request,
+  res: functions.Response
+): Promise<any> {
   const { toUid, fromUid } = req.body;
 
   if (!toUid || !fromUid) {

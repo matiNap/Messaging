@@ -9,7 +9,7 @@ export default (req: functions.Request, res: functions.Response) => {
   }
 
   const ref = admin.database().ref(`users/${uid}`);
-  return ref.on("value", (snapshot: admin.database.DataSnapshot) => {
+  return ref.on("value", (snapshot: any) => {
     ref.off();
     const databaseToken = snapshot.val().token;
     const { fname, sname, name } = snapshot.val();
@@ -20,7 +20,7 @@ export default (req: functions.Request, res: functions.Response) => {
       ref
         .update({ token: newToken })
         .catch(error => res.status(422).send(error));
-      admin
+      return admin
         .auth()
         .getUser(uid)
         .then(userRecord => {

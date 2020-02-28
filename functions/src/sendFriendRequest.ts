@@ -1,8 +1,7 @@
 import * as admin from "firebase-admin";
-import * as functions from 'firebase-functions'
+import * as functions from "firebase-functions";
 
-
-export default (req:functions.Request, res:functions.Response) {
+export default (req: functions.Request, res: functions.Response) => {
   const { fromUid, toUid } = req.body;
   if (!fromUid || !toUid) {
     res.status(409).send("Pass fromUid and toUid");

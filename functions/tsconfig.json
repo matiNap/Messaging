@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "module": "ES2020",
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "outDir": "lib",
-    "sourceMap": true,
-    "strict": true,
-    "target": "es2017"
+    "target": "es6",
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "outDir": "./lib",
+    "moduleResolution": "node",
+    "strictNullChecks": false,
+    "noImplicitAny": false
   },
-  "compileOnSave": true,
-  "include": ["src"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }

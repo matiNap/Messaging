@@ -3,10 +3,13 @@ import * as functions from "firebase-functions";
 const TokenGenerator = require("uuid-token-generator");
 
 export default (req: functions.Request, res: functions.Response) => {
-  if (!req.body.password || !req.body.email || !req.body.username) {
-    return res.status(422).send({ error: "Pass email,username and password" });
-  }
   const { fname, sname, email, password, username } = req.body;
+  if (!password || !email || !username || !fname || !sname) {
+    return res
+      .status(422)
+      .send({ error: "Pass email,username, fname, sname and password" });
+  }
+
   return admin
     .auth()
     .createUser({
