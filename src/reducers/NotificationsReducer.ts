@@ -3,13 +3,13 @@ import * as types from '_actions/notifications';
 import FriendRequest from '_interfaces/friendReqest';
 import _ from 'lodash';
 
-const initState: NotificationState = {
-  friendRequests: [],
-};
-
 export interface NotificationState {
   friendRequests: FriendRequest[];
 }
+
+const initState: NotificationState = {
+  friendRequests: [],
+};
 
 export default (state = initState, action): NotificationState => {
   switch (action.type) {

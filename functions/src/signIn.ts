@@ -1,7 +1,7 @@
 import * as firebase from "firebase";
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
-import TokenGenerator from "uuid-token-generator";
+import * as TokenGenerator from "uuid-token-generator";
 
 export default (req: functions.Request, res: functions.Response): any => {
   const { email, password } = req.body;
@@ -41,6 +41,7 @@ export default (req: functions.Request, res: functions.Response): any => {
       });
     })
     .catch(err => {
+      console.log(err);
       return res.status(401).send(err);
     });
 };

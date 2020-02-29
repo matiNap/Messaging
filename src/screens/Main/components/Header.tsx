@@ -18,6 +18,7 @@ import IconBackground from '_components/IconBackground';
 import StatusBar from '_components/StatusBar';
 import Touchable from '_components/Touchable';
 import { navigate } from '_navigation';
+import globals from '_globals';
 
 interface Props {
   title?: string;
@@ -39,8 +40,7 @@ const MainHeader = (props: Props) => {
           <Thumbnail
             style={styles.avatar}
             source={{
-              uri:
-                'https://ramcotubular.com/wp-content/uploads/default-avatar.jpg',
+              uri: globals.primaryAvatar,
             }}
           />
         </Touchable>

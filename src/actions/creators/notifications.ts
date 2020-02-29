@@ -1,6 +1,7 @@
 import database from '_apis/database';
 import * as types from '../notifications';
 import { AppThunk } from '_interfaces/appThunk';
+import reactotron from 'reactotron-react-native';
 
 export const sendFriendRequest = (
   toUid: string,
@@ -9,7 +10,7 @@ export const sendFriendRequest = (
 ): AppThunk => async (dispatch, getState) => {
   try {
     const fromUid = getState().app.user.uid;
-    await database.post('sendFriendRequest', { fromUid, toUid });
+    await database.post(`friendRequest/${toUid}?fromUid=${fromUid}`);
     onSucces();
   } catch (error) {
     onFailed();
@@ -22,9 +23,8 @@ export const listenFriendRequests = (): AppThunk => async (
 ) => {
   try {
     const toUid = getState().app.user.uid;
-    const response = await database.post('listenFriendRequests', {
-      toUid,
-    });
+    const response = await database.get(`friendRequest/${toUid}`);
+    reactotron.log(response.data);
     dispatch({
       type: types.LISTEN_FRIEND_REQUESTS,
       payload: response.data,

@@ -29,7 +29,8 @@ export default (req: functions.Request, res: functions.Response) => {
           token: tokgen.generate(),
           fName: fname,
           sname: sname,
-          name: `${fname} ${sname}`
+          name: `${fname} ${sname}`,
+          displayName: username
         })
         .catch(error => {
           return res

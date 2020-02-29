@@ -5,6 +5,7 @@ import palette from '_palette';
 import metrics from '_metrics';
 import typography from '_typography';
 import Touchable from '_components/Touchable';
+import globals from '_globals';
 
 interface Props {
   name: string;
@@ -16,6 +17,7 @@ interface Props {
 
 const LatestListItem = (props: Props) => {
   const { name, avatarUri, noTouch, onPress } = props;
+  const avtar = avatarUri ? avatarUri : globals.primaryAvatar;
   const RightComponent = props.rightComponent;
   const Content = () => (
     <ListItem itemDivider={false} style={styles.listItem} avatar>
@@ -23,7 +25,7 @@ const LatestListItem = (props: Props) => {
         <Thumbnail
           style={styles.mainAvatar}
           source={{
-            uri: avatarUri,
+            uri: avtar,
           }}
         />
       </Left>

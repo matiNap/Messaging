@@ -4,7 +4,8 @@ import * as express from "express";
 import * as cors from "cors";
 
 const postFriendRequest = (req: functions.Request, res: functions.Response) => {
-  const { fromUid, toUid } = req.params;
+  const { toUid } = req.params;
+  const { fromUid } = req.query;
 
   if (!fromUid || !toUid) {
     res.status(409).send("Pass fromUid and toUid");
@@ -68,6 +69,6 @@ const friendRequest = express();
 // friendRequest.use(cors({ origin: true }));
 
 friendRequest.get("/:toUid", getFriendRequest);
-friendRequest.post("/:toUid?:fromUid", postFriendRequest);
+friendRequest.post("/:toUid", postFriendRequest);
 
 export default friendRequest;

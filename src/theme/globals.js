@@ -1,3 +1,5 @@
 export default {
-  appName: "Messaging"
+  appName: 'Messaging',
+  primaryAvatar:
+    'https://ramcotubular.com/wp-content/uploads/default-avatar.jpg',
 };
