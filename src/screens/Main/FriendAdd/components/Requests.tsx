@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import palette from '_palette';
 import typography from '_typography';
 import metrics from '_metrics';
-import FriendRequest from '_interfaces/friendReqest';
+import { FriendRequest } from '_types';
 
 interface Props {
   acceptRequest: typeof acceptRequest;

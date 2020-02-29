@@ -12,7 +12,7 @@ module.exports = {
         '_helpers/*': './helpers/*',
         '_assets/*': './assets/*',
         '_components/*': './screens/components/*',
-        '_interfaces/*': './interfaces/*',
+        _types: './types/index.ts',
         _navigation: './navigationService.js',
         _typography: './theme/typography.js',
         _palette: './theme/palette',

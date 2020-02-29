@@ -16,7 +16,7 @@
       "_globals": ["./theme/globals.js"],
       "_zIndex": ["./theme/zIndex.js"],
       "_navigation": ["./navigationService.js"],
-      "_interfaces/*": ["./interfaces/*"],
+      "_types": ["./types/index.ts"],
       "_rootReducer": ["./reducers/index.ts"]
     },
     "jsx": "react-native",

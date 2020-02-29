@@ -6,7 +6,7 @@
         "root": ["./"],
         "alias": {
           "_navigation": "./navigationService.js",
-          "_interfaces/*": "./interfaces/*",
+          "_types": "./types/index.ts",
           "_apis": "./apis/",
           "_actions": "./actions/",
           "_hocs": "./hocs/",

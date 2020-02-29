@@ -7,36 +7,44 @@ import metrics from '_metrics';
 import ItemAdd from './ItemAdd';
 import { connect } from 'react-redux';
 import { sendFriendRequest } from '_actions/creators/notifications';
+import { User } from '_types';
+import globals from '_globals';
 
 interface Props {
-  uid: string;
-  name: string;
-  avatartUri: string;
   sendFriendRequest: typeof sendFriendRequest;
+  results: User[];
 }
 
+const renderResults = (
+  results: User[],
+  onPress: typeof sendFriendRequest,
+) => {
+  return results.map(users => {
+    const { name, avatarUri, state, uid } = users;
+
+    const avatar = avatarUri ? avatarUri : globals.primaryAvatar;
+    return (
+      <ItemAdd
+        onPress={() => {
+          onPress(uid);
+        }}
+        state={state}
+        name={name}
+        avatarUri={avatar}
+      />
+    );
+  });
+};
+
 const Results = (props: Props) => {
-  const { uid, name, avatartUri } = props;
+  const { results } = props;
 
   return (
     <View>
       <Text style={styles.title}>Results</Text>
-      <ItemAdd
-        onPress={() => {
-          props.sendFriendRequest(
-            uid,
-            () => {
-              console.log('succes');
-            },
-            () => {
-              console.log('Failed');
-            },
-          );
-        }}
-        addFriend
-        name="Mateusz Napieralski"
-        avatarUri="https://ramcotubular.com/wp-content/uploads/default-avatar.jpg"
-      />
+      {renderResults(results, (uid: string) => {
+        props.sendFriendRequest(uid);
+      })}
     </View>
   );
 };

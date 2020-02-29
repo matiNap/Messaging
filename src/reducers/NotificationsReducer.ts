@@ -1,6 +1,5 @@
-import { REHYDRATE } from 'redux-persist/es/constants';
 import * as types from '_actions/notifications';
-import FriendRequest from '_interfaces/friendReqest';
+import { FriendRequest } from '_types';
 import _ from 'lodash';
 
 export interface NotificationState {

@@ -2,7 +2,7 @@ import database from '_apis/database';
 import * as types from '../app';
 import { navigate } from '_navigation';
 import reactotron from 'reactotron-react-native';
-import { AppThunk } from '_interfaces/appThunk';
+import { AppThunk } from '_types';
 
 export const createUser = (
   userData: {
