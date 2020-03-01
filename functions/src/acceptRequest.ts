@@ -21,6 +21,10 @@ export default async function(
       .database()
       .ref(`users/${toUid}/friends`)
       .update({ [fromUid]: true });
+    await admin
+      .database()
+      .ref(`users/${fromUid}/friends`)
+      .update({ [toUid]: true });
 
     res.send("Accepted succesfuly");
   } catch (error) {

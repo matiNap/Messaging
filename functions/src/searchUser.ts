@@ -5,11 +5,25 @@ import * as cors from "cors";
 
 const searchUserRequest = express();
 
+const getState = (
+  invitedByUser: boolean,
+  invitedByMe: boolean,
+  areFriends: boolean
+) => {
+  if (invitedByUser) {
+    return "byUser";
+  } else if (areFriends) {
+    return "friends";
+  } else if (invitedByMe) {
+    return "byMe";
+  } else return "none";
+};
+
 const searchUser = async (req: functions.Request, res: functions.Response) => {
-  const { name } = req.query;
+  const { name, searchedBy } = req.query;
   const limit = req.query.limit ? Number.parseInt(req.query.limit) : 20;
-  if (!name) {
-    return res.status(409).send("Pass name to search");
+  if (!name || !searchedBy) {
+    return res.status(409).send("Pass name to search and searchedBy");
   }
 
   try {
@@ -23,11 +37,37 @@ const searchUser = async (req: functions.Request, res: functions.Response) => {
       .limitToFirst(limit)
       .once("value");
     const result = snapshot.val();
-
+    const friendRequestsSnapshot = await admin
+      .database()
+      .ref(`users/${searchedBy}/friendRequests`)
+      .once("value");
+    const ownFriendRequests = friendRequestsSnapshot.val();
     const searchedUsers = [];
     for (let [key] of Object.entries(result)) {
-      const { name, photoURL, displayName } = result[key];
-      searchedUsers.push({ name, photoURL, displayName, uid: key });
+      if (key === searchedBy) continue;
+      const { name, photoURL, displayName, friends, friendRequests } = result[
+        key
+      ];
+
+      const ivnitedByMe =
+        friendRequests && friendRequests[searchedBy]
+          ? friendRequests[searchedBy].sended
+          : null;
+      const invitedByUser =
+        ownFriendRequests && ownFriendRequests[key]
+          ? ownFriendRequests[key].sended
+          : null;
+
+      const areFriends =
+        friends && friends[searchedBy] ? friends[searchedBy] : null;
+
+      searchedUsers.push({
+        name,
+        photoURL,
+        displayName,
+        uid: key,
+        state: getState(invitedByUser, ivnitedByMe, areFriends)
+      });
     }
 
     return res.send(searchedUsers);
