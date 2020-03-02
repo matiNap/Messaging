@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { StyleSheet, AppState } from 'react-native';
 import { List } from 'native-base';
 import Header from '../components/Header';
-import Input from '_components/Input';
-import palette from '_palette';
 import { Container } from 'native-base';
-import metrics from '_metrics';
-import typography from '_typography';
-import { FontAwesome } from '@expo/vector-icons';
+
 import ListItem from './components/ListItem';
 import FriendSearch from '../components/FriendSearch';
-import { navigate } from '_navigation';
 import { listenFriendRequests } from '_actions/creators/notifications';
 import { connect } from 'react-redux';
+import { changeStatus } from '_actions/creators/app';
 
-class Latest extends Component {
+interface Props {
+  changeStatus: typeof changeStatus;
+}
+
+class Latest extends Component<Props> {
   componentDidMount() {
-    this.props.listenFriendRequests();
+    AppState.addEventListener('change', appState => {
+      if (appState === 'background') {
+        this.props.changeStatus(0);
+      } else {
+        this.props.changeStatus(1);
+      }
+    });
   }
 
   render() {
@@ -54,4 +60,6 @@ class Latest extends Component {
 
 const styles = StyleSheet.create({});
 
-export default connect(null, { listenFriendRequests })(Latest);
+export default connect(null, { listenFriendRequests, changeStatus })(
+  Latest,
+);

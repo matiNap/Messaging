@@ -7,6 +7,9 @@ const initState = {
     signedIn: false,
     token: null,
   },
+  tabButtonChecked: {
+    latest: true,
+  },
 };
 
 export default (state = initState, action) => {
@@ -32,6 +35,14 @@ export default (state = initState, action) => {
         user: {
           ...state.user,
           ...action.payload,
+        },
+      };
+    }
+    case types.PRESS_TAB_BAR: {
+      return {
+        ...state,
+        tabButtonChecked: {
+          [action.payload]: true,
         },
       };
     }

@@ -11,6 +11,8 @@ import FriendAdd from './FriendAdd';
 import SearchFriend from './SearchFriend';
 import Chat from './Chat';
 
+const ICON_SIZE = 35;
+
 export default createStackNavigator(
   {
     mainTabs: createBottomTabNavigator(
@@ -18,13 +20,17 @@ export default createStackNavigator(
         latest: {
           screen: Latest,
           navigationOptions: {
-            tabBarButtonComponent: LatestButton,
+            tabBarButtonComponent: () => {
+              return <LatestButton iconSize={ICON_SIZE} />;
+            },
           },
         },
         online: {
           screen: Online,
           navigationOptions: {
-            tabBarButtonComponent: OnlineButton,
+            tabBarButtonComponent: () => {
+              return <OnlineButton iconSize={ICON_SIZE} />;
+            },
           },
         },
       },

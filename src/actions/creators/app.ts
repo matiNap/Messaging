@@ -97,3 +97,22 @@ export const deleteUser = async (
     onDeleteFailed();
   }
 };
+
+export const pressTabBarButton = (name: string) => {
+  return {
+    type: types.PRESS_TAB_BAR,
+    payload: name,
+  };
+};
+
+export const changeStatus = (status: boolean): AppThunk => (
+  dispatch,
+  getState,
+) => {
+  const { uid } = getState().app.user;
+  try {
+    database.post(`status/${uid}?newStatus=${status}`);
+  } catch (error) {
+    console.log(error);
+  }
+};

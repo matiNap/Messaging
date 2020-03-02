@@ -21,13 +21,13 @@ const TabBarButton = (props: Props) => {
     <View style={styles.container}>
       <Touchable onPress={onPress}>
         <View style={{ marginTop: 10 }}>
+          <View style={[styles.circle, { backgroundColor }]}>
+            <Text style={styles.info}>{4}</Text>
+          </View>
           <IconComponent
             size={ICON_SIZE}
             color={palette.text.primary}
           />
-          <View style={[styles.circle, { backgroundColor }]}>
-            <Text style={styles.info}>{4}</Text>
-          </View>
         </View>
       </Touchable>
     </View>

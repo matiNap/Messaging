@@ -111,6 +111,9 @@ class FriendAdd extends React.Component<Props> {
                     onReject={this.onReject}
                   />
                 )}
+                {!results && !requests && (
+                  <Text style={styles.title}>Search for friends</Text>
+                )}
               </List>
             )}
             <ContentLoader visible={loading} />
@@ -151,6 +154,12 @@ const styles = StyleSheet.create({
     fontSize: typography.fontSize.normal,
     alignSelf: 'center',
     marginTop: metrics.margin.big,
+  },
+  title: {
+    fontSize: typography.fontSize.medium,
+    alignSelf: 'center',
+    color: palette.grayscale.light,
+    marginTop: '60%',
   },
 });
 
