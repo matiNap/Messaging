@@ -1,13 +1,12 @@
 import React, { CSSProperties } from 'react';
-import {
-  Container,
-  Item,
-  Input as BaseInput,
-  View,
-} from 'native-base';
+import { View } from 'native-base';
 import { TextInput } from 'react-native-gesture-handler';
 import palette from '_palette';
-import { StyleSheet } from 'react-native';
+import {
+  StyleSheet,
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+} from 'react-native';
 import metrics from '_metrics';
 import typography from '_typography';
 
@@ -19,8 +18,12 @@ interface Props {
   style: CSSProperties;
   secondary: boolean;
   primary: boolean;
+  noOutlined: boolean;
   secureTextEntry: boolean;
   textInputStyle: CSSProperties;
+  color?: string | undefined;
+  placeholderColor: string;
+  rightIcon: React.Component;
 }
 
 const Input = (props: Props) => {
@@ -33,20 +36,40 @@ const Input = (props: Props) => {
     secondary,
     onChangeText,
     value,
+    noOutlined,
+    color,
+    placeholderColor,
   } = props;
   const borderColor = secondary ? palette.secondary : palette.primary;
-  const color = secondary
+  const customContainerStyle = {
+    borderColor: noOutlined ? null : borderColor,
+    borderWidth: noOutlined ? 0 : 2,
+  };
+  const inputThemeColor = secondary
     ? palette.text.secondary
     : palette.grayscale.medium;
+  const inputColor = color ? color : inputThemeColor;
+  const RightIcon = props.rightIcon;
   return (
-    <View style={[styles.container, { borderColor }, style]}>
+    <View style={[styles.container, customContainerStyle, style]}>
+      {RightIcon && (
+        <View style={styles.rightIcon}>
+          <RightIcon />
+        </View>
+      )}
       <TextInput
+        placeholderTextColor={placeholderColor}
         value={value}
         secureTextEntry={secureTextEntry}
         textContentType={type}
         onChangeText={onChangeText}
         placeholder={placeholder}
-        style={[styles.textInput, { color }, textInputStyle]}
+        style={[
+          styles.textInput,
+          textInputStyle,
+          { color: inputColor },
+          { color },
+        ]}
       />
     </View>
   );
@@ -64,6 +87,12 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: metrics.margin.small,
     flexGrow: 2,
+    color: palette.text.primary,
+  },
+  rightIcon: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginLeft: metrics.margin.normal,
   },
 });
 

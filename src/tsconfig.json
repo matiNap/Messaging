@@ -14,7 +14,10 @@
       "_palette": ["./theme/palette.js"],
       "_metrics": ["./theme/metrics.js"],
       "_globals": ["./theme/globals.js"],
-      "_zIndex": ["./theme/zIndex.js"]
+      "_zIndex": ["./theme/zIndex.js"],
+      "_navigation": ["./navigationService.js"],
+      "_types": ["./types/index.ts"],
+      "_rootReducer": ["./reducers/index.ts"]
     },
     "jsx": "react-native",
     "lib": ["dom", "esnext"],

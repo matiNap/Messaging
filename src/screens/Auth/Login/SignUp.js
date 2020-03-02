@@ -90,6 +90,7 @@ class SignUp extends Component {
         <Text style={styles.title}>Sign up</Text>
         <View style={styles.inputContainer}>
           <Input
+            color={palette.secondary}
             value={inputs[USERNAME]}
             type="username"
             placeholder="Username"
@@ -100,6 +101,7 @@ class SignUp extends Component {
             }}
           />
           <Input
+            color={palette.secondary}
             value={inputs[EMAIL]}
             type="emailAddress"
             placeholder="email"
@@ -111,6 +113,7 @@ class SignUp extends Component {
           />
           <View style={styles.inputNameContainer}>
             <Input
+              color={palette.secondary}
               value={inputs[FNAME]}
               type="name"
               placeholder="First name"
@@ -121,6 +124,7 @@ class SignUp extends Component {
               }}
             />
             <Input
+              color={palette.secondary}
               value={inputs[SNAME]}
               type="name"
               placeholder="Surname"
@@ -132,6 +136,7 @@ class SignUp extends Component {
             />
           </View>
           <Input
+            color={palette.secondary}
             value={inputs[PASS]}
             secureTextEntry
             type="password"
@@ -143,6 +148,7 @@ class SignUp extends Component {
             }}
           />
           <Input
+            color={palette.secondary}
             value={inputs[RPASS]}
             secureTextEntry
             type="password"
