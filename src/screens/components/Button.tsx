@@ -7,9 +7,9 @@ import typography from '_typography';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 interface Props {
-  style: CSSProperties;
-  buttonStyle: CSSProperties;
-  secondary: boolean;
+  style?: CSSProperties;
+  buttonStyle?: CSSProperties;
+  secondary?: boolean;
   onPress(event: GestureResponderEvent): void;
   title: string;
 }

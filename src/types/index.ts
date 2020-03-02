@@ -22,3 +22,16 @@ export type FriendRequest = {
   uid: string;
   photoURL: string;
 };
+
+export type FriendRequestState =
+  | 'byUser'
+  | 'friends'
+  | 'byMe'
+  | 'none';
+
+export type SearchedUser = {
+  uid: string;
+  state: FriendRequestState;
+  name: string;
+  photoURL: string;
+};

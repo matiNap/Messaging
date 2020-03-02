@@ -38,7 +38,6 @@ export default class Touchable extends React.Component<Props> {
             style,
             {
               opacity: opacity,
-              justifyContent: 'center',
             },
           ]}
         >

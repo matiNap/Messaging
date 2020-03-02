@@ -17,10 +17,8 @@ export default (state = initState, action): NotificationState => {
         ...state,
         friendRequests: action.payload,
       };
+
     case types.REQUEST_RESPONSE: {
-      _.remove(state.friendRequests, request => {
-        return request.uid === action.payload.uid;
-      });
       return {
         ...state,
         friendRequests: _.remove(state.friendRequests, request => {

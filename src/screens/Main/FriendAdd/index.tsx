@@ -16,6 +16,7 @@ import {
   searchUser,
   deleteSearchedUsers,
 } from '_actions/creators/users';
+import Notification from '_components/Notification';
 
 interface Props {
   requests: null | FriendRequest[];
@@ -29,6 +30,11 @@ class FriendAdd extends React.Component<Props> {
     loading: false,
     notFound: false,
   };
+  notificationRef: React.RefObject<Notification>;
+  constructor(props: Props) {
+    super(props);
+    this.notificationRef = React.createRef();
+  }
   componentWillUnmount() {
     this.props.deleteSearchedUsers();
   }
@@ -41,10 +47,18 @@ class FriendAdd extends React.Component<Props> {
       loading: false,
     });
   };
+
+  onReject = () => {
+    this.notificationRef.open('Rejected', palette.actions.error);
+  };
+
+  onAccept = () => {
+    this.notificationRef.open('Accept', palette.actions.succes);
+  };
   render() {
     const { requests, results } = this.props;
     const { loading, notFound } = this.state;
-    console.log(notFound);
+
     return (
       <KeyboardAvoidingView
         enabled
@@ -61,7 +75,7 @@ class FriendAdd extends React.Component<Props> {
             <View style={styles.search}>
               <Back />
               <Input
-                placeholder="Search friend"
+                placeholder="Search user"
                 noOutlined
                 style={styles.input}
                 textInputStyle={styles.textInputStyle}
@@ -80,13 +94,23 @@ class FriendAdd extends React.Component<Props> {
                 }}
               />
             </View>
-            <ContentLoader />
+
             {!loading && (
               <List scrollEnabled>
                 {requests && !results && !notFound && (
-                  <Requests requests={requests} />
+                  <Requests
+                    requests={requests}
+                    onAccept={this.onAccept}
+                    onReject={this.onReject}
+                  />
                 )}
-                {results && <Results results={results} />}
+                {results && (
+                  <Results
+                    results={results}
+                    onAccept={this.onAccept}
+                    onReject={this.onReject}
+                  />
+                )}
               </List>
             )}
             <ContentLoader visible={loading} />
@@ -94,6 +118,12 @@ class FriendAdd extends React.Component<Props> {
               <Text style={styles.notFoundText}>Not found</Text>
             )}
           </View>
+          <Notification
+            duration={1000}
+            ref={ref => {
+              this.notificationRef = ref;
+            }}
+          />
         </View>
       </KeyboardAvoidingView>
     );

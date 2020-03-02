@@ -1,73 +1,76 @@
 import React from 'react';
-import { Modal, StyleSheet } from 'react-native';
-import { Text, View } from 'native-base';
+import { StyleSheet } from 'react-native';
+import { Text } from 'native-base';
 import * as Animatable from 'react-native-animatable';
 import typography from '_typography';
 import palette from '_palette';
 import metrics from '_metrics';
 import Animated from 'react-native-reanimated';
 
-const getBackgroundColor = (type: string | undefined) => {
-  switch (type) {
-    case 'success':
-      return palette.actions.warning;
-    case 'warning':
-      return palette.actions.warning;
-    case 'error':
-      return palette.actions.error;
-    default:
-      return palette.secondary;
-  }
-};
-
 interface Props {
   content: string;
-  type?: 'warning' | 'error' | 'success';
   color?: string | Animated.Node<string>;
-  hide?: boolean;
+  duration: number | null;
 }
 
 class Notification extends React.Component<Props> {
   animationRef: Animatable.View;
 
-  componentDidUpdate() {
-    const { hide } = this.props;
-    if (hide) {
-      this.onExit();
+  state = {
+    color: null,
+    content: null,
+  };
+
+  constructor(props: Props) {
+    super(props);
+
+    this.open = this.open.bind(this);
+    this.close = this.close.bind(this);
+  }
+
+  open(content: string, color: string) {
+    const { duration } = this.props;
+    this.setState({ content, color });
+    if (duration) {
+      this.animationRef.slideInUp(200);
+      setTimeout(() => {
+        this.animationRef.slideOutDown(200);
+      }, 1000);
+    } else {
+      this.animationRef.slideInUp(200);
     }
   }
 
-  onExit = () => {
+  close() {
     if (this.animationRef) this.animationRef.slideOutDown(200);
-  };
+  }
 
   render() {
-    const { content, type, color, hide } = this.props;
-    const backgroundColor = color ? color : getBackgroundColor(type);
+    const backgroundColor = this.state.color
+      ? this.state.color
+      : this.props.color;
+    const content = this.state.content
+      ? this.state.content
+      : this.props.content;
     return (
-      <View style={{ position: 'absolute', bottom: 0 }}>
-        {!hide && (
-          <Animatable.View
-            style={styles.container}
-            animation="slideInUp"
-            ref={ref => {
-              this.animationRef = ref;
-            }}
-          >
-            <Animated.View
-              style={{
-                flex: 1,
-                display: 'flex',
-                backgroundColor,
-                justifyContent: 'center',
-                flexDirection: 'column',
-              }}
-            >
-              <Text style={styles.text}>{content}</Text>
-            </Animated.View>
-          </Animatable.View>
-        )}
-      </View>
+      <Animatable.View
+        style={styles.container}
+        ref={ref => {
+          this.animationRef = ref;
+        }}
+      >
+        <Animated.View
+          style={{
+            flex: 1,
+            display: 'flex',
+            backgroundColor,
+            justifyContent: 'center',
+            flexDirection: 'column',
+          }}
+        >
+          <Text style={styles.text}>{content}</Text>
+        </Animated.View>
+      </Animatable.View>
     );
   }
 }
@@ -81,6 +84,8 @@ const styles = StyleSheet.create({
     shadowColor: 'rgba(31,31,31,0.7)',
     shadowOffset: { x: 0, y: -1 },
     bottom: 0,
+    left: 0,
+    right: 0,
   },
   text: {
     color: palette.text.secondary,

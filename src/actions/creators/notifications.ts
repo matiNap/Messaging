@@ -1,6 +1,6 @@
 import database from '_apis/database';
 import * as types from '../notifications';
-import { AppThunk } from 'types/appThunk';
+import { AppThunk } from 'types';
 import reactotron from 'reactotron-react-native';
 
 export const sendFriendRequest = (

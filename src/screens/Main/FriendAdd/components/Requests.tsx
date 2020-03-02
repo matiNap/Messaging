@@ -1,51 +1,35 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import ItemRequest from './ItemRequest';
-import {
-  acceptRequest,
-  rejectRequest,
-} from '_actions/creators/notifications';
-import { connect } from 'react-redux';
 import palette from '_palette';
 import typography from '_typography';
 import metrics from '_metrics';
 import { FriendRequest } from '_types';
 
 interface Props {
-  acceptRequest: typeof acceptRequest;
-  rejectRequest: typeof rejectRequest;
   requests: FriendRequest[];
+  onAccept: Function;
+  onReject: Function;
 }
 
-const renderRequests = (
-  requests: FriendRequest[],
-  acceptRequest: Function,
-  rejectRequest: Function,
-) => {
-  return requests.map((request: FriendRequest) => {
-    const { name, uid, photoURL } = request;
-    return (
-      <ItemRequest
-        onAccept={() => {
-          acceptRequest(uid);
-        }}
-        onReject={() => {
-          rejectRequest(uid);
-        }}
-        name={name}
-        avatarUri={photoURL}
-      />
-    );
-  });
-};
-
 const Requests = (props: Props) => {
-  const { requests, acceptRequest, rejectRequest } = props;
+  const { requests, onAccept, onReject } = props;
 
   return (
     <View>
       <Text style={styles.text}>Friends Requests</Text>
-      {renderRequests(requests, acceptRequest, rejectRequest)}
+      {requests.map((request: FriendRequest) => {
+        const { name, photoURL, uid } = request;
+        return (
+          <ItemRequest
+            onAccept={onAccept}
+            onReject={onReject}
+            name={name}
+            avatarUri={photoURL}
+            uid={uid}
+          />
+        );
+      })}
     </View>
   );
 };
@@ -59,6 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, { acceptRequest, rejectRequest })(
-  Requests,
-);
+export default Requests;

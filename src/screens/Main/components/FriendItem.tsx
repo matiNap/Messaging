@@ -10,49 +10,42 @@ import globals from '_globals';
 interface Props {
   name: string;
   avatarUri: string;
-  noTouch: boolean;
   rightComponent?: React.Component;
   onPress: Function;
 }
 
 const LatestListItem = (props: Props) => {
-  const { name, avatarUri, noTouch, onPress } = props;
+  const { name, avatarUri, onPress } = props;
   const avtar = avatarUri ? avatarUri : globals.primaryAvatar;
   const RightComponent = props.rightComponent;
-  const Content = () => (
+  return (
     <ListItem itemDivider={false} style={styles.listItem} avatar>
-      <Left>
-        <Thumbnail
-          style={styles.mainAvatar}
-          source={{
-            uri: avtar,
-          }}
-        />
-      </Left>
-      <View style={styles.body}>
-        <Text style={styles.mainText}>{name}</Text>
-      </View>
+      <Touchable onPress={onPress} style={{ flexDirection: 'row' }}>
+        <Left>
+          <Thumbnail
+            style={styles.mainAvatar}
+            source={{
+              uri: avtar,
+            }}
+          />
+        </Left>
+
+        <View style={styles.body}>
+          <Text style={styles.mainText}>{name}</Text>
+        </View>
+      </Touchable>
+
       <View style={styles.right}>
         {RightComponent && <RightComponent {...props} />}
       </View>
     </ListItem>
   );
-  if (noTouch) {
-    return <Content />;
-  } else {
-    return (
-      <Touchable onPress={() => {}}>
-        <Content />
-      </Touchable>
-    );
-  }
 };
 
 const styles = StyleSheet.create({
   listItem: {
     backgroundColor: palette.secondary,
     marginTop: metrics.margin.normal,
-    flexDirection: 'row',
   },
   mainAvatar: { width: 42, height: 42 },
   mainText: {
@@ -63,7 +56,7 @@ const styles = StyleSheet.create({
   body: {
     marginTop: metrics.margin.normal,
     marginLeft: metrics.margin.medium,
-    width: '65%',
+    alignSelf: 'center',
   },
   right: {
     flexGrow: 2,

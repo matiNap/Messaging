@@ -6,44 +6,40 @@ import palette from '_palette';
 import metrics from '_metrics';
 import ItemAdd from './ItemAdd';
 import { connect } from 'react-redux';
-import { sendFriendRequest } from '_actions/creators/notifications';
-import { User } from '_types';
+import { SearchedUser } from '_types';
 import globals from '_globals';
+import { addUser } from '_actions/creators/users';
 
 interface Props {
-  sendFriendRequest: typeof sendFriendRequest;
-  results: User[];
+  results: SearchedUser[];
+  addUser: typeof addUser;
+  onAccept: Function;
+  onReject: Function;
 }
 
-const renderResults = (
-  results: User[],
-  onPress: typeof sendFriendRequest,
-) => {
-  return results.map(users => {
-    const { name, avatarUri, state, uid } = users;
-
-    const avatar = avatarUri ? avatarUri : globals.primaryAvatar;
-    return (
-      <ItemAdd
-        onPress={() => {
-          onPress(uid);
-        }}
-        state={state}
-        name={name}
-        avatarUri={avatar}
-      />
-    );
-  });
-};
-
 const Results = (props: Props) => {
-  const { results } = props;
+  const { results, addUser, onAccept, onReject } = props;
 
   return (
     <View>
-      <Text style={styles.title}>Results</Text>
-      {renderResults(results, (uid: string) => {
-        props.sendFriendRequest(uid);
+      <Text style={styles.title}>Add new friend</Text>
+      {results.map(users => {
+        const { name, photoURL, state, uid } = users;
+
+        const avatarUri = photoURL ? photoURL : globals.primaryAvatar;
+        return (
+          <ItemAdd
+            onPress={() => {
+              addUser(uid);
+            }}
+            uid={uid}
+            onAccept={onAccept}
+            onReject={onReject}
+            state={state}
+            name={name}
+            avatarUri={avatarUri}
+          />
+        );
       })}
     </View>
   );
@@ -58,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, { sendFriendRequest })(Results);
+export default connect(null, { addUser })(Results);
