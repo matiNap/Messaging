@@ -13,6 +13,8 @@ import acceptRequestFunction from "./acceptRequest";
 import rejectRequestFunction from "./rejectRequest";
 import friendRequestRequest from "./friendRequest";
 import searchUserRequest from "./searchUser";
+import statusRequest from "./status";
+import onlineUsersRequest from "./onlineUsers";
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -32,3 +34,7 @@ export const rejectRequest = functions.https.onRequest(rejectRequestFunction);
 
 //SerchUser
 export const searchUser = functions.https.onRequest(searchUserRequest);
+//Status
+
+export const status = functions.https.onRequest(statusRequest);
+export const onlineUsers = functions.https.onRequest(onlineUsersRequest);
