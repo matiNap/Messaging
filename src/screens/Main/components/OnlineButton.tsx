@@ -11,10 +11,11 @@ interface Props {
   iconSize: number;
   pressTabBarButton: typeof pressTabBarButton;
   checked: boolean;
+  onlineValue: number;
 }
 
 const OnlineButton = (props: Props) => {
-  const { iconSize, checked } = props;
+  const { iconSize, checked, onlineValue } = props;
   return (
     <BadgeButton
       onPress={() => {
@@ -22,7 +23,7 @@ const OnlineButton = (props: Props) => {
         props.pressTabBarButton('online');
       }}
       size={iconSize}
-      value={4}
+      value={onlineValue}
       color={palette.primary}
       buttonComponent={() => {
         return (
@@ -42,6 +43,7 @@ const OnlineButton = (props: Props) => {
 const mapStateToProps = (state: RootState) => {
   return {
     checked: state.app.tabButtonChecked['online'],
+    onlineValue: state.users.friendsOnline.length,
   };
 };
 

@@ -15,6 +15,8 @@ export type User = {
   fname: string;
   sname: string;
   name: string;
+  online: boolean;
+  photoURL: string;
 };
 
 export type FriendRequest = {

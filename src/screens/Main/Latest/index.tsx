@@ -7,15 +7,21 @@ import { Container } from 'native-base';
 import ListItem from './components/ListItem';
 import FriendSearch from '../components/FriendSearch';
 import { listenFriendRequests } from '_actions/creators/notifications';
+import { fetchOnlineUsers } from '_actions/creators/users';
 import { connect } from 'react-redux';
 import { changeStatus } from '_actions/creators/app';
 
 interface Props {
   changeStatus: typeof changeStatus;
+  fetchOnlineUsers: typeof fetchOnlineUsers;
+  listenFriendRequests: typeof listenFriendRequests;
 }
 
 class Latest extends Component<Props> {
   componentDidMount() {
+    this.props.listenFriendRequests();
+    this.props.fetchOnlineUsers();
+
     AppState.addEventListener('change', appState => {
       if (appState === 'background') {
         this.props.changeStatus(0);
@@ -58,8 +64,8 @@ class Latest extends Component<Props> {
   }
 }
 
-const styles = StyleSheet.create({});
-
-export default connect(null, { listenFriendRequests, changeStatus })(
-  Latest,
-);
+export default connect(null, {
+  listenFriendRequests,
+  changeStatus,
+  fetchOnlineUsers,
+})(Latest);
