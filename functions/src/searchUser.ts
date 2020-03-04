@@ -20,7 +20,6 @@ const getState = (
 };
 
 const searchUser = async (req: functions.Request, res: functions.Response) => {
-  console.log(req.query);
   const { name, searchedBy, onlyFriends } = req.query;
   const searchForFriends = onlyFriends
     ? Boolean(Number.parseInt(onlyFriends))
