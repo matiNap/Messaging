@@ -13,3 +13,5 @@ apis/
 
 # macOS
 .DS_Store
+
+firebase_config.ts

@@ -15,20 +15,54 @@ import metrics from '_metrics';
 import typography from '_typography';
 import Touchable from '_components/Touchable';
 import { navigate } from '_navigation';
+import { connect } from 'react-redux';
+import { RootState } from '_rootReducer';
+import { Message } from '_types';
 
 interface Props {
   name: string;
   fname: string;
-  subText: string;
+  latestMessage: Message;
   avatarUri: string;
-  state: Object;
-  date: string;
+  readed: boolean;
+  userUid: string;
 }
 
+const whichUser = (aUid: string, by: string) => {
+  if (by === aUid) {
+    return true;
+  } else return false;
+};
+
+const getLatestMessageDate = (time: string) => {
+  const d = new Date(time);
+  const ye = new Intl.DateTimeFormat('en', {
+    year: 'numeric',
+  }).format(d);
+  const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(
+    d,
+  );
+  const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(
+    d,
+  );
+
+  return `${da}-${mo}-${ye}`;
+};
+
 const LatestListItem = (props: Props) => {
-  const { name, subText, avatarUri, state, fname, date } = props;
-  //TODO: Check which user typed last message
-  const who = fname;
+  const {
+    name,
+    latestMessage,
+    avatarUri,
+    readed,
+    fname,
+
+    userUid,
+  } = props;
+  const lastMessageBy = latestMessage._id;
+  const { text, createdAt } = latestMessage;
+
+  const who = whichUser(userUid, lastMessageBy) ? 'Me' : fname;
   return (
     <Touchable
       onPress={() => {
@@ -48,11 +82,11 @@ const LatestListItem = (props: Props) => {
           <Text style={styles.mainText}>{name}</Text>
           <View style={{ flexDirection: 'row' }}>
             <View style={{ width: '55%' }}>
-              <Text
-                style={styles.subText}
-              >{`${who}: ${subText}`}</Text>
+              <Text style={styles.subText}>{`${who}: ${text}`}</Text>
             </View>
-            <Text style={styles.date}>{date}</Text>
+            <Text style={styles.date}>
+              {getLatestMessageDate(latestMessage.createdAt)}
+            </Text>
           </View>
         </View>
 
@@ -95,4 +129,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LatestListItem;
+const mapStateToProps = (state: RootState) => {
+  return {
+    userUid: state.app.user.uid,
+  };
+};
+
+export default connect(mapStateToProps)(LatestListItem);

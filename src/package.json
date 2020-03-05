@@ -24,7 +24,11 @@
     "eslint-config-prettier": "^6.7.0",
     "eslint-import-resolver-babel-module": "^5.1.2",
     "expo": "~36.0.0",
+    "expo-background-fetch": "~8.0.0",
     "expo-font": "^8.0.0",
+    "expo-location": "~8.0.0",
+    "expo-task-manager": "~8.0.0",
+    "firebase": "^7.9.3",
     "lodash": "^4.17.15",
     "native-base": "^2.13.8",
     "prettier": "^1.19.1",
@@ -50,10 +54,7 @@
     "redux": "^4.0.4",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "typescript": "^3.7.5",
-    "expo-background-fetch": "~8.0.0",
-    "expo-task-manager": "~8.0.0",
-    "expo-location": "~8.0.0"
+    "typescript": "^3.7.5"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

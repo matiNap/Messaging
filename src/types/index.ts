@@ -19,6 +19,28 @@ export type User = {
   photoURL: string;
 };
 
+export type UserChat = {
+  name: string;
+  photoURL: string;
+  online: boolean;
+  displayName: string;
+  uid: string;
+  readed: boolean;
+  fName: string;
+};
+
+export type Message = {
+  _id: string;
+  createdAt: number;
+  text: string;
+};
+
+export type ChatData = {
+  user: UserChat;
+  messages: Message[];
+  latestMessage: Message;
+};
+
 export type FriendRequest = {
   name: string;
   uid: string;
