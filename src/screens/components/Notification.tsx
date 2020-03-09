@@ -28,21 +28,46 @@ class Notification extends React.Component<Props> {
     this.close = this.close.bind(this);
   }
 
-  open(content: string, color: string) {
-    const { duration } = this.props;
-    this.setState({ content, color });
+  open(
+    content: string,
+    settings: {
+      duration: 'default' | null | number;
+      color?: undefined | string | Animated.Value<string>;
+    },
+  ) {
+    const duration = settings.duration
+      ? this.props.duration
+      : settings.duration;
+    this.setState({ content, color: settings.color });
     if (duration) {
       this.animationRef.slideInUp(200);
       setTimeout(() => {
         this.animationRef.slideOutDown(200);
-      }, 1000);
+      }, this.props.duration);
     } else {
       this.animationRef.slideInUp(200);
     }
   }
 
-  close() {
-    if (this.animationRef) this.animationRef.slideOutDown(200);
+  close(
+    content: string,
+    settings: {
+      duration: 'default' | null | number;
+      color?: undefined | string | Animated.Value<string>;
+    },
+  ) {
+    const duration =
+      settings.duration === 'default'
+        ? this.props.duration
+        : settings.duration;
+    if (content) this.setState({ content });
+    if (duration) {
+      setTimeout(() => {
+        this.animationRef.slideOutDown(200);
+      }, this.props.duration);
+    } else {
+      this.animationRef.slideOutDown(200);
+    }
   }
 
   render() {

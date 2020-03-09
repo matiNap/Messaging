@@ -14,6 +14,7 @@ const Back = (props: Props) => {
   const { onPress, style } = props;
   return (
     <Touchable
+      style={style}
       onPress={() => {
         if (!onPress) props.navigation.goBack();
         else onPress();

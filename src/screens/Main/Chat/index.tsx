@@ -19,42 +19,42 @@ import Input from '_components/Input';
 import ChatHeader from './components/ChatHeader';
 import Touchable from '_components/Touchable';
 import { MaterialIcons, SimpleLineIcons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+import { RootState } from '_rootReducer';
+import { UserChat, Message as MessageType } from '_types';
+import { sendMessage, readMessage } from '_actions/creators/chat';
+import reactotron from 'reactotronConfig';
 
-class Chat extends Component {
-  state = {
-    messages: [],
-  };
+interface Props {
+  user: UserChat;
+  readMessage: typeof readMessage;
+  sendMessage: typeof sendMessage;
+  messages: MessageType[];
+  navigation: any;
+}
 
-  componentWillMount() {
-    this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: 'It is example message.',
-          createdAt: new Date(Date.UTC(2016, 5, 11, 17, 20, 0)),
-          isTyping: true,
-          user: {
-            _id: 2,
-            name: 'React Native',
-            avatar:
-              'https://ramcotubular.com/wp-content/uploads/default-avatar.jpg',
-          },
-        },
-      ],
-    });
+class Chat extends Component<Props> {
+  componentDidMount() {
+    const { user } = this.getParms();
+    this.props.readMessage(user.uid);
   }
 
-  onSend(messages = []) {
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages),
-    }));
-  }
-
-  renderBubble = props => {
-    return <Bubble {...props} />;
+  getParms = () => {
+    return this.props.navigation.state.params;
   };
 
-  renderMessageText = props => {
+  onSend(message: any) {
+    const { text } = message[0];
+    const { user } = this.getParms();
+    this.props.sendMessage(text, user.uid);
+  }
+
+  renderBubble = (props: any) => {
+    const { currentMessage } = props;
+    return <Bubble key={currentMessage.iid} {...props} />;
+  };
+
+  renderMessageText = (props: any) => {
     return (
       <MessageText
         {...props}
@@ -72,7 +72,7 @@ class Chat extends Component {
     );
   };
 
-  renderFooter = props => {
+  renderFooter = (props: any) => {
     const { isTyping } = props;
     if (isTyping) {
       return (
@@ -115,6 +115,8 @@ class Chat extends Component {
   };
 
   render() {
+    const { messages } = this.props;
+
     return (
       <KeyboardAvoidingView
         enabled
@@ -125,7 +127,7 @@ class Chat extends Component {
         <GiftedChat
           renderBubble={this.renderBubble}
           messagesContainerStyle={styles.messagesContainerStyle}
-          messages={this.state.messages}
+          messages={messages}
           onSend={messages => this.onSend(messages)}
           renderMessageText={this.renderMessageText}
           renderTime={() => <View />}
@@ -173,4 +175,14 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Chat;
+const mapStateToProps = (state: RootState, ownProps: Props) => {
+  const { uid } = ownProps.navigation.state.params.user;
+  console.log(uid);
+  return {
+    messages: state.chat.chats[uid].messages.reverse(),
+  };
+};
+
+export default connect(mapStateToProps, { sendMessage, readMessage })(
+  Chat,
+);

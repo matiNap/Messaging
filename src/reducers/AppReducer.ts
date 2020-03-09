@@ -1,11 +1,23 @@
 import { REHYDRATE } from 'redux-persist/es/constants';
 import * as types from '_actions/app';
 import reactotron from 'reactotron-react-native';
+import { User } from '_types';
 
-const initState = {
+interface AppState {
+  user: User;
+  tabButtonChecked: {
+    latest: boolean;
+    online: boolean;
+  };
+}
+
+const initState: AppState = {
   user: {
     signedIn: false,
     token: null,
+  },
+  tabButtonChecked: {
+    latest: true,
   },
 };
 
@@ -24,7 +36,7 @@ export default (state = initState, action) => {
       };
     }
     case types.SIGN_OUT: {
-      return { ...state, user: null };
+      return { ...initState };
     }
     case types.CHECK_AUTH: {
       return {
@@ -32,6 +44,14 @@ export default (state = initState, action) => {
         user: {
           ...state.user,
           ...action.payload,
+        },
+      };
+    }
+    case types.PRESS_TAB_BAR: {
+      return {
+        ...state,
+        tabButtonChecked: {
+          [action.payload]: true,
         },
       };
     }

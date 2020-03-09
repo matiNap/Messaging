@@ -13,6 +13,10 @@ import acceptRequestFunction from "./acceptRequest";
 import rejectRequestFunction from "./rejectRequest";
 import friendRequestRequest from "./friendRequest";
 import searchUserRequest from "./searchUser";
+import statusRequest from "./status";
+import onlineUsersRequest from "./onlineUsers";
+import chatRequest from "./chat";
+import deviceTokenRequest from "./deviceToken";
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -25,10 +29,11 @@ export const deleteUser = functions.https.onRequest(deleteUserFunction);
 export const signIn = functions.https.onRequest(signInFunction);
 export const signOut = functions.https.onRequest(signOutFunction);
 export const checkAuth = functions.https.onRequest(checkAuthFunction);
-//FriendRequests
 export const friendRequest = functions.https.onRequest(friendRequestRequest);
 export const acceptRequest = functions.https.onRequest(acceptRequestFunction);
 export const rejectRequest = functions.https.onRequest(rejectRequestFunction);
-
-//SerchUser
 export const searchUser = functions.https.onRequest(searchUserRequest);
+export const status = functions.https.onRequest(statusRequest);
+export const onlineUsers = functions.https.onRequest(onlineUsersRequest);
+export const chat = functions.https.onRequest(chatRequest);
+export const deviceToken = functions.https.onRequest(deviceTokenRequest);

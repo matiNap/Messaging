@@ -18,9 +18,12 @@ import {
 import Touchable from '_components/Touchable';
 import UserInterface from '_UserInterface';
 import Back from '_components/Back';
+import { signOut } from '_actions/creators/app';
+import { navigate } from '_navigation';
 
 interface Props {
   user: UserInterface;
+  signOut: typeof signOut;
 }
 
 const ICON_SIZE = 30;
@@ -35,7 +38,12 @@ const Profile = (props: Props) => {
       animation="fadeIn"
       duration={300}
     >
-      <Back />
+      <Back
+        style={{
+          marginLeft: metrics.margin.normal,
+          marginTop: metrics.margin.small,
+        }}
+      />
       <Thumbnail
         source={{
           uri:
@@ -96,7 +104,11 @@ const Profile = (props: Props) => {
 
         <Touchable>
           <Option
-            title="Switch account"
+            onPress={() => {
+              props.signOut();
+              navigate('auth');
+            }}
+            title="Log out"
             icon={() => (
               <IconBackground size={ICON_SIZE} color="#0991e6">
                 <FontAwesome name="refresh" style={styles.icon} />
@@ -135,7 +147,7 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 120,
     alignSelf: 'center',
-    marginTop: metrics.margin.medium,
+    marginTop: metrics.margin.normal,
     borderWidth: 5.5,
     borderColor: palette.primary,
   },
@@ -157,4 +169,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, { signOut })(Profile);

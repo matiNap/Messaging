@@ -7,36 +7,33 @@ import typography from '_typography';
 import ContentLoader from '_components/ContentLoader';
 import { List, Text } from 'native-base';
 import Back from '_components/Back';
-import Requests from './components/Requests';
-import Results from './components/Results';
 import { connect } from 'react-redux';
 import { RootState } from '_rootReducer';
-import { User, FriendRequest } from '_types';
+import { User } from '_types';
 import {
-  searchUser,
-  deleteSearchedUsers,
+  deleteSearchedOwnFriends,
+  searchOwnFriends,
 } from '_actions/creators/users';
-import Notification from '_components/Notification';
+import FriendState from '../Online/components/FriendState';
+import globals from '_globals';
 
 interface Props {
-  requests: null | FriendRequest[];
   results: null | User[];
-  searchUser: typeof searchUser;
-  deleteSearchedUsers: typeof deleteSearchedUsers;
+  searchOwnFriends: typeof searchOwnFriends;
+  deleteSearchedOwnFriends: typeof deleteSearchedOwnFriends;
 }
 
-class FriendAdd extends React.Component<Props> {
+class SearchFriend extends React.Component<Props> {
   state = {
     loading: false,
     notFound: false,
   };
-  notificationRef: React.RefObject<Notification>;
+
   constructor(props: Props) {
     super(props);
-    this.notificationRef = React.createRef();
   }
   componentWillUnmount() {
-    this.props.deleteSearchedUsers();
+    this.props.deleteSearchedOwnFriends();
   }
   onSucces = () => {
     this.setState({ loading: false, notFound: false });
@@ -48,21 +45,8 @@ class FriendAdd extends React.Component<Props> {
     });
   };
 
-  onReject = () => {
-    this.notificationRef.open('Rejected', {
-      color: palette.actions.error,
-      duration: 'default',
-    });
-  };
-
-  onAccept = () => {
-    this.notificationRef.open('Accept', {
-      color: palette.actions.succes,
-      duration: 'default',
-    });
-  };
   render() {
-    const { requests, results } = this.props;
+    const { results } = this.props;
     const { loading, notFound } = this.state;
 
     return (
@@ -87,7 +71,7 @@ class FriendAdd extends React.Component<Props> {
                 textInputStyle={styles.textInputStyle}
                 onChangeText={text => {
                   if (text.length !== 0) {
-                    this.props.searchUser(
+                    this.props.searchOwnFriends(
                       text,
                       this.onSucces,
                       this.onFailed,
@@ -95,7 +79,7 @@ class FriendAdd extends React.Component<Props> {
                     this.setState({ loading: true });
                   } else {
                     this.setState({ loading: false });
-                    this.props.deleteSearchedUsers();
+                    this.props.deleteSearchedOwnFriends();
                   }
                 }}
               />
@@ -103,23 +87,19 @@ class FriendAdd extends React.Component<Props> {
 
             {!loading && (
               <List scrollEnabled>
-                {requests && !results && !notFound && (
-                  <Requests
-                    requests={requests}
-                    onAccept={this.onAccept}
-                    onReject={this.onReject}
-                  />
-                )}
-                {results && (
-                  <Results
-                    results={results}
-                    onAccept={this.onAccept}
-                    onReject={this.onReject}
-                  />
-                )}
-                {!results && !requests && (
-                  <Text style={styles.title}>Search for friends</Text>
-                )}
+                {results?.map(data => {
+                  const { online, name, photoURL } = data;
+                  const avatarUri = photoURL
+                    ? photoURL
+                    : globals.primaryAvatar;
+                  return (
+                    <FriendState
+                      name={name}
+                      avatarUri={avatarUri}
+                      state={online}
+                    />
+                  );
+                })}
               </List>
             )}
             <ContentLoader visible={loading} />
@@ -127,12 +107,6 @@ class FriendAdd extends React.Component<Props> {
               <Text style={styles.notFoundText}>Not found</Text>
             )}
           </View>
-          <Notification
-            duration={1000}
-            ref={ref => {
-              this.notificationRef = ref;
-            }}
-          />
         </View>
       </KeyboardAvoidingView>
     );
@@ -170,16 +144,14 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: RootState) => {
-  const { friendRequests } = state.notifications;
-  const { searched } = state.users;
+  const { searchedFriends } = state.users;
 
   return {
-    requests: friendRequests.length !== 0 ? friendRequests : null,
-    results: searched.length !== 0 ? searched : null,
+    results: searchedFriends.length === 0 ? null : searchedFriends,
   };
 };
 
 export default connect(mapStateToProps, {
-  searchUser,
-  deleteSearchedUsers,
-})(FriendAdd);
+  searchOwnFriends,
+  deleteSearchedOwnFriends,
+})(SearchFriend);

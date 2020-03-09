@@ -14,7 +14,7 @@ import { navigate } from '_navigation';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 interface Props {
-  onChangeText(text: string): Function;
+  onChangeText?(text: string): Function;
   onFocus?: NativeSyntheticEvent<TextInputFocusEventData>;
 }
 

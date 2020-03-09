@@ -1,15 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  View,
-  Text,
-  Header,
-  Left,
-  Thumbnail,
-  Right,
-  Icon,
-  Body,
-} from 'native-base';
+import { Text, Header, Left, Thumbnail, Right } from 'native-base';
 import palette from '_palette';
 import metrics from '_metrics';
 import typography from '_typography';
@@ -19,13 +10,17 @@ import StatusBar from '_components/StatusBar';
 import Touchable from '_components/Touchable';
 import { navigate } from '_navigation';
 import globals from '_globals';
+import BadgeButton from './BadgeButton';
+import { connect } from 'react-redux';
+import { RootState } from '_rootReducer';
 
 interface Props {
   title?: string;
+  requestValue: number;
 }
 
 const MainHeader = (props: Props) => {
-  const { title } = props;
+  const { title, requestValue } = props;
 
   return (
     <Header style={styles.header}>
@@ -48,19 +43,23 @@ const MainHeader = (props: Props) => {
       </Left>
 
       <Right>
-        <Touchable
+        <BadgeButton
+          color={palette.actions.error}
+          size={35}
+          value={requestValue}
           onPress={() => {
             navigate('friendAdd');
           }}
-        >
-          <IconBackground size={37}>
-            <Ionicons
-              name="ios-person-add"
-              size={30}
-              color={palette.secondary}
-            />
-          </IconBackground>
-        </Touchable>
+          buttonComponent={() => (
+            <IconBackground size={40}>
+              <Ionicons
+                name="ios-person-add"
+                size={35}
+                color={palette.secondary}
+              />
+            </IconBackground>
+          )}
+        />
       </Right>
     </Header>
   );
@@ -89,4 +88,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainHeader;
+const mapStateToProps = (state: RootState) => {
+  return {
+    requestValue: state.notifications.friendRequests.length,
+  };
+};
+
+export default connect(mapStateToProps)(MainHeader);

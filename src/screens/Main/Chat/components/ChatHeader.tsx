@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { Header, Left, Body, Right } from 'native-base';
+import { Header, Left, Right } from 'native-base';
 import Back from '_components/Back';
 import palette from '_palette';
 import metrics from '_metrics';
@@ -17,14 +17,18 @@ const ChatHeader = (props: Props) => {
   const { name, displayName } = props;
   return (
     <Header style={styles.header}>
-      <Left style={{ flexDirection: 'row' }}>
-        <Back style={styles.back} />
+      <View style={styles.leftContainer}>
+        <View style={{ alignSelf: 'center' }}>
+          <Back style={styles.back} />
+        </View>
         <View style={styles.nameContainer}>
-          <Text style={styles.mainText}>{name}</Text>
+          <Text style={styles.mainText} numberOfLines={1}>
+            {name}
+          </Text>
 
           <Text style={styles.subText}>{displayName}</Text>
         </View>
-      </Left>
+      </View>
 
       <Right>
         <Touchable>
@@ -40,20 +44,24 @@ const ChatHeader = (props: Props) => {
 
 const styles = StyleSheet.create({
   header: {
-    paddingTop: metrics.padding.medium,
+    paddingTop: metrics.statusBarHeight,
     height: 65 + metrics.statusBarHeight,
     backgroundColor: palette.primary,
     borderBottomColor: palette.grayscale.light,
     borderBottomWidth: 0.3,
   },
+  leftContainer: {
+    flexDirection: 'row',
+    marginTop: metrics.margin.small,
+    justifyContent: 'center',
+  },
   back: {
     color: palette.text.secondary,
-    marginLeft: metrics.margin.normal,
-    alignSelf: 'center',
   },
   nameContainer: {
     flexDirection: 'column',
     marginLeft: metrics.margin.medium,
+    width: 100,
   },
   mainText: {
     fontSize: typography.fontSize.medium,

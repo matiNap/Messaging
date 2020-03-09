@@ -63,7 +63,7 @@ class SignUp extends Component {
     } else if (pass.length < 6) {
       this.setMessage('Password must be at least 6 characters');
     } else if (pass !== rpass) {
-      this.setMessage('Passwords are diffren');
+      this.setMessage('Passwords are diffrent');
     } else {
       this.props.createUser(
         { username, email, fname, sname, password: pass },
@@ -90,9 +90,10 @@ class SignUp extends Component {
         <Text style={styles.title}>Sign up</Text>
         <View style={styles.inputContainer}>
           <Input
+            autoCapitalize="none"
             color={palette.secondary}
             value={inputs[USERNAME]}
-            type="username"
+            type="default"
             placeholder="Username"
             style={styles.input}
             secondary
@@ -101,21 +102,22 @@ class SignUp extends Component {
             }}
           />
           <Input
+            autoCapitalize="none"
             color={palette.secondary}
             value={inputs[EMAIL]}
-            type="emailAddress"
+            type="email-address"
             placeholder="email"
             style={styles.input}
             secondary
             onChangeText={text => {
-              this.onInputChange(EMAIL, text);
+              this.onInputChange(EMAIL, text.replace(/\s/g, ''));
             }}
           />
           <View style={styles.inputNameContainer}>
             <Input
               color={palette.secondary}
               value={inputs[FNAME]}
-              type="name"
+              type="default"
               placeholder="First name"
               style={styles.fnameInput}
               secondary
@@ -126,7 +128,7 @@ class SignUp extends Component {
             <Input
               color={palette.secondary}
               value={inputs[SNAME]}
-              type="name"
+              type="default"
               placeholder="Surname"
               style={styles.snameInput}
               secondary
@@ -139,7 +141,7 @@ class SignUp extends Component {
             color={palette.secondary}
             value={inputs[PASS]}
             secureTextEntry
-            type="password"
+            type="default"
             placeholder="Password"
             style={styles.input}
             secondary
@@ -151,7 +153,7 @@ class SignUp extends Component {
             color={palette.secondary}
             value={inputs[RPASS]}
             secureTextEntry
-            type="password"
+            type="default"
             placeholder="Repeat password"
             style={styles.input}
             secondary

@@ -1,6 +1,7 @@
 import * as types from '_actions/users';
 import { AppThunk } from '_types';
 import database from '_apis/database';
+import reactotron from 'reactotron-react-native';
 
 export const searchUser = (
   text: string,
@@ -59,3 +60,44 @@ export const rejectRequest = (fromUid: string) => {
 export const deleteSearchedUsers = () => ({
   type: types.DELETE_SEARCHED,
 });
+
+export const fetchOnlineUsers = (): AppThunk => async (
+  dispatch,
+  getState,
+) => {
+  const { uid } = getState().app.user;
+  try {
+    const response = await database.get(`onlineUsers/${uid}`);
+    reactotron.log(response.data);
+    dispatch({
+      type: types.FETCH_ONLINE_USERS,
+      payload: response.data,
+    });
+  } catch (error) {
+    reactotron.log(error.response);
+  }
+};
+
+export const searchOwnFriends = (
+  text: string,
+  onSucces: Function,
+  onFailed: Function,
+): AppThunk => async (dispatch, getState) => {
+  const searchedBy = getState().app.user.uid;
+  try {
+    const response = await database.get(
+      `searchUser?name=${text}&limit=${20}&searchedBy=${searchedBy}&onlyFriends=1`,
+    );
+    onSucces();
+    dispatch({
+      type: types.SEARCH_OWN_FRIENDS,
+      payload: response.data,
+    });
+  } catch (error) {
+    onFailed();
+  }
+};
+
+export const deleteSearchedOwnFriends = () => {
+  return { type: types.DELETE_SEARCHED_OWN_FRIENDS };
+};

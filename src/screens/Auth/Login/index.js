@@ -20,7 +20,6 @@ import {
   getProgress,
 } from './animationHelpers';
 import { runTiming } from '_helpers/animations';
-import ConnectionInfo from '_components/ConnectionInfo';
 
 const { event, Value, sub, set } = Animated;
 
@@ -97,7 +96,6 @@ class Login extends React.Component {
             />
           </Animated.View>
         </PanGestureHandler>
-        <ConnectionInfo />
       </View>
     );
   }

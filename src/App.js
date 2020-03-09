@@ -11,6 +11,8 @@ import getTheme from './native-base-theme/components';
 import AppContainer from './screens/AppContainer';
 import { store, persistor } from './store';
 import reactotron from 'reactotron-react-native';
+import * as firebase from 'firebase';
+import firebaseConfig from './firebase_config';
 
 console.disableYellowBox = true;
 
@@ -20,6 +22,11 @@ export default class App extends React.Component {
   };
 
   async componentDidMount() {
+    try {
+      firebase.initializeApp(firebaseConfig);
+    } catch (error) {
+      console.log(error);
+    }
     if (!this.state.fontLoaded) {
       await Font.loadAsync({
         prompt: require('./assets/fonts/Prompt.ttf'),

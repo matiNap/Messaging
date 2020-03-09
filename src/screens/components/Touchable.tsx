@@ -22,6 +22,7 @@ export default class Touchable extends React.Component<Props> {
     });
     return (
       <TouchableWithoutFeedback
+        style={style}
         onPress={() => {
           Animated.timing(this.opacity, {
             duration: 500,
@@ -35,7 +36,6 @@ export default class Touchable extends React.Component<Props> {
       >
         <Animated.View
           style={[
-            style,
             {
               opacity: opacity,
             },

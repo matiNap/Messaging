@@ -18,7 +18,7 @@ export const createUser = (
   // onCreate();
 
   try {
-    const response = await database.post('createUser', {
+    await database.post('createUser', {
       ...userData,
     });
     onCreate();
@@ -51,16 +51,17 @@ export const signIn = (
     onSignInFailed('Invalid password or email');
   }
 };
-export const signOut = (onFailed: Function): AppThunk => async (
-  dispatch,
-  getState,
-) => {
+export const signOut = (): AppThunk => async (dispatch, getState) => {
   const state = getState();
   try {
     const { uid } = state.app.user;
     await database.post('signOut', { uid });
+    navigate('auth');
+    dispatch({
+      type: types.SIGN_OUT,
+    });
   } catch (error) {
-    onFailed();
+    console.log(error);
   }
 };
 export const checkAuth = (
@@ -68,7 +69,7 @@ export const checkAuth = (
   onAuthFailed: Function,
 ): AppThunk => async (dispatch, getState) => {
   const state = getState();
-  console.log('Check');
+
   try {
     const { token, uid } = state.app.user;
     const response = await database.post('checkAuth', { uid, token });
@@ -83,6 +84,7 @@ export const checkAuth = (
       },
     });
   } catch (error) {
+    console.log('fial');
     onAuthFailed();
   }
 };
@@ -95,5 +97,24 @@ export const deleteUser = async (
     await database.post('deleteUser', { uid });
   } catch (error) {
     onDeleteFailed();
+  }
+};
+
+export const pressTabBarButton = (name: string) => {
+  return {
+    type: types.PRESS_TAB_BAR,
+    payload: name,
+  };
+};
+
+export const changeStatus = (status: boolean): AppThunk => (
+  dispatch,
+  getState,
+) => {
+  const { uid } = getState().app.user;
+  try {
+    database.post(`status/${uid}?newStatus=${status}`);
+  } catch (error) {
+    console.log(error);
   }
 };

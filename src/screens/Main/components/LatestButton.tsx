@@ -1,23 +1,51 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { View } from 'native-base';
-import TabBarButton from './TabBarButton';
+
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import palette from '_palette';
 import { navigate } from 'navigationService';
+import BadgeButton from './BadgeButton';
+import { connect } from 'react-redux';
+import { pressTabBarButton } from '_actions/creators/app';
+import { RootState } from '_rootReducer';
 
-const LatestButton = props => {
+interface Props {
+  iconSize: number;
+  pressTabBarButton: typeof pressTabBarButton;
+  checked: boolean;
+}
+
+const LatestButton = (props: Props) => {
+  const { iconSize, checked } = props;
   return (
-    <TabBarButton
+    <BadgeButton
       onPress={() => {
         navigate('latest');
+        props.pressTabBarButton('latest');
       }}
-      backgroundColor={palette.actions.succes}
-      iconComponent={props => {
-        return <MaterialCommunityIcons {...props} name="email" />;
+      size={iconSize}
+      value={4}
+      color={palette.actions.succes}
+      buttonComponent={() => {
+        return (
+          <MaterialCommunityIcons
+            name="email"
+            size={iconSize}
+            color={
+              !checked ? palette.text.primary : palette.grayscale.dark
+            }
+          />
+        );
       }}
     />
   );
 };
 
-export default LatestButton;
+const mapStateToProps = (state: RootState) => {
+  return {
+    checked: state.app.tabButtonChecked['latest'],
+  };
+};
+
+export default connect(mapStateToProps, { pressTabBarButton })(
+  LatestButton,
+);

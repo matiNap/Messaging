@@ -13,7 +13,21 @@ import typography from '_typography';
 interface Props {
   onChangeText(text: string): void;
   value?: string;
-  type?: 'none' | 'emailAddress' | 'name' | 'password';
+  type?:
+    | 'default'
+    | 'email-address'
+    | 'numeric'
+    | 'phone-pad'
+    | 'number-pad'
+    | 'decimal-pad'
+    | 'visible-password'
+    | 'ascii-capable'
+    | 'numbers-and-punctuation'
+    | 'url'
+    | 'name-phone-pad'
+    | 'twitter'
+    | 'web-search'
+    | undefined;
   placeholder?: string | '';
   style: CSSProperties;
   secondary: boolean;
@@ -24,6 +38,7 @@ interface Props {
   color?: string | undefined;
   placeholderColor: string;
   rightIcon: React.Component;
+  autoCapitalize?: 'none' | 'words' | 'letters' | 'characters';
 }
 
 const Input = (props: Props) => {
@@ -39,6 +54,7 @@ const Input = (props: Props) => {
     noOutlined,
     color,
     placeholderColor,
+    autoCapitalize,
   } = props;
   const borderColor = secondary ? palette.secondary : palette.primary;
   const customContainerStyle = {
@@ -58,10 +74,12 @@ const Input = (props: Props) => {
         </View>
       )}
       <TextInput
+        keyboardType=""
         placeholderTextColor={placeholderColor}
         value={value}
         secureTextEntry={secureTextEntry}
-        textContentType={type}
+        textContentType="username"
+        autoCapitalize={autoCapitalize}
         onChangeText={onChangeText}
         placeholder={placeholder}
         style={[

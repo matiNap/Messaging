@@ -20,7 +20,10 @@ const getState = (
 };
 
 const searchUser = async (req: functions.Request, res: functions.Response) => {
-  const { name, searchedBy } = req.query;
+  const { name, searchedBy, onlyFriends } = req.query;
+  const searchForFriends = onlyFriends
+    ? Boolean(Number.parseInt(onlyFriends))
+    : false;
   const limit = req.query.limit ? Number.parseInt(req.query.limit) : 20;
   if (!name || !searchedBy) {
     return res.status(409).send("Pass name to search and searchedBy");
@@ -45,9 +48,14 @@ const searchUser = async (req: functions.Request, res: functions.Response) => {
     const searchedUsers = [];
     for (let [key] of Object.entries(result)) {
       if (key === searchedBy) continue;
-      const { name, photoURL, displayName, friends, friendRequests } = result[
-        key
-      ];
+      const {
+        name,
+        photoURL,
+        displayName,
+        friends,
+        friendRequests,
+        online
+      } = result[key];
 
       const ivnitedByMe =
         friendRequests && friendRequests[searchedBy]
@@ -61,13 +69,16 @@ const searchUser = async (req: functions.Request, res: functions.Response) => {
       const areFriends =
         friends && friends[searchedBy] ? friends[searchedBy] : null;
 
-      searchedUsers.push({
+      const friendData = {
         name,
         photoURL,
         displayName,
         uid: key,
         state: getState(invitedByUser, ivnitedByMe, areFriends)
-      });
+      };
+      if (searchForFriends && areFriends) {
+        searchedUsers.push({ ...friendData, online });
+      } else if (!searchForFriends) searchedUsers.push(friendData);
     }
 
     return res.send(searchedUsers);

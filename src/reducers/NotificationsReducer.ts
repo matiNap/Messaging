@@ -19,11 +19,11 @@ export default (state = initState, action): NotificationState => {
       };
 
     case types.REQUEST_RESPONSE: {
+      _.remove(state.friendRequests, request => {
+        return request.uid === action.payload.uid;
+      });
       return {
         ...state,
-        friendRequests: _.remove(state.friendRequests, request => {
-          return request.uid === action.payload.uid;
-        }),
       };
     }
     default:
