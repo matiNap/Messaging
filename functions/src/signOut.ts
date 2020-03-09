@@ -10,7 +10,10 @@ export default (req: functions.Request, res: functions.Response): any => {
   admin
     .database()
     .ref(`users/${uid}`)
-    .set({ token: null })
+    .update({ token: null })
+    .then(() => {
+      return res.send("Signed out");
+    })
     .catch(error => {
       res.status(409).send(error);
     });

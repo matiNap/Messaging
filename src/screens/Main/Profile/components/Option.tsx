@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, GestureResponderEvent } from 'react-native';
 import { ListItem, Text, Left, Body } from 'native-base';
 import palette from '_palette';
 import typography from '_typography';
@@ -10,13 +10,14 @@ interface Props {
   title: string;
   icon: React.Component;
   subText: string;
+  onPress: GestureResponderEvent;
 }
 
 const Option = (props: Props) => {
-  const { title, subText } = props;
+  const { title, subText, onPress } = props;
   const Icon = props.icon;
   return (
-    <ListItem avatar>
+    <ListItem avatar onPress={onPress}>
       <Left>{Icon && <Icon />}</Left>
       <Body>
         <Text style={styles.text}> {title}</Text>

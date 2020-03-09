@@ -17,56 +17,66 @@ import Touchable from '_components/Touchable';
 import { navigate } from '_navigation';
 import { connect } from 'react-redux';
 import { RootState } from '_rootReducer';
-import { Message } from '_types';
+import { Message, UserChat } from '_types';
+import { format } from 'date-fns';
+import globals from '_globals';
+import reactotron from 'reactotronConfig';
 
 interface Props {
-  name: string;
-  fname: string;
+  user: UserChat;
   latestMessage: Message;
-  avatarUri: string;
-  readed: boolean;
   userUid: string;
+  toRead: number;
 }
 
-const whichUser = (aUid: string, by: string) => {
+const isMe = (aUid: string, by: string) => {
   if (by === aUid) {
     return true;
   } else return false;
 };
 
-const getLatestMessageDate = (time: string) => {
-  const d = new Date(time);
-  const ye = new Intl.DateTimeFormat('en', {
-    year: 'numeric',
-  }).format(d);
-  const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(
-    d,
-  );
-  const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(
-    d,
-  );
+const diffInDays = (d1: any, d2: any): number => {
+  var t1 = d1.getTime();
+  var t2 = d2.getTime();
 
-  return `${da}-${mo}-${ye}`;
+  return parseInt((t1 - t2) / (24 * 3600 * 1000));
+};
+
+const getLatestMessageDate = (time: number) => {
+  const currentDate = new Date();
+  const messageDate = new Date(time);
+  if (currentDate.getDay() === messageDate.getDay()) {
+    return format(messageDate, 'p');
+  } else if (Math.abs(diffInDays(currentDate, messageDate)) < 7) {
+    return format(messageDate, 'E');
+  } else if (
+    messageDate.getFullYear() === currentDate.getFullYear()
+  ) {
+    return format(messageDate, 'cc MMM, yy');
+  }
+};
+
+const getSubTextStyle = (byMe: boolean, readed: boolean) => {
+  if (!byMe && !readed) {
+    return styles.subTextAction;
+  } else return styles.subTextNormal;
 };
 
 const LatestListItem = (props: Props) => {
-  const {
-    name,
-    latestMessage,
-    avatarUri,
-    readed,
-    fname,
-
-    userUid,
-  } = props;
+  const { latestMessage, user, userUid, toRead } = props;
+  const { name, fname, photoURL } = user;
+  const avatarUri = photoURL ? photoURL : globals.primaryAvatar;
   const lastMessageBy = latestMessage._id;
   const { text, createdAt } = latestMessage;
+  const byMe = isMe(userUid, lastMessageBy);
+  const who = byMe ? 'Me' : fname;
+  const readed = latestMessage.createdAt - toRead <= 0 ? true : false;
+  const subTextStyle = getSubTextStyle(byMe, readed);
 
-  const who = whichUser(userUid, lastMessageBy) ? 'Me' : fname;
   return (
     <Touchable
       onPress={() => {
-        navigate('chat');
+        navigate('chat', { user });
       }}
     >
       <ListItem itemDivider={false} style={styles.listItem} avatar>
@@ -82,20 +92,26 @@ const LatestListItem = (props: Props) => {
           <Text style={styles.mainText}>{name}</Text>
           <View style={{ flexDirection: 'row' }}>
             <View style={{ width: '55%' }}>
-              <Text style={styles.subText}>{`${who}: ${text}`}</Text>
+              <Text
+                style={[styles.subText, subTextStyle]}
+                numberOfLines={1}
+              >{`${who}: ${text}`}</Text>
             </View>
-            <Text style={styles.date}>
-              {getLatestMessageDate(latestMessage.createdAt)}
+
+            <Text style={[styles.date, subTextStyle]}>
+              {getLatestMessageDate(createdAt)}
             </Text>
           </View>
         </View>
 
-        <Thumbnail
-          style={styles.subAvatar}
-          source={{
-            uri: avatarUri,
-          }}
-        />
+        {readed && byMe && (
+          <Thumbnail
+            style={styles.subAvatar}
+            source={{
+              uri: avatarUri,
+            }}
+          />
+        )}
       </ListItem>
     </Touchable>
   );
@@ -115,18 +131,21 @@ const styles = StyleSheet.create({
   subText: {
     fontSize: typography.fontSize.verySmall,
     color: palette.grayscale.medium,
-
     flex: 1,
   },
   date: {
     fontSize: typography.fontSize.verySmall,
     color: palette.grayscale.medium,
-    marginLeft: metrics.margin.small,
+    marginLeft: metrics.margin.normal,
   },
   body: {
     marginTop: metrics.margin.normal,
     marginLeft: metrics.margin.medium,
   },
+  subTextAction: {
+    color: palette.text.primary,
+  },
+  subTextNormal: {},
 });
 
 const mapStateToProps = (state: RootState) => {

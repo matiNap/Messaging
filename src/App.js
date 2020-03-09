@@ -22,7 +22,11 @@ export default class App extends React.Component {
   };
 
   async componentDidMount() {
-    firebase.initializeApp(firebaseConfig);
+    try {
+      firebase.initializeApp(firebaseConfig);
+    } catch (error) {
+      console.log(error);
+    }
     if (!this.state.fontLoaded) {
       await Font.loadAsync({
         prompt: require('./assets/fonts/Prompt.ttf'),

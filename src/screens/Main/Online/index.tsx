@@ -7,6 +7,8 @@ import { User } from '_types';
 import { connect } from 'react-redux';
 import { RootState } from '_rootReducer';
 import globals from '_globals';
+import { navigate } from '_navigation';
+import ContentLoader from '_components/ContentLoader';
 
 interface Props {
   friendsOnline: User[];
@@ -19,19 +21,25 @@ const Online = (props: Props) => {
       <Header title="Online" iconName="add" />
       <List>
         <FriendSearch />
-        {friendsOnline.map(data => {
-          const { online, name, photoURL } = data;
-          const avatarUri = photoURL
-            ? photoURL
-            : globals.primaryAvatar;
-          return (
-            <FriendState
-              name={name}
-              avatarUri={avatarUri}
-              state={online}
-            />
-          );
-        })}
+        {friendsOnline &&
+          friendsOnline.map(data => {
+            const { online, name, photoURL } = data;
+            const avatarUri = photoURL
+              ? photoURL
+              : globals.primaryAvatar;
+            return (
+              <FriendState
+                onPress={() => {
+                  navigate('chat', { user: data });
+                }}
+                name={name}
+                avatarUri={avatarUri}
+                state={online}
+              />
+            );
+          })}
+
+        <ContentLoader visible={!friendsOnline} />
       </List>
     </Container>
   );

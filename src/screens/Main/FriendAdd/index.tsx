@@ -49,11 +49,17 @@ class FriendAdd extends React.Component<Props> {
   };
 
   onReject = () => {
-    this.notificationRef.open('Rejected', palette.actions.error);
+    this.notificationRef.open('Rejected', {
+      color: palette.actions.error,
+      duration: 'default',
+    });
   };
 
   onAccept = () => {
-    this.notificationRef.open('Accept', palette.actions.succes);
+    this.notificationRef.open('Accept', {
+      color: palette.actions.succes,
+      duration: 'default',
+    });
   };
   render() {
     const { requests, results } = this.props;

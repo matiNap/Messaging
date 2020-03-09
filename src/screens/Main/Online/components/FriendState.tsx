@@ -7,6 +7,7 @@ interface Props {
   state: boolean;
   name: string;
   avatarUri: string;
+  onPress: Function;
 }
 const STATE_SIZE = 16;
 
@@ -18,10 +19,11 @@ const renderOnlineState = (state: boolean) => {
 };
 
 const FriendState = (props: Props) => {
-  const { state } = props;
+  const { state, onPress } = props;
 
   return (
     <FriendItem
+      onPress={onPress}
       {...props}
       rightComponent={() => (
         <View style={styles.stateContainer}>

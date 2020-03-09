@@ -25,20 +25,21 @@ export type UserChat = {
   online: boolean;
   displayName: string;
   uid: string;
-  readed: boolean;
-  fName: string;
+  fname: string;
 };
 
 export type Message = {
   _id: string;
   createdAt: number;
   text: string;
+  iid: string;
 };
 
 export type ChatData = {
   user: UserChat;
   messages: Message[];
   latestMessage: Message;
+  toRead: number;
 };
 
 export type FriendRequest = {

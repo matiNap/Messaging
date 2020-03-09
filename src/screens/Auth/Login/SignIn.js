@@ -47,22 +47,23 @@ class SignIn extends Component {
           <Input
             color={palette.text.primary}
             placeholder="Email"
-            type="emailAddress"
+            autoCapitalize="none"
+            type="email-address"
             style={styles.input}
             value={email}
             onChangeText={text => {
-              this.setState({ email: text });
+              this.setState({ email: text.replace(/\s/g, '') });
             }}
             textInputStyle={styles.textInput}
           />
           <Input
             color={palette.text.primary}
             placeholder="Password"
+            autoCapitalize="none"
             secureTextEntry
             value={password}
-            type="password"
             onChangeText={text => {
-              this.setState({ password: text });
+              this.setState({ password: text.replace(/\s/g, '') });
             }}
             style={styles.input}
             textInputStyle={styles.textInput}
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
     marginTop: metrics.margin.medium,
   },
   textInput: {
-    fontSize: typography.fontSize.medium,
+    fontSize: typography.fontSize.normal,
     color: palette.text.primary,
   },
   button: {

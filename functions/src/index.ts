@@ -16,6 +16,7 @@ import searchUserRequest from "./searchUser";
 import statusRequest from "./status";
 import onlineUsersRequest from "./onlineUsers";
 import chatRequest from "./chat";
+import deviceTokenRequest from "./deviceToken";
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -35,3 +36,4 @@ export const searchUser = functions.https.onRequest(searchUserRequest);
 export const status = functions.https.onRequest(statusRequest);
 export const onlineUsers = functions.https.onRequest(onlineUsersRequest);
 export const chat = functions.https.onRequest(chatRequest);
+export const deviceToken = functions.https.onRequest(deviceTokenRequest);

@@ -24,7 +24,6 @@ class Loading extends React.Component {
   constructor(props) {
     super(props);
     this.unsubscribe = NetInfo.addEventListener(state => {
-      console.log(state.isConnected);
       this.setState({ isConnected: state.isConnected });
     });
   }
@@ -39,14 +38,10 @@ class Loading extends React.Component {
     this.navigateScreens();
   }
 
-  // componentWillUnmount() {
-  //   this.unsubscribe();
-  // }
-
   navigateScreens = () => {
     const { isConnected } = this.state;
     const { signedIn } = this.props;
-    console.log(`Connected  ${isConnected}`);
+
     if (signedIn) {
       if (isConnected) {
         this.props.checkAuth(
