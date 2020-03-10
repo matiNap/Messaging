@@ -21,18 +21,17 @@ const LatestListItem = (props: Props) => {
   return (
     <ListItem itemDivider={false} style={styles.listItem} avatar>
       <Touchable onPress={onPress} style={{ flexDirection: 'row' }}>
-        <Left>
+        <Left style={{ justifyContent: 'center' }}>
           <Thumbnail
             style={styles.mainAvatar}
             source={{
               uri: avtar,
             }}
           />
+          <View style={styles.body}>
+            <Text style={styles.mainText}>{name}</Text>
+          </View>
         </Left>
-
-        <View style={styles.body}>
-          <Text style={styles.mainText}>{name}</Text>
-        </View>
       </Touchable>
 
       <View style={styles.right}>
@@ -56,7 +55,6 @@ const styles = StyleSheet.create({
   body: {
     marginTop: metrics.margin.normal,
     marginLeft: metrics.margin.medium,
-    alignSelf: 'center',
   },
   right: {
     flexGrow: 2,

@@ -38,9 +38,8 @@ const Online = (props: Props) => {
               />
             );
           })}
-
-        <ContentLoader visible={!friendsOnline} />
       </List>
+      <ContentLoader visible={!friendsOnline} />
     </Container>
   );
 };
@@ -48,7 +47,7 @@ const Online = (props: Props) => {
 const mapStateToProps = (state: RootState) => {
   const friendsOnline = state.users.friendsOnline;
   return {
-    friendsOnline: friendsOnline.length === 0 ? null : friendsOnline,
+    friendsOnline: friendsOnline,
   };
 };
 

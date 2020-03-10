@@ -3,12 +3,12 @@ import database from '_apis/database';
 import reactotron from 'reactotron-react-native';
 import * as firebase from 'firebase';
 import * as types from '../chat';
+import { listenChat } from '_helpers/chat';
 
 export const fetchNewMessages = (
   onFailed: Function,
 ): AppThunk => async (dispatch, getState) => {
   const uid = getState().app.user.uid;
-  const { sended } = getState().chat;
 
   try {
     const friendsSnapshot = await firebase
@@ -51,39 +51,32 @@ export const fetchNewMessages = (
         .database()
         .ref(`chat/${uid}/toRead/${friendUid}`)
         .once('value');
-      firebase
-        .database()
-        .ref(`chat/${uid}/messages/${friendUid}`)
-        .limitToLast(10)
-        .on('child_added', snapshot => {
-          const message = snapshot.val();
-          const user = {
-            name,
-            photoURL,
-            online,
-            displayName,
-            uid: friendUid,
-            fname: fName,
-          };
+      listenChat(uid, friendUid, (message: any) => {
+        const user = {
+          name,
+          photoURL,
+          online,
+          displayName,
+          uid: friendUid,
+          fname: fName,
+        };
 
-          if (!sended && message.uid !== uid) {
-            dispatch({
-              type: types.FETCH_NEW_MESSAGE,
-              payload: {
-                message: {
-                  ...message,
-
-                  user: {
-                    ...user,
-                    _id: message._id === uid ? 1 : 2,
-                  },
-                },
-                user,
-                toRead: toReadSnapshot.val(),
+        dispatch({
+          type: types.FETCH_NEW_MESSAGE,
+          payload: {
+            message: {
+              ...message,
+              createdAt: new Date(message.createdAt),
+              user: {
+                ...user,
+                _id: message.sendedBy === uid ? 1 : 2,
               },
-            });
-          }
+            },
+            user,
+            toRead: toReadSnapshot.val(),
+          },
         });
+      });
     }
   } catch (error) {
     onFailed();
@@ -93,21 +86,18 @@ export const fetchNewMessages = (
 export const sendMessage = (
   text: string,
   friendUid: string,
+  messageId: string,
 ): AppThunk => async (dispatch, getState) => {
-  const { uid } = getState().app.user;
-  const response = await database.post(
-    `chat/${friendUid}?withUid=${uid}`,
-    {
-      content: text,
-    },
-  );
+  const {
+    uid,
+    displayName,
+    photoURL,
+    fname,
+    name,
+  } = getState().app.user;
 
-  dispatch({
-    type: types.SEND_MESSAGE,
-    payload: {
-      uid: friendUid,
-      message: response.data,
-    },
+  database.post(`chat/${friendUid}?withUid=${uid}`, {
+    content: text,
   });
 };
 

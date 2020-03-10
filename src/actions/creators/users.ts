@@ -68,13 +68,16 @@ export const fetchOnlineUsers = (): AppThunk => async (
   const { uid } = getState().app.user;
   try {
     const response = await database.get(`onlineUsers/${uid}`);
-    reactotron.log(response.data);
+
     dispatch({
       type: types.FETCH_ONLINE_USERS,
       payload: response.data,
     });
   } catch (error) {
-    reactotron.log(error.response);
+    dispatch({
+      type: types.FETCH_ONLINE_USERS,
+      payload: [],
+    });
   }
 };
 

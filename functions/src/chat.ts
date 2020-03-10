@@ -57,18 +57,18 @@ const sendMessage = async (req: functions.Request, res: functions.Response) => {
     const message = {
       text: content,
       createdAt: currentTime,
-      _id: withUid,
-      iid: messageId
+      _id: messageId,
+      sendedBy: withUid
     };
 
     await admin
       .database()
-      .ref(`chat/${userUid}/messages/${withUid}`)
+      .ref(`chat/${withUid}/messages/${userUid}`)
       .push(message);
 
     await admin
       .database()
-      .ref(`chat/${withUid}/messages/${userUid}`)
+      .ref(`chat/${userUid}/messages/${withUid}`)
       .push(message);
     const nameSnapshot = await admin
       .database()

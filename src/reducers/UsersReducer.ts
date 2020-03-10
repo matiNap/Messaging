@@ -10,7 +10,7 @@ export interface UsersState {
 }
 
 const initState: UsersState = {
-  friendsOnline: [],
+  friendsOnline: null,
   searched: [],
   searchedFriends: [],
 };

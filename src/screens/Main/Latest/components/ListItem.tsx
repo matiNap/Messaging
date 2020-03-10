@@ -66,7 +66,7 @@ const LatestListItem = (props: Props) => {
   const { latestMessage, user, userUid, toRead } = props;
   const { name, fname, photoURL } = user;
   const avatarUri = photoURL ? photoURL : globals.primaryAvatar;
-  const lastMessageBy = latestMessage._id;
+  const lastMessageBy = latestMessage.sendedBy;
   const { text, createdAt } = latestMessage;
   const byMe = isMe(userUid, lastMessageBy);
   const who = byMe ? 'Me' : fname;
@@ -104,7 +104,7 @@ const LatestListItem = (props: Props) => {
           </View>
         </View>
 
-        {readed && byMe && (
+        {!readed && byMe && (
           <Thumbnail
             style={styles.subAvatar}
             source={{

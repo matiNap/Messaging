@@ -34,24 +34,33 @@ interface Props {
 }
 
 class Chat extends Component<Props> {
+  state = {
+    messages: [],
+  };
   componentDidMount() {
     const { user } = this.getParms();
     this.props.readMessage(user.uid);
+    this.setState({
+      messages: GiftedChat.append([], this.props.messages),
+    });
   }
 
   getParms = () => {
     return this.props.navigation.state.params;
   };
 
-  onSend(message: any) {
-    const { text } = message[0];
+  onSend(messages: any) {
+    const { text, _id } = messages[0];
     const { user } = this.getParms();
-    this.props.sendMessage(text, user.uid);
+
+    this.props.sendMessage(text, user.uid, _id);
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, messages),
+    }));
   }
 
   renderBubble = (props: any) => {
-    const { currentMessage } = props;
-    return <Bubble key={currentMessage.iid} {...props} />;
+    return <Bubble {...props} />;
   };
 
   renderMessageText = (props: any) => {
@@ -90,7 +99,7 @@ class Chat extends Component<Props> {
   };
 
   renderSend = props => {
-    const { onSend, text, isTyping } = props;
+    const { onSend, text } = props;
 
     return (
       <Touchable
@@ -115,15 +124,18 @@ class Chat extends Component<Props> {
   };
 
   render() {
-    const { messages } = this.props;
-
+    const { messages } = this.state;
+    const { user } = this.props;
     return (
       <KeyboardAvoidingView
         enabled
         behavior="height"
         style={{ flex: 1 }}
       >
-        <ChatHeader name="Mateusz" displayName="mati579" />
+        <ChatHeader
+          name={user.fname}
+          displayName={user.displayName}
+        />
         <GiftedChat
           renderBubble={this.renderBubble}
           messagesContainerStyle={styles.messagesContainerStyle}
@@ -177,9 +189,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state: RootState, ownProps: Props) => {
   const { uid } = ownProps.navigation.state.params.user;
-  console.log(uid);
+  const currentChat = state.chat.chats[uid];
   return {
-    messages: state.chat.chats[uid].messages.reverse(),
+    messages:
+      currentChat && currentChat.messages
+        ? currentChat.messages.reverse()
+        : [],
+    user: currentChat.user,
   };
 };
 

@@ -17,6 +17,7 @@ import ContentLoader from '_components/ContentLoader';
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 import database from '_apis/database';
+import reactotron from 'reactotronConfig';
 
 interface Props {
   changeStatus: typeof changeStatus;
@@ -67,6 +68,7 @@ class Latest extends Component<Props> {
   render() {
     const { chats } = this.props;
     const { empty } = this.state;
+
     return (
       <Container>
         <List>
@@ -78,6 +80,7 @@ class Latest extends Component<Props> {
 
               return (
                 <ListItem
+                  key={user.name}
                   user={user}
                   latestMessage={latestMessage}
                   toRead={toRead}

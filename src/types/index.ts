@@ -32,7 +32,7 @@ export type Message = {
   _id: string;
   createdAt: number;
   text: string;
-  iid: string;
+  sendedBy: string;
 };
 
 export type ChatData = {
