@@ -43,7 +43,10 @@ const OnlineButton = (props: Props) => {
 const mapStateToProps = (state: RootState) => {
   return {
     checked: state.app.tabButtonChecked['online'],
-    onlineValue: state.users.friendsOnline.length,
+    onlineValue:
+      state.users && state.users.friendsOnline
+        ? state.users.friendsOnline.length
+        : 0,
   };
 };
 

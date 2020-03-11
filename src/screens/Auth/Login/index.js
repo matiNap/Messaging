@@ -21,7 +21,7 @@ import {
 } from './animationHelpers';
 import { runTiming } from '_helpers/animations';
 
-const { event, Value, sub, set } = Animated;
+const { event, Value, sub, set, interpolate } = Animated;
 
 class Login extends React.Component {
   constructor(props) {
@@ -58,7 +58,7 @@ class Login extends React.Component {
     const { svgHeight } = metrics.login;
     const waveHeight = svgHeight / 2;
     const centerX = followPointer(this.pageX);
-    const progress = getProgress(swipeY, this.opened);
+    const progress = getProgress(swipeY);
     const verticalRadius = waveVerticalRadius(
       progress,
       this.gestureState,

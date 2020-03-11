@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { Text, View, Container } from 'native-base';
 import validator from 'email-validator';
 import { connect } from 'react-redux';
@@ -41,40 +41,43 @@ class SignIn extends Component {
 
     return (
       <Animated.View style={{ translateY }}>
-        <Text style={styles.appName}>{globals.appName}</Text>
-        <Text style={styles.title}>Sign in</Text>
-        <View style={styles.inputContainer}>
-          <Input
-            color={palette.text.primary}
-            placeholder="Email"
-            autoCapitalize="none"
-            type="email-address"
-            style={styles.input}
-            value={email}
-            onChangeText={text => {
-              this.setState({ email: text.replace(/\s/g, '') });
-            }}
-            textInputStyle={styles.textInput}
+        <KeyboardAvoidingView behavior="position">
+          <Text style={styles.appName}>{globals.appName}</Text>
+          <Text style={styles.title}>Sign in</Text>
+
+          <View style={styles.inputContainer}>
+            <Input
+              color={palette.text.primary}
+              placeholder="Email"
+              autoCapitalize="none"
+              type="email-address"
+              style={styles.input}
+              value={email}
+              onChangeText={text => {
+                this.setState({ email: text.replace(/\s/g, '') });
+              }}
+              textInputStyle={styles.textInput}
+            />
+            <Input
+              color={palette.text.primary}
+              placeholder="Password"
+              autoCapitalize="none"
+              secureTextEntry
+              value={password}
+              onChangeText={text => {
+                this.setState({ password: text.replace(/\s/g, '') });
+              }}
+              style={styles.input}
+              textInputStyle={styles.textInput}
+            />
+          </View>
+          <Button
+            style={styles.button}
+            title="Sign in"
+            onPress={this.handleForm}
           />
-          <Input
-            color={palette.text.primary}
-            placeholder="Password"
-            autoCapitalize="none"
-            secureTextEntry
-            value={password}
-            onChangeText={text => {
-              this.setState({ password: text.replace(/\s/g, '') });
-            }}
-            style={styles.input}
-            textInputStyle={styles.textInput}
-          />
-        </View>
-        <Button
-          style={styles.button}
-          title="Sign in"
-          onPress={this.handleForm}
-        />
-        <Text style={styles.warningText}>{message}</Text>
+          <Text style={styles.warningText}>{message}</Text>
+        </KeyboardAvoidingView>
         <Loader visible={loaderVisible} />
       </Animated.View>
     );

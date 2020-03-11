@@ -45,7 +45,7 @@ const Online = (props: Props) => {
 };
 
 const mapStateToProps = (state: RootState) => {
-  const friendsOnline = state.users.friendsOnline;
+  const friendsOnline = state?.users?.friendsOnline;
   return {
     friendsOnline: friendsOnline,
   };

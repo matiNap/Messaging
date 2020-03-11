@@ -55,11 +55,12 @@ export const signOut = (): AppThunk => async (dispatch, getState) => {
   const state = getState();
   try {
     const { uid } = state.app.user;
-    await database.post('signOut', { uid });
-    navigate('auth');
     dispatch({
-      type: types.SIGN_OUT,
+      type: 'LOG_OUT',
     });
+    await database.post('signOut', { uid });
+
+    navigate('login');
   } catch (error) {
     console.log(error);
   }

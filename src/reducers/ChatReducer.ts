@@ -45,7 +45,7 @@ export default (state = initState, action) => {
       };
     }
     case types.CHANGE_READED: {
-      const { friendUid } = action.payload;
+      const { friendUid, value } = action.payload;
       const { chats } = state;
       return {
         ...state,
@@ -53,7 +53,7 @@ export default (state = initState, action) => {
           ...chats,
           [friendUid]: {
             ...chats[friendUid],
-            toRead: action.payload.value,
+            toRead: value,
           },
         },
       };

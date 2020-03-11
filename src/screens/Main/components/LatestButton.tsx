@@ -7,15 +7,18 @@ import BadgeButton from './BadgeButton';
 import { connect } from 'react-redux';
 import { pressTabBarButton } from '_actions/creators/app';
 import { RootState } from '_rootReducer';
+import _ from 'lodash';
+import reactotron from 'reactotronConfig';
 
 interface Props {
   iconSize: number;
   pressTabBarButton: typeof pressTabBarButton;
   checked: boolean;
+  valu: number;
 }
 
 const LatestButton = (props: Props) => {
-  const { iconSize, checked } = props;
+  const { iconSize, checked, value } = props;
   return (
     <BadgeButton
       onPress={() => {
@@ -23,7 +26,7 @@ const LatestButton = (props: Props) => {
         props.pressTabBarButton('latest');
       }}
       size={iconSize}
-      value={4}
+      value={value}
       color={palette.actions.succes}
       buttonComponent={() => {
         return (
@@ -40,9 +43,27 @@ const LatestButton = (props: Props) => {
   );
 };
 
+const countMessages = (chats: any, myUid: string) => {
+  const chatsArray = Object.values(chats);
+  let c = 0;
+  for (const currentChat of chatsArray) {
+    const { toRead, latestMessage } = currentChat;
+    reactotron.log(latestMessage.sendedBy, myUid);
+    if (latestMessage.sendedBy !== myUid) {
+      const diff = latestMessage.createdAt.getTime() - toRead;
+      if (diff >= 0) c++;
+    }
+  }
+
+  return c;
+};
+
 const mapStateToProps = (state: RootState) => {
   return {
     checked: state.app.tabButtonChecked['latest'],
+    value: state.chat.chats
+      ? countMessages(state.chat.chats, state.app.user.uid)
+      : 0,
   };
 };
 

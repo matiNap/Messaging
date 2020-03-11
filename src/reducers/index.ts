@@ -13,4 +13,10 @@ const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>;
 
-export default rootReducer;
+export default (state: any, action: any) => {
+  if (action.type === 'LOG_OUT') {
+    state = undefined;
+  }
+
+  return rootReducer(state, action);
+};

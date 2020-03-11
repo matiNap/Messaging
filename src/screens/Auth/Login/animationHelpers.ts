@@ -1,7 +1,7 @@
-import Animated, { Clock } from "react-native-reanimated";
-import { runTiming, runSpring } from "_helpers/animations";
-import { State } from "react-native-gesture-handler";
-import metrics from "_metrics";
+import Animated, { Clock } from 'react-native-reanimated';
+import { runTiming, runSpring } from '_helpers/animations';
+import { State } from 'react-native-gesture-handler';
+import metrics from '_metrics';
 
 const { svgHeight } = metrics.login;
 
@@ -32,14 +32,14 @@ const {
   greaterOrEq,
   exp,
   cos,
-  debug
+  debug,
 } = Animated;
 
 export const waveSwipeY = (
   gestureState: State,
   y: Animated.Node<number>,
   opened: Animated.Node<number>,
-  back: Animated.Node<number>
+  back: Animated.Node<number>,
 ) => {
   const swipeY = new Value(metrics.screenHeight);
   return block([
@@ -52,11 +52,11 @@ export const waveSwipeY = (
             [
               cond(
                 lessThan(y, 0),
-                set(swipeY, add(0, add(metrics.screenHeight, y)))
-              )
+                set(swipeY, add(0, add(metrics.screenHeight, y))),
+              ),
             ],
-            [cond(greaterThan(y, 0), set(swipeY, add(0, y)))]
-          )
+            [cond(greaterThan(y, 0), set(swipeY, add(0, y)))],
+          ),
         ]),
         cond(eq(gestureState, State.END), [
           cond(
@@ -65,7 +65,7 @@ export const waveSwipeY = (
               runTiming(swipeY, metrics.screenHeight, () => {
                 opened.setValue(0);
               }),
-              set(opened, 0)
+              set(opened, 0),
             ],
             cond(
               lessThan(y, -metrics.login.swipe),
@@ -73,16 +73,16 @@ export const waveSwipeY = (
                 runTiming(swipeY, 0, () => {
                   opened.setValue(1);
                 }),
-                set(opened, 1)
+                set(opened, 1),
               ],
-              cond(eq(opened, 1), [runTiming(swipeY, 0)])
-            )
-          )
-        ])
+              cond(eq(opened, 1), [runTiming(swipeY, 0)]),
+            ),
+          ),
+        ]),
       ],
-      cond(runTiming(swipeY, metrics.screenHeight), [set(back, 0)])
+      cond(runTiming(swipeY, metrics.screenHeight), [set(back, 0)]),
     ),
-    swipeY
+    swipeY,
   ]);
 };
 
@@ -90,26 +90,26 @@ export const followPointer = (value: Animated.Node<number>) => {
   const clock = new Clock();
   const config = {
     ...Animated.SpringUtils.makeDefaultConfig(),
-    toValue: new Value(0)
+    toValue: new Value(0),
   };
   const state = {
     time: new Value(0),
     velocity: new Value(0),
     position: new Value(0),
-    finished: new Value(0)
+    finished: new Value(0),
   };
   return block([
     startClock(clock),
     set(config.toValue, value),
     spring(clock, state, config),
-    state.position
+    state.position,
   ]);
 };
 
 export const waveHorizontalRadius = (
   progress: Animated.Node<number>,
   gestureState: State,
-  opened: Animated.Node<number>
+  opened: Animated.Node<number>,
 ) => {
   const value = new Value(initHorizontalRadius);
   return block([
@@ -126,30 +126,33 @@ export const waveHorizontalRadius = (
               value,
               add(
                 initHorizontalRadius,
-                multiply(maxHorizontalRadius - initHorizontalRadius, progress)
-              )
-            )
-          )
-        )
+                multiply(
+                  maxHorizontalRadius - initHorizontalRadius,
+                  progress,
+                ),
+              ),
+            ),
+          ),
+        ),
       ],
       [
         cond(eq(gestureState, State.END), [
           cond(
             eq(opened, 1),
             [runSpring(value, maxHorizontalRadius, 10)],
-            [runSpring(value, initHorizontalRadius, 0)]
-          )
-        ])
-      ]
+            [runSpring(value, initHorizontalRadius, 0)],
+          ),
+        ]),
+      ],
     ),
-    value
+    value,
   ]);
 };
 
 export const waveVerticalRadius = (
   progress: Animated.Node<number>,
   gestureState: State,
-  opened: Animated.Node<number>
+  opened: Animated.Node<number>,
 ) => {
   const value = new Value(inititalVerticalRadius);
 
@@ -170,30 +173,33 @@ export const waveVerticalRadius = (
                     value,
                     add(
                       inititalVerticalRadius,
-                      multiply(progress, svgHeight * 0.5 - svgHeight * 0.2)
-                    )
-                  )
+                      multiply(
+                        progress,
+                        svgHeight * 0.5 - svgHeight * 0.2,
+                      ),
+                    ),
+                  ),
                 ],
-                greaterOrEq(eq(progress, 1), [set(value, 0)])
-              )
-            )
+                greaterOrEq(eq(progress, 1), [set(value, 0)]),
+              ),
+            ),
           ],
-          [set(value, 0)]
-        )
+          [set(value, 0)],
+        ),
       ],
       cond(eq(gestureState, State.END), [
-        runSpring(value, inititalVerticalRadius, 5)
-      ])
+        runSpring(value, inititalVerticalRadius, 5),
+      ]),
     ),
-    value
+    value,
   ];
 };
 
 export const getProgress = (value: Animated.Node<number>) => {
   return block([
     interpolate(value, {
-      inputRange: [-metrics.screenHeight, 0],
-      outputRange: [1, 0]
-    })
+      inputRange: [0, metrics.screenHeight],
+      outputRange: [1, 0],
+    }),
   ]);
 };

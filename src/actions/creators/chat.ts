@@ -23,7 +23,6 @@ export const fetchNewMessages = (
         .database()
         .ref(`chat/${friendUid}/toRead`)
         .on('child_changed', snapshot => {
-          reactotron.log(snapshot.val());
           dispatch({
             type: types.CHANGE_READED,
             payload: {

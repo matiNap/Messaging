@@ -70,7 +70,9 @@ const LatestListItem = (props: Props) => {
   const { text, createdAt } = latestMessage;
   const byMe = isMe(userUid, lastMessageBy);
   const who = byMe ? 'Me' : fname;
+
   const readed = latestMessage.createdAt - toRead <= 0 ? true : false;
+  reactotron.log(readed);
   const subTextStyle = getSubTextStyle(byMe, readed);
 
   return (
@@ -104,7 +106,7 @@ const LatestListItem = (props: Props) => {
           </View>
         </View>
 
-        {!readed && byMe && (
+        {readed && byMe && (
           <Thumbnail
             style={styles.subAvatar}
             source={{

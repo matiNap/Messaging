@@ -31,7 +31,7 @@ class Loading extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       this.navigateScreens();
-    }, 500);
+    }, 1000);
   }
 
   componentDidUpdate() {
@@ -46,7 +46,7 @@ class Loading extends React.Component {
       if (isConnected) {
         this.props.checkAuth(
           () => {
-            navigate('latest');
+            navigate('login');
           },
           () => {
             navigate('login');
