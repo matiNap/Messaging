@@ -71,8 +71,10 @@ const LatestListItem = (props: Props) => {
   const byMe = isMe(userUid, lastMessageBy);
   const who = byMe ? 'Me' : fname;
 
-  const readed = latestMessage.createdAt - toRead <= 0 ? true : false;
-  reactotron.log(readed);
+  const readed =
+    new Date(latestMessage.createdAt).getTime() - toRead <= 0
+      ? true
+      : false;
   const subTextStyle = getSubTextStyle(byMe, readed);
 
   return (

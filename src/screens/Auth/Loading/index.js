@@ -40,7 +40,7 @@ class Loading extends React.Component {
 
   navigateScreens = () => {
     const { isConnected } = this.state;
-    const { signedIn } = this.props;
+    const { signedIn, uid } = this.props;
 
     if (signedIn) {
       if (isConnected) {
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return {
     signedIn: state.app.user.signedIn,
+    uid: state.app.user.uid,
   };
 };
 

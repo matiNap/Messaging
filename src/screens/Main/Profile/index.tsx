@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { List, Text, Thumbnail } from 'native-base';
-import * as Animatable from 'react-native-animatable';
+import { List, Text, Thumbnail, View } from 'native-base';
 import palette from '_palette';
 import metrics from '_metrics';
 import ItemDivider from './components/ItemDivider';
@@ -33,11 +32,7 @@ const Profile = (props: Props) => {
   const { displayName, email, name } = user;
 
   return (
-    <Animatable.View
-      style={[StyleSheet.absoluteFill, styles.container]}
-      animation="fadeIn"
-      duration={300}
-    >
+    <View style={[StyleSheet.absoluteFill, styles.container]}>
       <Back
         style={{
           marginLeft: metrics.margin.normal,
@@ -127,7 +122,7 @@ const Profile = (props: Props) => {
           />
         </Touchable>
       </List>
-    </Animatable.View>
+    </View>
   );
 };
 

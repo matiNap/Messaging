@@ -18,7 +18,10 @@ const initState: UsersState = {
 export default (state = initState, action: any) => {
   switch (action.type) {
     case REHYDRATE: {
-      const { friendsOnline } = action.payload.users;
+      const { friendsOnline } =
+        action.payload && action.payload.users
+          ? action.payload.users
+          : [];
       return { ...state, friendsOnline };
     }
     case types.SEARCH_USER: {

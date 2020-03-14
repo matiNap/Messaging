@@ -1,6 +1,5 @@
 import { AppThunk } from '_types';
 import database from '_apis/database';
-import reactotron from 'reactotron-react-native';
 import * as firebase from 'firebase';
 import * as types from '../chat';
 import { listenChat } from '_helpers/chat';
@@ -79,21 +78,15 @@ export const fetchNewMessages = (
     }
   } catch (error) {
     onFailed();
+    console.log(error);
   }
 };
 
 export const sendMessage = (
   text: string,
   friendUid: string,
-  messageId: string,
 ): AppThunk => async (dispatch, getState) => {
-  const {
-    uid,
-    displayName,
-    photoURL,
-    fname,
-    name,
-  } = getState().app.user;
+  const { uid } = getState().app.user;
 
   database.post(`chat/${friendUid}?withUid=${uid}`, {
     content: text,

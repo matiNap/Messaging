@@ -48,7 +48,7 @@ const countMessages = (chats: any, myUid: string) => {
   let c = 0;
   for (const currentChat of chatsArray) {
     const { toRead, latestMessage } = currentChat;
-    reactotron.log(latestMessage.sendedBy, myUid);
+
     if (latestMessage.sendedBy !== myUid) {
       const diff = latestMessage.createdAt.getTime() - toRead;
       if (diff >= 0) c++;

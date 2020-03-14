@@ -125,7 +125,7 @@ class Chat extends Component<Props> {
 
   render() {
     const { messages } = this.state;
-    const { user } = this.props;
+    const { user } = this.getParms();
     return (
       <KeyboardAvoidingView
         enabled
@@ -189,13 +189,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state: RootState, ownProps: Props) => {
   const { uid } = ownProps.navigation.state.params.user;
-  const currentChat = state.chat.chats[uid];
+  const currentChat = state.chat.chats ? state.chat.chats[uid] : null;
   return {
     messages:
       currentChat && currentChat.messages
         ? currentChat.messages.reverse()
         : [],
-    user: currentChat.user,
+    user: currentChat && currentChat.user ? currentChat.user : {},
   };
 };
 

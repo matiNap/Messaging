@@ -24,9 +24,10 @@ const initState: AppState = {
 export default (state = initState, action) => {
   switch (action.type) {
     case REHYDRATE: {
-      const { user } = action.payload.app
-        ? action.payload.app
-        : initState.user;
+      const user =
+        action.payload && action.payload.app
+          ? action.payload.app.user
+          : initState.user;
       return { ...state, user };
     }
     case types.SIGN_IN: {

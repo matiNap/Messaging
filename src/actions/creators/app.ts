@@ -23,7 +23,6 @@ export const createUser = (
     });
     onCreate();
   } catch (err) {
-    reactotron.log(err);
     onFailed();
   }
 };
@@ -40,7 +39,7 @@ export const signIn = (
     });
 
     const { data } = response;
-    navigate('latest');
+    navigate('loading');
     dispatch({
       type: types.SIGN_IN,
       payload: {

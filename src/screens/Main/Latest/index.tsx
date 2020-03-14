@@ -17,7 +17,6 @@ import ContentLoader from '_components/ContentLoader';
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 import database from '_apis/database';
-import reactotron from 'reactotronConfig';
 
 interface Props {
   changeStatus: typeof changeStatus;
