@@ -17,6 +17,7 @@ import ContentLoader from '_components/ContentLoader';
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 import database from '_apis/database';
+import reactotron from 'reactotronConfig';
 
 interface Props {
   changeStatus: typeof changeStatus;
@@ -32,18 +33,19 @@ class Latest extends Component<Props> {
     empty: false,
   };
   componentDidMount() {
-    this.props.listenFriendRequests();
-    this.props.fetchOnlineUsers();
-    this.props.fetchNewMessages(() => {
-      this.setState({ empty: true });
-    });
-    this.registerForPushNotificationsAsync();
+    // this.props.listenFriendRequests();
+    // this.props.fetchOnlineUsers();
+    // this.props.fetchNewMessages(() => {
+    //   this.setState({ empty: true });
+    // });
+    reactotron.log('latest');
+    // this.registerForPushNotificationsAsync();
 
     AppState.addEventListener('change', appState => {
       if (appState === 'background') {
-        this.props.changeStatus(0);
+        // this.props.changeStatus(0);
       } else {
-        this.props.changeStatus(1);
+        // this.props.changeStatus(1);
       }
     });
   }

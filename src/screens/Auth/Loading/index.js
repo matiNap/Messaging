@@ -15,6 +15,7 @@ import palette from '_palette';
 import metrics from '_metrics';
 import NetInfo from '@react-native-community/netinfo';
 import { checkAuth } from '_actions/creators/app';
+import reactotron from 'reactotron-react-native';
 
 class Loading extends React.Component {
   state = {
@@ -31,7 +32,7 @@ class Loading extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       this.navigateScreens();
-    }, 1000);
+    }, 2000);
   }
 
   componentDidUpdate() {
@@ -43,19 +44,18 @@ class Loading extends React.Component {
     const { signedIn, uid } = this.props;
 
     if (signedIn) {
-      if (isConnected) {
-        this.props.checkAuth(
-          () => {
-            navigate('login');
-          },
-          () => {
-            navigate('login');
-          },
-        );
-      } else navigate('latest');
+      this.props.checkAuth(
+        () => {
+          navigate('latest');
+        },
+        () => {
+          navigate('login');
+        },
+      );
     } else {
-      navigate('login');
+      navigate('latest');
     }
+    navigate('login');
   };
 
   render() {

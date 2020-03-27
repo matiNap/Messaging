@@ -1,8 +1,10 @@
 import database from '_apis/database';
 import * as types from '../app';
 import { navigate } from '_navigation';
-import reactotron from 'reactotron-react-native';
 import { AppThunk } from '_types';
+import * as firestore from '_apis/firestore';
+import reactotron from 'reactotron-react-native';
+import firebase from 'firebase';
 
 export const createUser = (
   userData: {
@@ -15,14 +17,12 @@ export const createUser = (
   onCreate: Function,
   onFailed: Function,
 ) => async () => {
-  // onCreate();
-
   try {
-    await database.post('createUser', {
-      ...userData,
-    });
+    await firestore.createUser(userData);
+
     onCreate();
   } catch (err) {
+    reactotron.log(err);
     onFailed();
   }
 };
@@ -33,32 +33,28 @@ export const signIn = (
   onSignInFailed: Function,
 ): AppThunk => async dispatch => {
   try {
-    const response = await database.post('signIn', {
+    const response = await firestore.signIn({
       email: username,
       password,
     });
 
-    const { data } = response;
     navigate('loading');
     dispatch({
       type: types.SIGN_IN,
       payload: {
-        ...data,
+        ...response,
       },
     });
   } catch (error) {
     onSignInFailed('Invalid password or email');
   }
 };
-export const signOut = (): AppThunk => async (dispatch, getState) => {
-  const state = getState();
+export const signOut = (): AppThunk => async dispatch => {
   try {
-    const { uid } = state.app.user;
+    await firebase.auth().signOut();
     dispatch({
       type: 'LOG_OUT',
     });
-    await database.post('signOut', { uid });
-
     navigate('login');
   } catch (error) {
     console.log(error);
@@ -67,24 +63,19 @@ export const signOut = (): AppThunk => async (dispatch, getState) => {
 export const checkAuth = (
   onAuthSucces: Function,
   onAuthFailed: Function,
-): AppThunk => async (dispatch, getState) => {
-  const state = getState();
-
+): AppThunk => async dispatch => {
+  reactotron.log('check auth');
   try {
-    const { token, uid } = state.app.user;
-    const response = await database.post('checkAuth', { uid, token });
-    const { data } = response;
-    const { newToken } = data;
+    const user = await firestore.checkAuth();
+    reactotron.log(user);
     onAuthSucces();
     dispatch({
       type: types.CHECK_AUTH,
       payload: {
-        ...data,
-        token: newToken,
+        ...user,
       },
     });
   } catch (error) {
-    console.log('fial');
     onAuthFailed();
   }
 };
