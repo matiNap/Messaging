@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, AppState } from 'react-native';
-import { List, Root } from 'native-base';
+import { AppState } from 'react-native';
+import { List } from 'native-base';
 import Header from '../components/Header';
 import { Container } from 'native-base';
 

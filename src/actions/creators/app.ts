@@ -98,13 +98,9 @@ export const pressTabBarButton = (name: string) => {
   };
 };
 
-export const changeStatus = (status: boolean): AppThunk => (
-  dispatch,
-  getState,
-) => {
-  const { uid } = getState().app.user;
+export const changeStatus = (status: boolean) => {
   try {
-    database.post(`status/${uid}?newStatus=${status}`);
+    firestore.getCurrentUserRef().update({ online: status });
   } catch (error) {
     console.log(error);
   }

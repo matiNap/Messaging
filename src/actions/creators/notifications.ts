@@ -2,6 +2,9 @@ import database from '_apis/database';
 import * as types from '../notifications';
 import { AppThunk } from 'types';
 import reactotron from 'reactotron-react-native';
+import { getFriendsRef } from '_apis/firestore';
+import * as firestore from '_apis/firestore';
+import firebase from 'firebase';
 
 export const sendFriendRequest = (
   toUid: string,
@@ -22,8 +25,13 @@ export const listenFriendRequests = (): AppThunk => async (
   getState,
 ) => {
   try {
-    const toUid = getState().app.user.uid;
-    const response = await database.get(`friendRequest/${toUid}`);
+    const { uid } = firestore.getUserData();
+    const response = firebase
+      .database()
+      .ref(`friends/${uid}`)
+      .on('child_added', snapshot => {
+        reactotron.log(snapshot);
+      });
 
     dispatch({
       type: types.LISTEN_FRIEND_REQUESTS,

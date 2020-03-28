@@ -2,23 +2,68 @@ import * as types from '_actions/users';
 import { AppThunk } from '_types';
 import database from '_apis/database';
 import reactotron from 'reactotron-react-native';
+import * as firestore from '_apis/firestore';
+import firebase from 'firebase';
+
+const requestState = async (
+  currentUserUid: string,
+  friendUid: string,
+) => {
+  const stateSnapshot = await firebase
+    .database()
+    .ref(`friends/${friendUid}/${currentUserUid}`)
+    .once('value');
+  const myStateSnapshot = await firebase
+    .database()
+    .ref(`friends/${currentUserUid}/${friendUid}`)
+    .once('value');
+
+  const fromFriendState = stateSnapshot.val()
+    ? stateSnapshot.val()
+    : null;
+  const myState = myStateSnapshot.val()
+    ? myStateSnapshot.val()
+    : null;
+
+  if (fromFriendState && myState) {
+    return 'friends';
+  } else if (fromFriendState) {
+    return 'byMe';
+  } else if (myState) {
+    return 'byUser';
+  }
+
+  return null;
+};
 
 export const searchUser = (
   text: string,
   onSucces: Function,
   onFailed: Function,
-): AppThunk => async (dispatch, getState) => {
+): AppThunk => async dispatch => {
   try {
-    const searchedBy = getState().app.user.uid;
+    const snapshot = await firestore
+      .firestore()
+      .collection('users')
+      .orderBy('name')
+      .startAt(text)
+      .endAt(text + '\uf8ff')
+      .get();
 
-    const response = await database.get(
-      `searchUser?name=${text}&limit=${10}&searchedBy=${searchedBy}`,
-    );
+    const data = [];
+    const currentUserUid = firestore.getUserData().uid;
+    for (const doc of snapshot.docs) {
+      const friendUid = doc.data().uid;
+      if (friendUid === currentUserUid) continue;
+      const state = await requestState(currentUserUid, friendUid);
+      reactotron.log(state);
+      data.push({ ...doc.data(), state: state ? state : 'none' });
+    }
 
     onSucces();
     dispatch({
       type: types.SEARCH_USER,
-      payload: response.data,
+      payload: data,
     });
   } catch (err) {
     onFailed();
@@ -30,14 +75,32 @@ export const addUser = (toUid: string): AppThunk => (
   getState,
 ) => {
   const fromUid = getState().app.user.uid;
-  database.post(`friendRequest/${toUid}?fromUid=${fromUid}`);
-  dispatch({
-    type: types.ADD_USER,
-    payload: { uid: toUid },
-  });
+
+  try {
+    firebase
+      .database()
+      .ref(`friends/${toUid}/${fromUid}`)
+      .set('invited');
+
+    dispatch({
+      type: types.ADD_USER,
+      payload: { uid: toUid },
+    });
+  } catch (error) {
+    reactotron.log(error);
+  }
 };
 
-export const acceptRequest = (fromUid: string) => {
+export const acceptRequest = (fromUid: string) => async () => {
+  const { uid } = firestore.getUserData();
+  firebase
+    .database()
+    .ref(`friends/${uid}/${fromUid}`)
+    .set('friends');
+  firebase
+    .database()
+    .ref(`friends/${fromUid}/${uid}`)
+    .set('friends');
   return {
     type: types.REQUEST_RESPONSE,
     payload: {
@@ -48,6 +111,12 @@ export const acceptRequest = (fromUid: string) => {
 };
 
 export const rejectRequest = (fromUid: string) => {
+  const { uid } = firestore.getUserData();
+  firebase
+    .database()
+    .ref(`friends/${uid}/${fromUid}`)
+    .remove();
+
   return {
     type: types.REQUEST_RESPONSE,
     payload: {
