@@ -30,33 +30,15 @@ class Loading extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      this.navigateScreens();
-    }, 2000);
+    this.props.checkAuth(
+      () => {
+        navigate('latest');
+      },
+      () => {
+        navigate('login');
+      },
+    );
   }
-
-  componentDidUpdate() {
-    this.navigateScreens();
-  }
-
-  navigateScreens = () => {
-    const { isConnected } = this.state;
-    const { signedIn, uid } = this.props;
-
-    if (signedIn) {
-      this.props.checkAuth(
-        () => {
-          navigate('latest');
-        },
-        () => {
-          navigate('login');
-        },
-      );
-    } else {
-      navigate('latest');
-    }
-    navigate('login');
-  };
 
   render() {
     const verticalRadius = waveVerticalRadius();

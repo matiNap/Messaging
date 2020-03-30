@@ -13,6 +13,8 @@ import Animated from 'react-native-reanimated';
 import palette from '_palette';
 import { signIn } from '_actions/creators/app';
 import Loader from '_components/Loader';
+import reactotron from 'reactotron-react-native';
+import firebase from 'firebase';
 
 class SignIn extends Component {
   state = {

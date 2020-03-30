@@ -33,12 +33,12 @@ class Latest extends Component<Props> {
     empty: false,
   };
   componentDidMount() {
-    // this.props.listenFriendRequests();
-    // this.props.fetchOnlineUsers();
+    this.props.listenFriendRequests();
+    this.props.fetchOnlineUsers();
     // this.props.fetchNewMessages(() => {
     //   this.setState({ empty: true });
     // });
-    reactotron.log('latest');
+
     // this.registerForPushNotificationsAsync();
 
     AppState.addEventListener('change', appState => {

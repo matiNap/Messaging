@@ -63,21 +63,26 @@ export const signOut = (): AppThunk => async dispatch => {
 export const checkAuth = (
   onAuthSucces: Function,
   onAuthFailed: Function,
-): AppThunk => async dispatch => {
-  reactotron.log('check auth');
-  try {
-    const user = await firestore.checkAuth();
-    reactotron.log(user);
-    onAuthSucces();
-    dispatch({
-      type: types.CHECK_AUTH,
-      payload: {
-        ...user,
-      },
-    });
-  } catch (error) {
-    onAuthFailed();
-  }
+) => {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      onAuthSucces();
+      return {
+        type: types.CHECK_AUTH,
+        payload: {
+          ...user,
+        },
+      };
+    } else {
+      onAuthFailed();
+      return {
+        type: 'none',
+      };
+    }
+  });
+  return {
+    type: 'none',
+  };
 };
 
 export const deleteUser = async (
