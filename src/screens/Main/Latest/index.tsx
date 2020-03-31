@@ -16,8 +16,9 @@ import { ChatData } from '_types';
 import ContentLoader from '_components/ContentLoader';
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
-import database from '_apis/database';
+import _ from 'lodash';
 import reactotron from 'reactotronConfig';
+import { reactotronRedux } from 'reactotron-redux';
 
 interface Props {
   changeStatus: typeof changeStatus;
@@ -35,9 +36,9 @@ class Latest extends Component<Props> {
   componentDidMount() {
     this.props.listenFriendRequests();
     this.props.fetchOnlineUsers();
-    // this.props.fetchNewMessages(() => {
-    //   this.setState({ empty: true });
-    // });
+    this.props.fetchNewMessages(() => {
+      this.setState({ empty: true });
+    });
 
     // this.registerForPushNotificationsAsync();
 
@@ -77,14 +78,14 @@ class Latest extends Component<Props> {
           <FriendSearch />
           {chats &&
             chats.map(currentChat => {
-              const { user, latestMessage, toRead } = currentChat;
+              const { user, latestMessage } = currentChat;
 
               return (
                 <ListItem
                   key={user.name}
                   user={user}
                   latestMessage={latestMessage}
-                  toRead={toRead}
+                  toRead={true}
                 />
               );
             })}
@@ -96,12 +97,8 @@ class Latest extends Component<Props> {
 }
 
 const mapStateToProps = (state: RootState) => {
-  const chats = state.chat.chats
-    ? state.chat.chats
-    : state.chat.persistedChats;
   return {
-    chats: chats ? Object.values(chats) : null,
-    uid: state.app.user.uid,
+    chats: Object.values(_.omit(state.chat.chats, 'messages')),
   };
 };
 

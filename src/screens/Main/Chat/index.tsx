@@ -34,15 +34,9 @@ interface Props {
 }
 
 class Chat extends Component<Props> {
-  state = {
-    messages: [],
-  };
   componentDidMount() {
     const { user } = this.getParms();
     this.props.readMessage(user.uid);
-    this.setState({
-      messages: GiftedChat.append([], this.props.messages),
-    });
   }
 
   getParms = () => {
@@ -54,13 +48,10 @@ class Chat extends Component<Props> {
     const { user } = this.getParms();
 
     this.props.sendMessage(text, user.uid, _id);
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages),
-    }));
   }
 
   renderBubble = (props: any) => {
-    return <Bubble {...props} />;
+    return <Bubble key {...props} />;
   };
 
   renderMessageText = (props: any) => {
@@ -124,8 +115,8 @@ class Chat extends Component<Props> {
   };
 
   render() {
-    const { messages } = this.state;
     const { user } = this.getParms();
+    const { messages } = this.props;
     return (
       <KeyboardAvoidingView
         enabled
@@ -189,6 +180,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state: RootState, ownProps: Props) => {
   const { uid } = ownProps.navigation.state.params.user;
+
   const currentChat = state.chat.chats ? state.chat.chats[uid] : null;
   return {
     messages:

@@ -29,10 +29,12 @@ export type UserChat = {
 };
 
 export type Message = {
-  _id: string;
-  createdAt: number;
   text: string;
-  sendedBy: string;
+  createdAt: string;
+  _id: string;
+  user: {
+    _id: string | number;
+  };
 };
 
 export type ChatData = {

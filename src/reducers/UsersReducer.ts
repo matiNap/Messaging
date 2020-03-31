@@ -22,7 +22,7 @@ const updateArray = (arr: any[], key: any, newval: any) => {
     var index = _.indexOf(arr, _.find(arr, key));
 
     arr.splice(index, 1, newval);
-    reactotron.log(arr);
+
     return arr;
   } else {
     arr.push(newval);
@@ -59,7 +59,7 @@ export default (state = initState, action: any) => {
           if (data.uid === action.payload.uid) {
             return {
               ...data,
-              ['state']: 'byMe',
+              state: 'byMe',
             };
           } else return data;
         }),
