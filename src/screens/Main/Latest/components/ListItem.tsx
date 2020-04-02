@@ -26,7 +26,10 @@ interface Props {
   user: UserChat;
   latestMessage: Message;
   userUid: string;
-  toRead: number;
+  readed: {
+    byMe: boolean;
+    byUser: boolean;
+  };
 }
 
 const isMe = (aUid: string, by: string) => {
@@ -63,20 +66,15 @@ const getSubTextStyle = (byMe: boolean, readed: boolean) => {
 };
 
 const LatestListItem = (props: Props) => {
-  const { latestMessage, user, userUid, toRead } = props;
+  const { latestMessage, user, userUid, readed } = props;
   const { name, fname, photoURL } = user;
   const avatarUri = photoURL ? photoURL : globals.primaryAvatar;
-  const lastMessageBy = latestMessage.sendedBy;
+  const lastMessageBy = latestMessage.user.uid;
   const { text, createdAt } = latestMessage;
   const byMe = isMe(userUid, lastMessageBy);
   const who = byMe ? 'Me' : fname;
 
-  const readed =
-    new Date(latestMessage.createdAt).getTime() - toRead <= 0
-      ? true
-      : false;
-  const subTextStyle = getSubTextStyle(byMe, readed);
-
+  const subTextStyle = getSubTextStyle(byMe, readed.byMe);
   return (
     <Touchable
       onPress={() => {
@@ -108,7 +106,7 @@ const LatestListItem = (props: Props) => {
           </View>
         </View>
 
-        {readed && byMe && (
+        {readed.byUser && byMe && (
           <Thumbnail
             style={styles.subAvatar}
             source={{

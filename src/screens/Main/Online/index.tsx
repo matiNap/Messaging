@@ -18,7 +18,7 @@ const Online = (props: Props) => {
   const { friendsOnline } = props;
   return (
     <Container>
-      <Header title="Online" iconName="add" />
+      <Header title="Friends" iconName="add" />
       <List>
         <FriendSearch />
         {friendsOnline &&

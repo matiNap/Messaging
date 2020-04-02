@@ -43,27 +43,24 @@ const LatestButton = (props: Props) => {
   );
 };
 
-// const countMessages = (chats: any, myUid: string) => {
-//   const chatsArray = Object.values(chats);
-//   let c = 0;
-//   for (const currentChat of chatsArray) {
-//     const { toRead, latestMessage } = currentChat;
+const countMessages = (chats: any) => {
+  const chatsArray = Object.values(chats);
+  let c = 0;
+  for (const currentChat of chatsArray) {
+    const { readed } = currentChat;
+    if (readed) {
+      const { byMe } = readed;
+      if (byMe) c++;
+    }
+  }
 
-//     if (latestMessage.sendedBy !== myUid) {
-//       const diff = latestMessage.createdAt.getTime() - toRead;
-//       if (diff >= 0) c++;
-//     }
-//   }
-
-//   return c;
-// };
+  return c;
+};
 
 const mapStateToProps = (state: RootState) => {
   return {
-    // checked: state.app.tabButtonChecked['latest'],
-    // value: state.chat.chats
-    //   ? countMessages(state.chat.chats, state.app.user.uid)
-    //   : 0,
+    checked: state.app.tabButtonChecked['latest'],
+    value: state.chat.chats ? countMessages(state.chat.chats) : 0,
   };
 };
 

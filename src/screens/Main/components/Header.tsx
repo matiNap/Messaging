@@ -6,7 +6,6 @@ import metrics from '_metrics';
 import typography from '_typography';
 import { Ionicons } from '@expo/vector-icons';
 import IconBackground from '_components/IconBackground';
-import StatusBar from '_components/StatusBar';
 import Touchable from '_components/Touchable';
 import { navigate } from '_navigation';
 import globals from '_globals';
@@ -24,8 +23,7 @@ const MainHeader = (props: Props) => {
 
   return (
     <Header style={styles.header}>
-      <StatusBar />
-      <Left style={{ flexDirection: 'row' }}>
+      <Left style={{ flexDirection: 'row', flexGrow: 2 }}>
         <Touchable
           onPress={() => {
             navigate('profile');

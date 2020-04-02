@@ -10,21 +10,25 @@ import { listenFriendRequests } from '_actions/creators/notifications';
 import { fetchOnlineUsers } from '_actions/creators/users';
 import { connect } from 'react-redux';
 import { changeStatus } from '_actions/creators/app';
-import { fetchNewMessages } from '_actions/creators/chat';
+import {
+  fetchNewMessages,
+  sendNotSended,
+} from '_actions/creators/chat';
 import { RootState } from '_rootReducer';
 import { ChatData } from '_types';
 import ContentLoader from '_components/ContentLoader';
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 import _ from 'lodash';
+import * as firestore from '_apis/firestore';
 import reactotron from 'reactotronConfig';
-import { reactotronRedux } from 'reactotron-redux';
 
 interface Props {
   changeStatus: typeof changeStatus;
   fetchOnlineUsers: typeof fetchOnlineUsers;
   listenFriendRequests: typeof listenFriendRequests;
   fetchNewMessages: typeof fetchNewMessages;
+  sendNotSended: typeof sendNotSended;
   chats: ChatData[];
   uid: string;
 }
@@ -39,20 +43,19 @@ class Latest extends Component<Props> {
     this.props.fetchNewMessages(() => {
       this.setState({ empty: true });
     });
-
-    // this.registerForPushNotificationsAsync();
-
+    this.props.sendNotSended();
+    this.registerForPushNotificationsAsync();
+    firestore.getCurrentUserRef().update({ online: true });
     AppState.addEventListener('change', appState => {
       if (appState === 'background') {
-        // this.props.changeStatus(0);
+        firestore.getCurrentUserRef().update({ online: false });
       } else {
-        // this.props.changeStatus(1);
+        firestore.getCurrentUserRef().update({ online: true });
       }
     });
   }
 
   async registerForPushNotificationsAsync() {
-    const { uid } = this.props;
     const { status } = await Permissions.askAsync(
       Permissions.NOTIFICATIONS,
     );
@@ -64,7 +67,9 @@ class Latest extends Component<Props> {
 
     let token = await Notifications.getExpoPushTokenAsync();
 
-    return database.post(`deviceToken/${uid}?token=${token}`);
+    return firestore
+      .getCurrentUserRef()
+      .update({ deviceToken: token });
   }
 
   render() {
@@ -78,16 +83,27 @@ class Latest extends Component<Props> {
           <FriendSearch />
           {chats &&
             chats.map(currentChat => {
-              const { user, latestMessage } = currentChat;
+              // reactotron.log(currentChat);
+              const {
+                user,
+                latestMessage,
+                byMe,
+                byUser,
+              } = currentChat;
 
-              return (
-                <ListItem
-                  key={user.name}
-                  user={user}
-                  latestMessage={latestMessage}
-                  toRead={true}
-                />
-              );
+              if (user) {
+                return (
+                  <ListItem
+                    key={user.name}
+                    user={user}
+                    latestMessage={latestMessage}
+                    readed={{
+                      byMe,
+                      byUser,
+                    }}
+                  />
+                );
+              }
             })}
         </List>
         <ContentLoader visible={!chats && !empty} />
@@ -97,8 +113,11 @@ class Latest extends Component<Props> {
 }
 
 const mapStateToProps = (state: RootState) => {
+  const chats = state.chat.persistedChats
+    ? state.chat.persistedChats
+    : state.chat.chats;
   return {
-    chats: Object.values(_.omit(state.chat.chats, 'messages')),
+    chats: Object.values(_.omit(chats, 'messages')),
   };
 };
 
@@ -107,4 +126,5 @@ export default connect(mapStateToProps, {
   changeStatus,
   fetchOnlineUsers,
   fetchNewMessages,
+  sendNotSended,
 })(Latest);

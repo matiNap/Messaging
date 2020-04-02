@@ -1,13 +1,12 @@
 import * as types from '_actions/chat';
 import { REHYDRATE } from 'redux-persist/es/constants';
 import _ from 'lodash';
-import { Message, User } from '_types';
+import { LocalMessage } from '_types';
 import reactotron from 'reactotron-react-native';
 import * as firestore from '_apis/firestore';
 
 interface ChatState {
-  toSend: Message[];
-
+  toSend: LocalMessage[];
   persistedChats: object | null;
   chats: object;
 }
@@ -21,22 +20,39 @@ const initState: ChatState = {
 export default (state = initState, action) => {
   switch (action.type) {
     case REHYDRATE: {
+      const chat =
+        action.payload && action.payload.chat
+          ? action.payload.chat
+          : initState;
       return {
         ...state,
-        persistedChats: action.payload?.chat?.messages,
+        persistedChats: chat.chats,
+        toSend: chat.toSend,
+      };
+    }
+
+    case types.FETCH_ON_SCROLL: {
+      const { friendUid, messages } = action.payload;
+      return {
+        ...state,
+        chats: _.update(state.chats, `[${friendUid}]`, src => {
+          return {
+            ...src,
+            messages: [...src.messages, ...messages],
+          };
+        }),
       };
     }
 
     case types.SEND_MESSAGE: {
       const { friendUid, message, user } = action.payload;
-      const myUid = firestore.getUserData().uid;
+
       return {
         ...state,
         persistedChats: null,
         chats: _.update(state.chats, `[${friendUid}]`, src => {
           const latestMessage = {
             ...message,
-            sendedBy: message === myUid,
           };
           if (src) {
             const prevMessages = src.messages ? src.messages : [];
@@ -57,16 +73,33 @@ export default (state = initState, action) => {
         }),
       };
     }
-    //Send this messsages when didMount on Latest
-    case types.SEND_MESSAGE_OFFLINE: {
-      const { friendUid, message } = action.payload;
+    case types.UPDATE_READED: {
+      const { friendUid, readed } = action.payload;
 
       return {
         ...state,
-        // toSend: {
-        //   ...state.messages,
-        //   [friendUid]: [...state.toSend, message],
-        // },
+        chats: _.update(state.chats, `[${friendUid}]`, src => {
+          if (src) {
+            return { ...src, ...readed };
+          } else
+            return {
+              ...readed,
+            };
+        }),
+      };
+    }
+    case types.CLEAR_TO_SEND: {
+      return {
+        ...state,
+        toSend: initState.toSend,
+      };
+    }
+    case types.SEND_MESSAGE_OFFLINE: {
+      const { message } = action.payload;
+
+      return {
+        ...state,
+        toSend: [...state.toSend, message],
       };
     }
 
