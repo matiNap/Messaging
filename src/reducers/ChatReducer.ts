@@ -35,12 +35,13 @@ export default (state = initState, action) => {
       const { friendUid, messages } = action.payload;
       return {
         ...state,
-        chats: _.update(state.chats, `[${friendUid}]`, src => {
-          return {
-            ...src,
-            messages: [...src.messages, ...messages],
-          };
-        }),
+        chats: _.update(
+          state.chats,
+          `[${friendUid}].messages`,
+          src => {
+            return [...messages, ...src];
+          },
+        ),
       };
     }
 
@@ -60,7 +61,7 @@ export default (state = initState, action) => {
             return {
               ...src,
               user,
-              messages: [...prevMessages, message],
+              messages: [message, ...prevMessages],
               latestMessage,
             };
           } else {

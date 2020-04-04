@@ -5,6 +5,7 @@ import * as firestore from '_apis/firestore';
 import reactotron from 'reactotron-react-native';
 import firebase from 'firebase';
 import NetInfo from '@react-native-community/netinfo';
+import _ from 'lodash';
 
 const sendChatMessage = async (
   uidA: string,
@@ -88,7 +89,6 @@ const toLocalMessage = (
     message.user._id === currentUserData.uid
       ? currentUserData
       : friendData;
-  reactotron.log(user);
   return {
     ...message,
     user: {
@@ -119,69 +119,72 @@ export const fetchNewMessages = (
 
   try {
     const onUpdateMessage = (
-      chatSnapshot: firebase.database.DataSnapshot,
+      messageSnapshot: firebase.database.DataSnapshot,
       friendData: User,
     ) => {
       const friendUid = friendData.uid;
-      if (chatSnapshot.key === 'messages') {
-        chatSnapshot.forEach(messageSnapshot => {
-          const messageData = messageSnapshot.val();
 
-          const message = toLocalMessage(
-            messageData,
-            uid,
-            friendData,
-            user,
-          );
-          reactotron.log(message);
-          if (messageData.user._id !== uid) {
-            dispatch({
-              type: types.UPDATE_READED,
-              payload: {
-                readed: {
-                  byMe: false,
-                },
-                friendUid,
-              },
-            });
-          }
+      const messageData = messageSnapshot.val();
 
-          dispatch({
-            type: types.SEND_MESSAGE,
-            payload: {
-              message,
-              friendUid,
-              user: friendData,
-            },
-          });
-        });
-      } else if (chatSnapshot.key === 'readed') {
-        const readedValues = chatSnapshot.val();
-        const userReaded = readedValues[friendUid];
-        const myReaded = readedValues[uid];
-        const currentChat = getState().chat.chats[friendUid];
+      const message = toLocalMessage(
+        messageData,
+        uid,
+        friendData,
+        user,
+      );
 
-        const latestMessage =
-          currentChat && currentChat.latestMessage
-            ? currentChat.latestMessage
-            : null;
-
+      if (messageData.user._id !== uid) {
         dispatch({
           type: types.UPDATE_READED,
           payload: {
             readed: {
-              byUser: userReaded
-                ? isReaded(userReaded, latestMessage)
-                : false,
-              byMe: userReaded
-                ? isReaded(myReaded, latestMessage)
-                : false,
+              byMe: false,
             },
             friendUid,
           },
         });
       }
+
+      dispatch({
+        type: types.SEND_MESSAGE,
+        payload: {
+          message,
+          friendUid,
+          user: friendData,
+        },
+      });
     };
+
+    const onUpdateReaded = (
+      readedSnapshot: firebase.database.DataSnapshot,
+      friendUid: string,
+    ) => {
+      const readedValues = readedSnapshot.val();
+      const userReaded = readedValues[friendUid];
+      const myReaded = readedValues[uid];
+      const currentChat = getState().chat.chats[friendUid];
+
+      const latestMessage =
+        currentChat && currentChat.latestMessage
+          ? currentChat.latestMessage
+          : null;
+
+      dispatch({
+        type: types.UPDATE_READED,
+        payload: {
+          readed: {
+            byUser: userReaded
+              ? isReaded(userReaded, latestMessage)
+              : false,
+            byMe: userReaded
+              ? isReaded(myReaded, latestMessage)
+              : false,
+          },
+          friendUid,
+        },
+      });
+    };
+
     firebase
       .database()
       .ref('chats')
@@ -194,15 +197,21 @@ export const fetchNewMessages = (
 
         const friendData = userSnapshot.data();
         database
-          .getChatRef(`${uid}/${friendUid}`)
+          .getChatRef(`${uid}/${friendUid}/messages`)
           .on('child_added', messageSnapshot => {
             onUpdateMessage(messageSnapshot, friendData);
           });
 
         database
-          .getChatRef(`${uid}/${friendUid}`)
-          .on('child_changed', messageSnapshot => {
-            onUpdateMessage(messageSnapshot, friendData);
+          .getChatRef(`${uid}/${friendUid}/readed`)
+          .on('child_changed', readedSnapshot => {
+            onUpdateReaded(readedSnapshot, friendUid);
+          });
+
+        database
+          .getChatRef(`${uid}/${friendUid}/readed`)
+          .on('value', readedSnapshot => {
+            onUpdateReaded(readedSnapshot, friendUid);
           });
       });
   } catch (error) {
@@ -214,25 +223,28 @@ const NEXT_LENGTH = 2;
 export const fetchChatOnScroll = (
   friendUid: string,
 ): AppThunk => async (dispatch, getState) => {
-  const { length } = getState().chat[friendUid];
-  const currentlength = length ? length : NEXT_LENGTH;
+  const currentChat = getState().chat.chats[friendUid];
+  const currentlength = currentChat.messages.length;
   const { uid } = firestore.getUserData();
   try {
     const newLength = currentlength + NEXT_LENGTH;
     const snapshot = await database
       .getChatRef(`${uid}/${friendUid}/messages`)
       .limitToFirst(newLength)
-      .limitToLast(NEXT_LENGTH)
       .once('value');
-    reactotron.log(snapshot.val());
-    dispatch({
-      type: types.FETCH_ON_SCROLL,
-      payload: {
-        messages: snapshot.val(),
-      },
-    });
+
+    // dispatch({
+    //   type: types.FETCH_ON_SCROLL,
+    //   payload: {
+    //     messages: _.dropRight(
+    //       Object.values(snapshot.val()),
+    //       currentlength,
+    //     ),
+    //     friendUid,
+    //   },
+    // });
   } catch (error) {
-    reactotron.log(error);
+    reactotron.log(error.message);
   }
 };
 

@@ -83,7 +83,6 @@ class Latest extends Component<Props> {
           <FriendSearch />
           {chats &&
             chats.map(currentChat => {
-              // reactotron.log(currentChat);
               const {
                 user,
                 latestMessage,
