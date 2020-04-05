@@ -4,18 +4,19 @@ import {
   View,
   StyleSheet,
   TouchableWithoutFeedback,
+  StatusBar,
 } from 'react-native';
-import withAuth from '_hocs/withAuth';
 import Wave from './componenets/Wave';
 import { waveVerticalRadius } from './animationHelpers';
 import { connect } from 'react-redux';
-import { navigate } from '../../../navigationService';
 import globals from '_globals';
 import palette from '_palette';
 import metrics from '_metrics';
 import NetInfo from '@react-native-community/netinfo';
 import { checkAuth } from '_actions/creators/app';
 import reactotron from 'reactotron-react-native';
+import { useNavigation } from '@react-navigation/native';
+import navigate from '_navigation';
 
 class Loading extends React.Component {
   state = {
@@ -30,20 +31,18 @@ class Loading extends React.Component {
   }
 
   componentDidMount() {
-    this.props.checkAuth(
-      () => {
-        navigate('latest');
-      },
-      () => {
-        navigate('login');
-      },
-    );
+    StatusBar.setBackgroundColor(palette.primary);
+    StatusBar.setBarStyle('light-content');
+    this.props.checkAuth(() => {
+      navigate('login');
+    });
   }
 
   render() {
     const verticalRadius = waveVerticalRadius();
+
     return (
-      <View style={{ flex: 1 }}>
+      <View style={[StyleSheet.absoluteFill]}>
         <View
           style={[
             StyleSheet.absoluteFill,
@@ -78,11 +77,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = state => {
-  return {
-    signedIn: state.app.user.signedIn,
-    uid: state.app.user.uid,
-  };
+export const LoadingNav = props => {
+  const navigation = useNavigation();
+  return <Loading {...props} navigation={navigation} />;
 };
 
-export default connect(mapStateToProps, { checkAuth })(Loading);
+export default connect(null, { checkAuth })(Loading);

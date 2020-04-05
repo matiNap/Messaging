@@ -1,12 +1,13 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { Header, Left, Right } from 'native-base';
+import { Text, View, StyleSheet, StatusBar } from 'react-native';
+import { Header, Right } from 'native-base';
 import Back from '_components/Back';
 import palette from '_palette';
 import metrics from '_metrics';
 import typography from '_typography';
 import { Entypo } from '@expo/vector-icons';
 import Touchable from '_components/Touchable';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
   name: string;
@@ -15,11 +16,23 @@ interface Props {
 
 const ChatHeader = (props: Props) => {
   const { name, displayName } = props;
+  const navigation = useNavigation();
+  StatusBar.setTranslucent(true);
   return (
-    <Header style={styles.header}>
+    <Header
+      style={styles.header}
+      androidStatusBarColor={'rgba(0,0,0,0)'}
+      iosBarStyle="light-content"
+    >
       <View style={styles.leftContainer}>
         <View style={{ alignSelf: 'center' }}>
-          <Back style={styles.back} />
+          <Back
+            style={styles.back}
+            onPress={() => {
+              StatusBar.setBarStyle('dark-content');
+              navigation.goBack();
+            }}
+          />
         </View>
         <View style={styles.nameContainer}>
           <Text style={styles.mainText} numberOfLines={1}>
@@ -44,8 +57,8 @@ const ChatHeader = (props: Props) => {
 
 const styles = StyleSheet.create({
   header: {
-    paddingTop: metrics.statusBarHeight,
     height: 65 + metrics.statusBarHeight,
+    paddingTop: metrics.statusBarHeight,
     backgroundColor: palette.primary,
     borderBottomColor: palette.grayscale.light,
     borderBottomWidth: 0.3,
@@ -57,6 +70,7 @@ const styles = StyleSheet.create({
   },
   back: {
     color: palette.text.secondary,
+    padding: 5,
   },
   nameContainer: {
     flexDirection: 'column',

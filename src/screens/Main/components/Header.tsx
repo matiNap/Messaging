@@ -7,11 +7,11 @@ import typography from '_typography';
 import { Ionicons } from '@expo/vector-icons';
 import IconBackground from '_components/IconBackground';
 import Touchable from '_components/Touchable';
-import { navigate } from '_navigation';
 import globals from '_globals';
 import BadgeButton from './BadgeButton';
 import { connect } from 'react-redux';
 import { RootState } from '_rootReducer';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
   title?: string;
@@ -20,9 +20,13 @@ interface Props {
 
 const MainHeader = (props: Props) => {
   const { title, requestValue } = props;
-
+  const { navigate } = useNavigation();
   return (
-    <Header style={styles.header}>
+    <Header
+      style={styles.header}
+      androidStatusBarColor={'#ffffff'}
+      iosBarStyle="dark-content"
+    >
       <Left style={{ flexDirection: 'row', flexGrow: 2 }}>
         <Touchable
           onPress={() => {
@@ -69,8 +73,8 @@ const styles = StyleSheet.create({
     height: 43,
   },
   header: {
-    paddingTop: metrics.padding.medium,
-    height: 65 + metrics.statusBarHeight,
+    paddingVertical: metrics.padding.medium,
+    height: 65,
     backgroundColor: palette.secondary,
     borderBottomColor: palette.grayscale.light,
     borderBottomWidth: 0.3,

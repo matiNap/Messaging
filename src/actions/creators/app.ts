@@ -1,10 +1,10 @@
 import database from '_apis/database';
 import * as types from '../app';
-import { navigate } from '_navigation';
 import { AppThunk } from '_types';
 import * as firestore from '_apis/firestore';
 import reactotron from 'reactotron-react-native';
 import firebase from 'firebase';
+import navigate from '_navigation';
 
 export const createUser = (
   userData: {
@@ -61,28 +61,30 @@ export const signOut = (): AppThunk => async dispatch => {
   }
 };
 export const checkAuth = (
-  onAuthSucces: Function,
   onAuthFailed: Function,
-) => {
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      onAuthSucces();
-      return {
+) => async dispatch => {
+  firebase.auth().onAuthStateChanged(async googleUser => {
+    if (googleUser) {
+      const userSnapshot = await firestore
+        .getUserRef(googleUser.uid)
+        .get();
+      const user = userSnapshot.data();
+      dispatch({
         type: types.CHECK_AUTH,
         payload: {
-          ...user,
+          user,
         },
-      };
+      });
     } else {
       onAuthFailed();
-      return {
-        type: 'none',
-      };
+      dispatch({
+        user: null,
+      });
     }
   });
-  return {
+  dispatch({
     type: 'none',
-  };
+  });
 };
 
 export const deleteUser = async (

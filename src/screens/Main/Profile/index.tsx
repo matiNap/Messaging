@@ -18,7 +18,7 @@ import Touchable from '_components/Touchable';
 import UserInterface from '_UserInterface';
 import Back from '_components/Back';
 import { signOut } from '_actions/creators/app';
-import { navigate } from '_navigation';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
   user: UserInterface;
@@ -30,7 +30,7 @@ const ICON_SIZE = 30;
 const Profile = (props: Props) => {
   const { user } = props;
   const { displayName, email, name } = user;
-
+  const { navigate } = useNavigation();
   return (
     <View style={[StyleSheet.absoluteFill, styles.container]}>
       <Back

@@ -5,6 +5,8 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   NativeScrollEvent,
+  StatusBar,
+  BackHandler,
 } from 'react-native';
 import { GiftedChat, MessageText } from 'react-native-gifted-chat';
 import Bubble from './components/Bubble';
@@ -51,10 +53,20 @@ class Chat extends Component<Props> {
   componentDidMount() {
     const { user } = this.getParms();
     this.props.readMessage(user.uid);
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      StatusBar.setBarStyle('dark-content');
+    });
+  }
+
+  shouldComponentUpdate(nextProps: Props) {
+    if (nextProps.messages !== this.props.messages) {
+      return true;
+    }
+    return false;
   }
 
   getParms = () => {
-    return this.props.navigation.state.params;
+    return this.props.route.params;
   };
 
   onSend(messages: any) {
@@ -155,6 +167,7 @@ class Chat extends Component<Props> {
   render() {
     const { user } = this.getParms();
     const { messages } = this.props;
+
     return (
       <KeyboardAvoidingView
         enabled
@@ -221,7 +234,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: RootState, ownProps: Props) => {
-  const { uid } = ownProps.navigation.state.params.user;
+  const { uid } = ownProps.route.params.user;
 
   const currentChat = state.chat.chats ? state.chat.chats[uid] : null;
   return {

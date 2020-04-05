@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppState } from 'react-native';
+import { AppState, StatusBar } from 'react-native';
 import { List } from 'native-base';
 import Header from '../components/Header';
 import { Container } from 'native-base';
@@ -21,8 +21,8 @@ import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 import _ from 'lodash';
 import * as firestore from '_apis/firestore';
-import reactotron from 'reactotronConfig';
-
+import { SafeAreaView } from 'react-native-safe-area-context';
+import palette from '_palette';
 interface Props {
   changeStatus: typeof changeStatus;
   fetchOnlineUsers: typeof fetchOnlineUsers;
@@ -37,7 +37,10 @@ class Latest extends Component<Props> {
   state = {
     empty: false,
   };
+
   componentDidMount() {
+    StatusBar.setBackgroundColor(palette.secondary);
+    StatusBar.setBarStyle('dark-content');
     this.props.listenFriendRequests();
     this.props.fetchOnlineUsers();
     this.props.fetchNewMessages(() => {
@@ -46,6 +49,7 @@ class Latest extends Component<Props> {
     this.props.sendNotSended();
     this.registerForPushNotificationsAsync();
     firestore.getCurrentUserRef().update({ online: true });
+
     AppState.addEventListener('change', appState => {
       if (appState === 'background') {
         firestore.getCurrentUserRef().update({ online: false });
@@ -77,36 +81,38 @@ class Latest extends Component<Props> {
     const { empty } = this.state;
 
     return (
-      <Container>
-        <List>
-          <Header title="Chat" />
-          <FriendSearch />
-          {chats &&
-            chats.map(currentChat => {
-              const {
-                user,
-                latestMessage,
-                byMe,
-                byUser,
-              } = currentChat;
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+        <Container>
+          <List>
+            <Header title="Chat" />
+            <FriendSearch />
+            {chats &&
+              chats.map(currentChat => {
+                const {
+                  user,
+                  latestMessage,
+                  byMe,
+                  byUser,
+                } = currentChat;
 
-              if (user) {
-                return (
-                  <ListItem
-                    key={user.name}
-                    user={user}
-                    latestMessage={latestMessage}
-                    readed={{
-                      byMe,
-                      byUser,
-                    }}
-                  />
-                );
-              }
-            })}
-        </List>
-        <ContentLoader visible={!chats && !empty} />
-      </Container>
+                if (user) {
+                  return (
+                    <ListItem
+                      key={user.name}
+                      user={user}
+                      latestMessage={latestMessage}
+                      readed={{
+                        byMe,
+                        byUser,
+                      }}
+                    />
+                  );
+                }
+              })}
+          </List>
+          <ContentLoader visible={!chats && !empty} />
+        </Container>
+      </SafeAreaView>
     );
   }
 }

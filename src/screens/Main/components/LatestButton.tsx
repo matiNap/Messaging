@@ -2,29 +2,23 @@ import React from 'react';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import palette from '_palette';
-import { navigate } from 'navigationService';
 import BadgeButton from './BadgeButton';
 import { connect } from 'react-redux';
 import { pressTabBarButton } from '_actions/creators/app';
 import { RootState } from '_rootReducer';
 import _ from 'lodash';
-import reactotron from 'reactotronConfig';
 
 interface Props {
   iconSize: number;
   pressTabBarButton: typeof pressTabBarButton;
   checked: boolean;
-  valu: number;
+  value: number;
 }
 
 const LatestButton = (props: Props) => {
   const { iconSize, checked, value } = props;
   return (
     <BadgeButton
-      onPress={() => {
-        navigate('latest');
-        props.pressTabBarButton('latest');
-      }}
       size={iconSize}
       value={value}
       color={palette.actions.succes}
@@ -59,11 +53,8 @@ const countMessages = (chats: any) => {
 
 const mapStateToProps = (state: RootState) => {
   return {
-    checked: state.app.tabButtonChecked['latest'],
     value: state.chat.chats ? countMessages(state.chat.chats) : 0,
   };
 };
 
-export default connect(mapStateToProps, { pressTabBarButton })(
-  LatestButton,
-);
+export default connect(mapStateToProps)(LatestButton);

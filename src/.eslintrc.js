@@ -13,7 +13,7 @@ module.exports = {
         '_assets/*': './assets/*',
         '_components/*': './screens/components/*',
         _types: './types/index.ts',
-        _navigation: './navigationService.js',
+        _navigation: './navigate.ts',
         _typography: './theme/typography.js',
         _palette: './theme/palette',
         _metrics: './theme/metrics',

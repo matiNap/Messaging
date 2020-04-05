@@ -16,6 +16,8 @@ import {
 } from '_actions/creators/users';
 import FriendState from '../Online/components/FriendState';
 import globals from '_globals';
+import Touchable from '_components/Touchable';
+import navigate from '_navigation';
 
 interface Props {
   results: null | User[];
@@ -43,6 +45,10 @@ class SearchFriend extends React.Component<Props> {
       notFound: true,
       loading: false,
     });
+  };
+
+  onUserPress = (user: User) => {
+    navigate('chat', { user });
   };
 
   render() {
@@ -93,11 +99,17 @@ class SearchFriend extends React.Component<Props> {
                     ? photoURL
                     : globals.primaryAvatar;
                   return (
-                    <FriendState
-                      name={name}
-                      avatarUri={avatarUri}
-                      state={online}
-                    />
+                    <Touchable
+                      onPress={() => {
+                        this.onUserPress(data);
+                      }}
+                    >
+                      <FriendState
+                        name={name}
+                        avatarUri={avatarUri}
+                        state={online}
+                      />
+                    </Touchable>
                   );
                 })}
               </List>

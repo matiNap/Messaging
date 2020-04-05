@@ -1,26 +1,16 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import {
-  View,
-  Item,
-  Text,
-  ListItem,
-  Thumbnail,
-  Left,
-  Body,
-  Right,
-} from 'native-base';
+import { View, Text, ListItem, Thumbnail, Left } from 'native-base';
 import palette from '_palette';
 import metrics from '_metrics';
 import typography from '_typography';
 import Touchable from '_components/Touchable';
-import { navigate } from '_navigation';
 import { connect } from 'react-redux';
 import { RootState } from '_rootReducer';
 import { Message, UserChat } from '_types';
 import { format } from 'date-fns';
 import globals from '_globals';
-import reactotron from 'reactotronConfig';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
   user: UserChat;
@@ -73,6 +63,7 @@ const LatestListItem = (props: Props) => {
   const { text, createdAt } = latestMessage;
   const byMe = isMe(userUid, lastMessageBy);
   const who = byMe ? 'Me' : fname;
+  const { navigate } = useNavigation();
 
   const subTextStyle = getSubTextStyle(byMe, readed.byMe);
   return (

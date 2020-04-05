@@ -6,7 +6,6 @@ import { View } from 'react-native';
 import { StyleProvider } from 'native-base';
 
 import { SafeAreaProvider } from 'react-native-safe-area-view';
-import * as navigationService from './navigationService';
 import getTheme from './native-base-theme/components';
 import AppContainer from './screens/AppContainer';
 import { store, persistor } from './store';
@@ -43,13 +42,7 @@ export default class App extends React.Component {
           <Provider store={store}>
             <PersistGate persistor={persistor}>
               <StyleProvider style={getTheme()}>
-                <AppContainer
-                  ref={navigationRef => {
-                    navigationService.setTopLevelNavigator(
-                      navigationRef,
-                    );
-                  }}
-                />
+                <AppContainer />
               </StyleProvider>
             </PersistGate>
           </Provider>
