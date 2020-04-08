@@ -13,17 +13,18 @@ const initState: NotificationState = {
 export default (state = initState, action): NotificationState => {
   switch (action.type) {
     case types.LISTEN_FRIEND_REQUESTS:
+      const { user } = action.payload;
       return {
         ...state,
-        friendRequests: action.payload,
+        friendRequests: [...state.friendRequests, user],
       };
 
     case types.REQUEST_RESPONSE: {
-      _.remove(state.friendRequests, request => {
-        return request.uid === action.payload.uid;
-      });
       return {
         ...state,
+        friendRequests: _.remove(state.friendRequests, request => {
+          return request.uid !== action.payload.uid;
+        }),
       };
     }
     default:

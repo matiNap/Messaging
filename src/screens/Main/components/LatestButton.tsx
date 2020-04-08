@@ -2,29 +2,23 @@ import React from 'react';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import palette from '_palette';
-import { navigate } from 'navigationService';
 import BadgeButton from './BadgeButton';
 import { connect } from 'react-redux';
 import { pressTabBarButton } from '_actions/creators/app';
 import { RootState } from '_rootReducer';
 import _ from 'lodash';
-import reactotron from 'reactotronConfig';
 
 interface Props {
   iconSize: number;
   pressTabBarButton: typeof pressTabBarButton;
   checked: boolean;
-  valu: number;
+  value: number;
 }
 
 const LatestButton = (props: Props) => {
   const { iconSize, checked, value } = props;
   return (
     <BadgeButton
-      onPress={() => {
-        navigate('latest');
-        props.pressTabBarButton('latest');
-      }}
       size={iconSize}
       value={value}
       color={palette.actions.succes}
@@ -43,15 +37,14 @@ const LatestButton = (props: Props) => {
   );
 };
 
-const countMessages = (chats: any, myUid: string) => {
+const countMessages = (chats: any) => {
   const chatsArray = Object.values(chats);
   let c = 0;
   for (const currentChat of chatsArray) {
-    const { toRead, latestMessage } = currentChat;
-
-    if (latestMessage.sendedBy !== myUid) {
-      const diff = latestMessage.createdAt.getTime() - toRead;
-      if (diff >= 0) c++;
+    const { readed } = currentChat;
+    if (readed) {
+      const { byMe } = readed;
+      if (byMe) c++;
     }
   }
 
@@ -60,13 +53,8 @@ const countMessages = (chats: any, myUid: string) => {
 
 const mapStateToProps = (state: RootState) => {
   return {
-    checked: state.app.tabButtonChecked['latest'],
-    value: state.chat.chats
-      ? countMessages(state.chat.chats, state.app.user.uid)
-      : 0,
+    value: state.chat.chats ? countMessages(state.chat.chats) : 0,
   };
 };
 
-export default connect(mapStateToProps, { pressTabBarButton })(
-  LatestButton,
-);
+export default connect(mapStateToProps)(LatestButton);

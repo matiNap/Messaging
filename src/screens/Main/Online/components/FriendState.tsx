@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import FriendItem from '../../components/FriendItem';
 import palette from '_palette';
+import Touchable from '_components/Touchable';
 
 interface Props {
   state: boolean;
@@ -22,15 +23,16 @@ const FriendState = (props: Props) => {
   const { state, onPress } = props;
 
   return (
-    <FriendItem
-      onPress={onPress}
-      {...props}
-      rightComponent={() => (
-        <View style={styles.stateContainer}>
-          {renderOnlineState(state)}
-        </View>
-      )}
-    />
+    <Touchable onPress={onPress}>
+      <FriendItem
+        {...props}
+        rightComponent={() => (
+          <View style={styles.stateContainer}>
+            {renderOnlineState(state)}
+          </View>
+        )}
+      />
+    </Touchable>
   );
 };
 

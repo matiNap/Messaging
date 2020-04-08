@@ -1,29 +1,35 @@
 # Details
 
-Date : 2020-02-24 22:00:54
+Date : 2020-03-21 21:06:38
 
 Directory c:\MobileProjects\Messaging\src
 
-Total : 118 files,  16229 codes, 211 comments, 659 blanks, all 17099 lines
+Total : 129 files,  18367 codes, 208 comments, 778 blanks, all 19353 lines
 
 [summary](results.md)
 
 ## Files
 | filename | language | code | comment | blank | total |
 | :--- | :--- | ---: | ---: | ---: | ---: |
-| [.eslintrc.js](/.eslintrc.js) | JavaScript | 9 | 17 | 0 | 26 |
+| [.eslintrc.js](/.eslintrc.js) | JavaScript | 9 | 18 | 0 | 27 |
 | [.expo-shared/assets.json](/.expo-shared/assets.json) | JSON | 4 | 0 | 0 | 4 |
 | [.prettierrc](/.prettierrc) | JSON | 6 | 0 | 1 | 7 |
-| [App.js](/App.js) | JavaScript | 47 | 0 | 6 | 53 |
-| [actions/app.js](/actions/app.js) | JavaScript | 3 | 0 | 1 | 4 |
-| [actions/creators/app.ts](/actions/creators/app.ts) | TypeScript | 92 | 1 | 6 | 99 |
-| [app.json](/app.json) | JSON | 24 | 7 | 0 | 31 |
+| [App.js](/App.js) | JavaScript | 56 | 0 | 6 | 62 |
+| [actions/app.ts](/actions/app.ts) | TypeScript | 5 | 0 | 1 | 6 |
+| [actions/chat.ts](/actions/chat.ts) | TypeScript | 6 | 0 | 1 | 7 |
+| [actions/creators/app.ts](/actions/creators/app.ts) | TypeScript | 110 | 1 | 10 | 121 |
+| [actions/creators/chat.ts](/actions/creators/chat.ts) | TypeScript | 105 | 0 | 11 | 116 |
+| [actions/creators/notifications.ts](/actions/creators/notifications.ts) | TypeScript | 58 | 0 | 7 | 65 |
+| [actions/creators/users.ts](/actions/creators/users.ts) | TypeScript | 95 | 0 | 12 | 107 |
+| [actions/notifications.ts](/actions/notifications.ts) | TypeScript | 3 | 0 | 2 | 5 |
+| [actions/users.ts](/actions/users.ts) | TypeScript | 8 | 0 | 1 | 9 |
+| [app.json](/app.json) | JSON | 19 | 6 | 0 | 25 |
 | [babel.config.js](/babel.config.js) | JavaScript | 6 | 0 | 1 | 7 |
 | [config.js](/config.js) | JavaScript | 5 | 0 | 2 | 7 |
 | [helpers/animations.ts](/helpers/animations.ts) | TypeScript | 75 | 0 | 8 | 83 |
+| [helpers/chat.ts](/helpers/chat.ts) | TypeScript | 15 | 0 | 2 | 17 |
 | [helpers/svgHelper.ts](/helpers/svgHelper.ts) | TypeScript | 33 | 0 | 7 | 40 |
 | [hocs/withAuth.js](/hocs/withAuth.js) | JavaScript | 16 | 0 | 3 | 19 |
-| [interfaces/user.tsx](/interfaces/user.tsx) | TypeScript React | 7 | 0 | 1 | 8 |
 | [native-base-theme/components/Badge.js](/native-base-theme/components/Badge.js) | JavaScript | 36 | 1 | 3 | 40 |
 | [native-base-theme/components/Body.js](/native-base-theme/components/Body.js) | JavaScript | 8 | 1 | 3 | 12 |
 | [native-base-theme/components/Button.js](/native-base-theme/components/Button.js) | JavaScript | 366 | 1 | 20 | 387 |
@@ -73,61 +79,66 @@ Total : 118 files,  16229 codes, 211 comments, 659 blanks, all 17099 lines
 | [native-base-theme/variables/material.js](/native-base-theme/variables/material.js) | JavaScript | 241 | 30 | 34 | 305 |
 | [native-base-theme/variables/platform.js](/native-base-theme/variables/platform.js) | JavaScript | 271 | 30 | 34 | 335 |
 | [navigationService.js](/navigationService.js) | JavaScript | 16 | 0 | 4 | 20 |
-| [package-lock.json](/package-lock.json) | JSON | 9,090 | 0 | 1 | 9,091 |
-| [package.json](/package.json) | JSON | 67 | 0 | 1 | 68 |
+| [package-lock.json](/package-lock.json) | JSON | 10,061 | 0 | 1 | 10,062 |
+| [package.json](/package.json) | JSON | 75 | 0 | 1 | 76 |
 | [reactotronConfig.js](/reactotronConfig.js) | JavaScript | 9 | 0 | 2 | 11 |
-| [reducers/AppReducer.js](/reducers/AppReducer.js) | JavaScript | 39 | 0 | 3 | 42 |
-| [reducers/index.js](/reducers/index.js) | JavaScript | 5 | 0 | 2 | 7 |
+| [reducers/AppReducer.ts](/reducers/AppReducer.ts) | TypeScript | 59 | 0 | 4 | 63 |
+| [reducers/ChatReducer.ts](/reducers/ChatReducer.ts) | TypeScript | 63 | 0 | 5 | 68 |
+| [reducers/NotificationsReducer.ts](/reducers/NotificationsReducer.ts) | TypeScript | 28 | 0 | 5 | 33 |
+| [reducers/UsersReducer.ts](/reducers/UsersReducer.ts) | TypeScript | 68 | 0 | 4 | 72 |
+| [reducers/index.ts](/reducers/index.ts) | TypeScript | 18 | 0 | 5 | 23 |
 | [screens/AppContainer.js](/screens/AppContainer.js) | JavaScript | 11 | 0 | 4 | 15 |
 | [screens/Auth/Loading/animationHelpers.ts](/screens/Auth/Loading/animationHelpers.ts) | TypeScript | 18 | 0 | 4 | 22 |
 | [screens/Auth/Loading/componenets/Wave.js](/screens/Auth/Loading/componenets/Wave.js) | JavaScript | 77 | 0 | 8 | 85 |
-| [screens/Auth/Loading/index.js](/screens/Auth/Loading/index.js) | JavaScript | 98 | 3 | 10 | 111 |
-| [screens/Auth/Login/SignIn.js](/screens/Auth/Login/SignIn.js) | JavaScript | 117 | 0 | 6 | 123 |
-| [screens/Auth/Login/SignUp.js](/screens/Auth/Login/SignUp.js) | JavaScript | 215 | 1 | 12 | 228 |
-| [screens/Auth/Login/animationHelpers.ts](/screens/Auth/Login/animationHelpers.ts) | TypeScript | 189 | 0 | 11 | 200 |
+| [screens/Auth/Loading/index.js](/screens/Auth/Loading/index.js) | JavaScript | 97 | 0 | 10 | 107 |
+| [screens/Auth/Login/SignIn.js](/screens/Auth/Login/SignIn.js) | JavaScript | 120 | 0 | 7 | 127 |
+| [screens/Auth/Login/SignUp.js](/screens/Auth/Login/SignUp.js) | JavaScript | 219 | 1 | 12 | 232 |
+| [screens/Auth/Login/animationHelpers.ts](/screens/Auth/Login/animationHelpers.ts) | TypeScript | 195 | 0 | 11 | 206 |
 | [screens/Auth/Login/components/Wave.js](/screens/Auth/Login/components/Wave.js) | JavaScript | 185 | 0 | 7 | 192 |
-| [screens/Auth/Login/index.js](/screens/Auth/Login/index.js) | JavaScript | 101 | 0 | 8 | 109 |
+| [screens/Auth/Login/index.js](/screens/Auth/Login/index.js) | JavaScript | 99 | 0 | 8 | 107 |
 | [screens/Auth/nav.js](/screens/Auth/nav.js) | JavaScript | 7 | 0 | 2 | 9 |
 | [screens/Main/Chat/components/Bubble.tsx](/screens/Main/Chat/components/Bubble.tsx) | TypeScript React | 26 | 0 | 4 | 30 |
-| [screens/Main/Chat/components/ChatHeader.tsx](/screens/Main/Chat/components/ChatHeader.tsx) | TypeScript React | 66 | 0 | 7 | 73 |
-| [screens/Main/Chat/index.js](/screens/Main/Chat/index.js) | JavaScript | 163 | 0 | 14 | 177 |
-| [screens/Main/FriendAdd/components/ItemAdd.tsx](/screens/Main/FriendAdd/components/ItemAdd.tsx) | TypeScript React | 34 | 0 | 5 | 39 |
-| [screens/Main/FriendAdd/components/ItemRequest.tsx](/screens/Main/FriendAdd/components/ItemRequest.tsx) | TypeScript React | 59 | 0 | 7 | 66 |
-| [screens/Main/FriendAdd/components/Requests.tsx](/screens/Main/FriendAdd/components/Requests.tsx) | TypeScript React | 23 | 0 | 4 | 27 |
-| [screens/Main/FriendAdd/components/Results.tsx](/screens/Main/FriendAdd/components/Results.tsx) | TypeScript React | 28 | 0 | 4 | 32 |
-| [screens/Main/FriendAdd/index.js](/screens/Main/FriendAdd/index.js) | JavaScript | 60 | 1 | 5 | 66 |
-| [screens/Main/Latest/components/ListItem.tsx](/screens/Main/Latest/components/ListItem.tsx) | TypeScript React | 91 | 1 | 7 | 99 |
-| [screens/Main/Latest/index.js](/screens/Main/Latest/index.js) | JavaScript | 48 | 0 | 4 | 52 |
-| [screens/Main/Online/components/FriendState.tsx](/screens/Main/Online/components/FriendState.tsx) | TypeScript React | 51 | 0 | 7 | 58 |
-| [screens/Main/Online/index.js](/screens/Main/Online/index.js) | JavaScript | 29 | 0 | 4 | 33 |
+| [screens/Main/Chat/components/ChatHeader.tsx](/screens/Main/Chat/components/ChatHeader.tsx) | TypeScript React | 74 | 0 | 7 | 81 |
+| [screens/Main/Chat/index.tsx](/screens/Main/Chat/index.tsx) | TypeScript React | 188 | 0 | 17 | 205 |
+| [screens/Main/FriendAdd/components/ItemAdd.tsx](/screens/Main/FriendAdd/components/ItemAdd.tsx) | TypeScript React | 82 | 0 | 5 | 87 |
+| [screens/Main/FriendAdd/components/ItemRequest.tsx](/screens/Main/FriendAdd/components/ItemRequest.tsx) | TypeScript React | 33 | 0 | 4 | 37 |
+| [screens/Main/FriendAdd/components/RequestButtons.tsx](/screens/Main/FriendAdd/components/RequestButtons.tsx) | TypeScript React | 61 | 0 | 6 | 67 |
+| [screens/Main/FriendAdd/components/Requests.tsx](/screens/Main/FriendAdd/components/Requests.tsx) | TypeScript React | 41 | 0 | 6 | 47 |
+| [screens/Main/FriendAdd/components/Results.tsx](/screens/Main/FriendAdd/components/Results.tsx) | TypeScript React | 51 | 0 | 7 | 58 |
+| [screens/Main/FriendAdd/index.tsx](/screens/Main/FriendAdd/index.tsx) | TypeScript React | 175 | 0 | 11 | 186 |
+| [screens/Main/Latest/components/ListItem.tsx](/screens/Main/Latest/components/ListItem.tsx) | TypeScript React | 147 | 0 | 15 | 162 |
+| [screens/Main/Latest/index.tsx](/screens/Main/Latest/index.tsx) | TypeScript React | 98 | 0 | 14 | 112 |
+| [screens/Main/Online/components/FriendState.tsx](/screens/Main/Online/components/FriendState.tsx) | TypeScript React | 53 | 0 | 7 | 60 |
+| [screens/Main/Online/index.tsx](/screens/Main/Online/index.tsx) | TypeScript React | 50 | 0 | 5 | 55 |
 | [screens/Main/Profile/components/ItemDivider.tsx](/screens/Main/Profile/components/ItemDivider.tsx) | TypeScript React | 26 | 0 | 5 | 31 |
-| [screens/Main/Profile/components/Option.tsx](/screens/Main/Profile/components/Option.tsx) | TypeScript React | 38 | 0 | 5 | 43 |
-| [screens/Main/Profile/index.tsx](/screens/Main/Profile/index.tsx) | TypeScript React | 150 | 0 | 11 | 161 |
-| [screens/Main/SearchFriend/index.js](/screens/Main/SearchFriend/index.js) | JavaScript | 75 | 0 | 4 | 79 |
-| [screens/Main/components/FriendItem.tsx](/screens/Main/components/FriendItem.tsx) | TypeScript React | 69 | 0 | 6 | 75 |
+| [screens/Main/Profile/components/Option.tsx](/screens/Main/Profile/components/Option.tsx) | TypeScript React | 39 | 0 | 5 | 44 |
+| [screens/Main/Profile/index.tsx](/screens/Main/Profile/index.tsx) | TypeScript React | 157 | 0 | 11 | 168 |
+| [screens/Main/SearchFriend/index.tsx](/screens/Main/SearchFriend/index.tsx) | TypeScript React | 147 | 0 | 11 | 158 |
+| [screens/Main/components/BadgeButton.tsx](/screens/Main/components/BadgeButton.tsx) | TypeScript React | 61 | 1 | 5 | 67 |
+| [screens/Main/components/FriendItem.tsx](/screens/Main/components/FriendItem.tsx) | TypeScript React | 61 | 0 | 7 | 68 |
 | [screens/Main/components/FriendSearch.tsx](/screens/Main/components/FriendSearch.tsx) | TypeScript React | 64 | 0 | 6 | 70 |
-| [screens/Main/components/Header.tsx](/screens/Main/components/Header.tsx) | TypeScript React | 86 | 0 | 7 | 93 |
-| [screens/Main/components/LatestButton.tsx](/screens/Main/components/LatestButton.tsx) | TypeScript React | 21 | 0 | 3 | 24 |
-| [screens/Main/components/OnlineButton.tsx](/screens/Main/components/OnlineButton.tsx) | TypeScript React | 21 | 0 | 3 | 24 |
+| [screens/Main/components/Header.tsx](/screens/Main/components/Header.tsx) | TypeScript React | 90 | 0 | 8 | 98 |
+| [screens/Main/components/LatestButton.tsx](/screens/Main/components/LatestButton.tsx) | TypeScript React | 64 | 0 | 9 | 73 |
+| [screens/Main/components/OnlineButton.tsx](/screens/Main/components/OnlineButton.tsx) | TypeScript React | 51 | 0 | 5 | 56 |
 | [screens/Main/components/TabBarButton.tsx](/screens/Main/components/TabBarButton.tsx) | TypeScript React | 57 | 1 | 5 | 63 |
 | [screens/Main/components/TabBarComponent.js](/screens/Main/components/TabBarComponent.js) | JavaScript | 26 | 0 | 6 | 32 |
-| [screens/Main/nav.js](/screens/Main/nav.js) | JavaScript | 42 | 1 | 2 | 45 |
-| [screens/components/Back.tsx](/screens/components/Back.tsx) | TypeScript React | 30 | 0 | 5 | 35 |
+| [screens/Main/nav.js](/screens/Main/nav.js) | JavaScript | 47 | 1 | 3 | 51 |
+| [screens/components/Back.tsx](/screens/components/Back.tsx) | TypeScript React | 31 | 0 | 5 | 36 |
 | [screens/components/Button.tsx](/screens/components/Button.tsx) | TypeScript React | 43 | 0 | 5 | 48 |
-| [screens/components/ConnectionInfo.tsx](/screens/components/ConnectionInfo.tsx) | TypeScript React | 68 | 0 | 9 | 77 |
 | [screens/components/ContentLoader.tsx](/screens/components/ContentLoader.tsx) | TypeScript React | 32 | 0 | 5 | 37 |
 | [screens/components/IconBackground.tsx](/screens/components/IconBackground.tsx) | TypeScript React | 34 | 0 | 5 | 39 |
-| [screens/components/Input.tsx](/screens/components/Input.tsx) | TypeScript React | 95 | 0 | 5 | 100 |
+| [screens/components/Input.tsx](/screens/components/Input.tsx) | TypeScript React | 113 | 0 | 5 | 118 |
 | [screens/components/Loader.js](/screens/components/Loader.js) | JavaScript | 29 | 0 | 4 | 33 |
-| [screens/components/Notification.tsx](/screens/components/Notification.tsx) | TypeScript React | 85 | 0 | 9 | 94 |
+| [screens/components/Notification.tsx](/screens/components/Notification.tsx) | TypeScript React | 113 | 0 | 11 | 124 |
 | [screens/components/StatusBar.js](/screens/components/StatusBar.js) | JavaScript | 19 | 0 | 4 | 23 |
-| [screens/components/Touchable.tsx](/screens/components/Touchable.tsx) | TypeScript React | 48 | 0 | 3 | 51 |
+| [screens/components/Touchable.tsx](/screens/components/Touchable.tsx) | TypeScript React | 47 | 0 | 3 | 50 |
 | [store.js](/store.js) | JavaScript | 20 | 0 | 5 | 25 |
-| [theme/globals.js](/theme/globals.js) | JavaScript | 3 | 0 | 1 | 4 |
+| [theme/globals.js](/theme/globals.js) | JavaScript | 5 | 0 | 1 | 6 |
 | [theme/metrics.js](/theme/metrics.js) | JavaScript | 33 | 0 | 3 | 36 |
 | [theme/palette.js](/theme/palette.js) | JavaScript | 18 | 0 | 1 | 19 |
 | [theme/typography.js](/theme/typography.js) | JavaScript | 18 | 0 | 3 | 21 |
 | [theme/zIndex.js](/theme/zIndex.js) | JavaScript | 5 | 0 | 1 | 6 |
-| [tsconfig.json](/tsconfig.json) | JSON | 7 | 34 | 0 | 41 |
+| [tsconfig.json](/tsconfig.json) | JSON | 7 | 35 | 0 | 42 |
+| [types/index.ts](/types/index.ts) | TypeScript | 54 | 0 | 9 | 63 |
 
 [summary](results.md)

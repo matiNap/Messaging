@@ -15,7 +15,7 @@
       "_metrics": ["./theme/metrics.js"],
       "_globals": ["./theme/globals.js"],
       "_zIndex": ["./theme/zIndex.js"],
-      "_navigation": ["./navigationService.js"],
+      "_navigation": ["./navigate.ts"],
       "_types": ["./types/index.ts"],
       "_rootReducer": ["./reducers/index.ts"]
     },

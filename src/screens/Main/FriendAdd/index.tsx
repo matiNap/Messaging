@@ -17,6 +17,7 @@ import {
   deleteSearchedUsers,
 } from '_actions/creators/users';
 import Notification from '_components/Notification';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface Props {
   requests: null | FriendRequest[];
@@ -66,82 +67,86 @@ class FriendAdd extends React.Component<Props> {
     const { loading, notFound } = this.state;
 
     return (
-      <KeyboardAvoidingView
-        enabled
-        behavior="height"
-        style={{ flex: 1 }}
-      >
-        <View
-          style={[
-            StyleSheet.absoluteFill,
-            { backgroundColor: palette.secondary },
-          ]}
+      <SafeAreaView style={{ flex: 1 }}>
+        <KeyboardAvoidingView
+          enabled
+          behavior="height"
+          style={{ flex: 1 }}
         >
-          <View style={styles.container}>
-            <View style={styles.search}>
-              <Back />
-              <Input
-                placeholder="Search user"
-                noOutlined
-                style={styles.input}
-                textInputStyle={styles.textInputStyle}
-                onChangeText={text => {
-                  if (text.length !== 0) {
-                    this.props.searchUser(
-                      text,
-                      this.onSucces,
-                      this.onFailed,
-                    );
-                    this.setState({ loading: true });
-                  } else {
-                    this.setState({ loading: false });
-                    this.props.deleteSearchedUsers();
-                  }
-                }}
-              />
-            </View>
+          <View
+            style={[
+              StyleSheet.absoluteFill,
+              { backgroundColor: palette.secondary },
+            ]}
+          >
+            <View style={styles.container}>
+              <View style={styles.search}>
+                <Back />
+                <Input
+                  placeholder="Search user"
+                  noOutlined
+                  style={styles.input}
+                  textInputStyle={styles.textInputStyle}
+                  onChangeText={text => {
+                    if (text.length !== 0) {
+                      this.props.searchUser(
+                        text,
+                        this.onSucces,
+                        this.onFailed,
+                      );
+                      this.setState({ loading: true });
+                    } else {
+                      this.setState({ loading: false });
+                      this.props.deleteSearchedUsers();
+                    }
+                  }}
+                />
+              </View>
 
-            {!loading && (
-              <List scrollEnabled>
-                {requests && !results && !notFound && (
-                  <Requests
-                    requests={requests}
-                    onAccept={this.onAccept}
-                    onReject={this.onReject}
-                  />
-                )}
-                {results && (
-                  <Results
-                    results={results}
-                    onAccept={this.onAccept}
-                    onReject={this.onReject}
-                  />
-                )}
-                {!results && !requests && (
-                  <Text style={styles.title}>Search for friends</Text>
-                )}
-              </List>
-            )}
-            <ContentLoader visible={loading} />
-            {notFound && (
-              <Text style={styles.notFoundText}>Not found</Text>
-            )}
+              {!loading && (
+                <List scrollEnabled>
+                  {requests && !results && !notFound && (
+                    <Requests
+                      requests={requests}
+                      onAccept={this.onAccept}
+                      onReject={this.onReject}
+                    />
+                  )}
+                  {results && (
+                    <Results
+                      results={results}
+                      onAccept={this.onAccept}
+                      onReject={this.onReject}
+                    />
+                  )}
+                  {!results && !requests && (
+                    <Text style={styles.title}>
+                      Search for friends
+                    </Text>
+                  )}
+                </List>
+              )}
+              <ContentLoader visible={loading} />
+              {notFound && (
+                <Text style={styles.notFoundText}>Not found</Text>
+              )}
+            </View>
+            <Notification
+              duration={1000}
+              ref={ref => {
+                this.notificationRef = ref;
+              }}
+            />
           </View>
-          <Notification
-            duration={1000}
-            ref={ref => {
-              this.notificationRef = ref;
-            }}
-          />
-        </View>
-      </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: metrics.statusBarHeight + metrics.margin.normal,
+    marginTop: metrics.margin.normal,
     paddingHorizontal: metrics.padding.medium,
     flex: 1,
   },

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Touchable from './Touchable';
 import palette from '_palette';
-import { withNavigation } from 'react-navigation';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
   onPress?: Function;
@@ -12,11 +12,12 @@ interface Props {
 
 const Back = (props: Props) => {
   const { onPress, style } = props;
+  const navigation = useNavigation();
   return (
     <Touchable
       style={style}
       onPress={() => {
-        if (!onPress) props.navigation.goBack();
+        if (!onPress) navigation.goBack();
         else onPress();
       }}
     >
@@ -28,8 +29,9 @@ const Back = (props: Props) => {
 const styles = StyleSheet.create({
   icon: {
     color: palette.text.primary,
-    fontSize: 35,
+    fontSize: 38,
+    padding: 2,
   },
 });
 
-export default withNavigation(Back);
+export default Back;

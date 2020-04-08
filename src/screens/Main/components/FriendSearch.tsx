@@ -10,8 +10,8 @@ import metrics from '_metrics';
 import { FontAwesome } from '@expo/vector-icons';
 import palette from '_palette';
 import typography from '_typography';
-import { navigate } from '_navigation';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
   onChangeText?(text: string): Function;
@@ -30,6 +30,7 @@ const renderSearchIcon = () => {
 
 const FriendSearch = (props: Props) => {
   const { onChangeText } = props;
+  const { navigate } = useNavigation();
   return (
     <TouchableWithoutFeedback
       onPress={() => {

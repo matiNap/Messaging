@@ -1,7 +1,6 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import palette from '_palette';
-import { navigate } from 'navigationService';
 import BadgeButton from './BadgeButton';
 import { connect } from 'react-redux';
 import { pressTabBarButton } from '_actions/creators/app';
@@ -18,10 +17,6 @@ const OnlineButton = (props: Props) => {
   const { iconSize, checked, onlineValue } = props;
   return (
     <BadgeButton
-      onPress={() => {
-        navigate('online');
-        props.pressTabBarButton('online');
-      }}
       size={iconSize}
       value={onlineValue}
       color={palette.primary}
@@ -41,15 +36,17 @@ const OnlineButton = (props: Props) => {
 };
 
 const mapStateToProps = (state: RootState) => {
+  let value = 0;
+  const friendsOnline: any[] =
+    state.users && state.users.friendsOnline
+      ? state.users.friendsOnline
+      : [];
+  friendsOnline.forEach(user => {
+    if (user.online) value++;
+  });
   return {
-    checked: state.app.tabButtonChecked['online'],
-    onlineValue:
-      state.users && state.users.friendsOnline
-        ? state.users.friendsOnline.length
-        : 0,
+    onlineValue: value,
   };
 };
 
-export default connect(mapStateToProps, { pressTabBarButton })(
-  OnlineButton,
-);
+export default connect(mapStateToProps)(OnlineButton);

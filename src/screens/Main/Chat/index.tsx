@@ -4,49 +4,69 @@ import {
   View,
   StyleSheet,
   KeyboardAvoidingView,
+  NativeScrollEvent,
+  StatusBar,
+  BackHandler,
 } from 'react-native';
-import {
-  GiftedChat,
-  MessageText,
-  Message,
-  Send,
-} from 'react-native-gifted-chat';
+import { GiftedChat, MessageText } from 'react-native-gifted-chat';
 import Bubble from './components/Bubble';
 import palette from '_palette';
 import typography from '_typography';
 import metrics from '_metrics';
-import Input from '_components/Input';
 import ChatHeader from './components/ChatHeader';
 import Touchable from '_components/Touchable';
 import { MaterialIcons, SimpleLineIcons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { RootState } from '_rootReducer';
 import { UserChat, Message as MessageType } from '_types';
-import { sendMessage, readMessage } from '_actions/creators/chat';
-import reactotron from 'reactotronConfig';
+import {
+  sendMessage,
+  readMessage,
+  fetchChatOnScroll,
+} from '_actions/creators/chat';
 
 interface Props {
   user: UserChat;
   readMessage: typeof readMessage;
   sendMessage: typeof sendMessage;
+  fetchChatOnScroll: typeof fetchChatOnScroll;
   messages: MessageType[];
   navigation: any;
 }
 
+const isCloseToTop = ({
+  layoutMeasurement,
+  contentOffset,
+  contentSize,
+}) => {
+  return (
+    parseInt(contentOffset.y) ===
+    parseInt(contentSize.height - layoutMeasurement.height)
+  );
+};
+
 class Chat extends Component<Props> {
   state = {
-    messages: [],
+    fetchedOnScroll: false,
   };
+
   componentDidMount() {
     const { user } = this.getParms();
     this.props.readMessage(user.uid);
-    this.setState({
-      messages: GiftedChat.append([], this.props.messages),
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      StatusBar.setBarStyle('dark-content');
     });
   }
 
+  shouldComponentUpdate(nextProps: Props) {
+    if (nextProps.messages !== this.props.messages) {
+      return true;
+    }
+    return false;
+  }
+
   getParms = () => {
-    return this.props.navigation.state.params;
+    return this.props.route.params;
   };
 
   onSend(messages: any) {
@@ -54,13 +74,10 @@ class Chat extends Component<Props> {
     const { user } = this.getParms();
 
     this.props.sendMessage(text, user.uid, _id);
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages),
-    }));
   }
 
   renderBubble = (props: any) => {
-    return <Bubble {...props} />;
+    return <Bubble key {...props} />;
   };
 
   renderMessageText = (props: any) => {
@@ -123,9 +140,34 @@ class Chat extends Component<Props> {
     );
   };
 
+  onScroll = ({
+    nativeEvent,
+  }: {
+    nativeEvent: NativeScrollEvent;
+  }) => {
+    const {
+      layoutMeasurement,
+      contentOffset,
+      contentSize,
+    } = nativeEvent;
+    const { fetchedOnScroll } = this.state;
+    const { uid } = this.props.user;
+    if (
+      isCloseToTop({
+        layoutMeasurement,
+        contentOffset,
+        contentSize,
+      }) &&
+      !fetchedOnScroll
+    ) {
+      this.props.fetchChatOnScroll(uid);
+    }
+  };
+
   render() {
-    const { messages } = this.state;
     const { user } = this.getParms();
+    const { messages } = this.props;
+
     return (
       <KeyboardAvoidingView
         enabled
@@ -137,6 +179,10 @@ class Chat extends Component<Props> {
           displayName={user.displayName}
         />
         <GiftedChat
+          listViewProps={{
+            scrollEventThrottle: 400,
+            onScroll: this.onScroll,
+          }}
           renderBubble={this.renderBubble}
           messagesContainerStyle={styles.messagesContainerStyle}
           messages={messages}
@@ -188,17 +234,18 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: RootState, ownProps: Props) => {
-  const { uid } = ownProps.navigation.state.params.user;
+  const { uid } = ownProps.route.params.user;
+
   const currentChat = state.chat.chats ? state.chat.chats[uid] : null;
   return {
     messages:
-      currentChat && currentChat.messages
-        ? currentChat.messages.reverse()
-        : [],
+      currentChat && currentChat.messages ? currentChat.messages : [],
     user: currentChat && currentChat.user ? currentChat.user : {},
   };
 };
 
-export default connect(mapStateToProps, { sendMessage, readMessage })(
-  Chat,
-);
+export default connect(mapStateToProps, {
+  sendMessage,
+  readMessage,
+  fetchChatOnScroll,
+})(Chat);

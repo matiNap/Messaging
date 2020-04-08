@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { SearchedUser } from '_types';
 import globals from '_globals';
 import { addUser } from '_actions/creators/users';
+import reactotron from 'reactotronConfig';
 
 interface Props {
   results: SearchedUser[];

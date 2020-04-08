@@ -1,8 +1,10 @@
 import database from '_apis/database';
 import * as types from '../app';
-import { navigate } from '_navigation';
-import reactotron from 'reactotron-react-native';
 import { AppThunk } from '_types';
+import * as firestore from '_apis/firestore';
+import reactotron from 'reactotron-react-native';
+import firebase from 'firebase';
+import navigate from '_navigation';
 
 export const createUser = (
   userData: {
@@ -15,14 +17,12 @@ export const createUser = (
   onCreate: Function,
   onFailed: Function,
 ) => async () => {
-  // onCreate();
-
   try {
-    await database.post('createUser', {
-      ...userData,
-    });
+    await firestore.createUser(userData);
+
     onCreate();
   } catch (err) {
+    reactotron.log(err);
     onFailed();
   }
 };
@@ -33,60 +33,57 @@ export const signIn = (
   onSignInFailed: Function,
 ): AppThunk => async dispatch => {
   try {
-    const response = await database.post('signIn', {
+    const response = await firestore.signIn({
       email: username,
       password,
     });
 
-    const { data } = response;
-    navigate('loading');
     dispatch({
       type: types.SIGN_IN,
       payload: {
-        ...data,
+        user: { ...response },
       },
     });
   } catch (error) {
     onSignInFailed('Invalid password or email');
   }
 };
-export const signOut = (): AppThunk => async (dispatch, getState) => {
-  const state = getState();
+export const signOut = (): AppThunk => async dispatch => {
   try {
-    const { uid } = state.app.user;
+    await firebase.auth().signOut();
     dispatch({
       type: 'LOG_OUT',
     });
-    await database.post('signOut', { uid });
-
-    navigate('login');
   } catch (error) {
     console.log(error);
   }
 };
 export const checkAuth = (
-  onAuthSucces: Function,
   onAuthFailed: Function,
-): AppThunk => async (dispatch, getState) => {
-  const state = getState();
-
-  try {
-    const { token, uid } = state.app.user;
-    const response = await database.post('checkAuth', { uid, token });
-    const { data } = response;
-    const { newToken } = data;
-    onAuthSucces();
-    dispatch({
-      type: types.CHECK_AUTH,
-      payload: {
-        ...data,
-        token: newToken,
-      },
-    });
-  } catch (error) {
-    console.log('fial');
-    onAuthFailed();
-  }
+) => async dispatch => {
+  firebase.auth().onAuthStateChanged(async googleUser => {
+    console.log(googleUser);
+    if (googleUser) {
+      const userSnapshot = await firestore
+        .getUserRef(googleUser.uid)
+        .get();
+      const user = userSnapshot.data();
+      dispatch({
+        type: types.CHECK_AUTH,
+        payload: {
+          user,
+        },
+      });
+    } else {
+      onAuthFailed();
+      dispatch({
+        user: null,
+      });
+    }
+  });
+  dispatch({
+    type: 'none',
+  });
 };
 
 export const deleteUser = async (
@@ -107,13 +104,9 @@ export const pressTabBarButton = (name: string) => {
   };
 };
 
-export const changeStatus = (status: boolean): AppThunk => (
-  dispatch,
-  getState,
-) => {
-  const { uid } = getState().app.user;
+export const changeStatus = (status: boolean) => {
   try {
-    database.post(`status/${uid}?newStatus=${status}`);
+    firestore.getCurrentUserRef().update({ online: status });
   } catch (error) {
     console.log(error);
   }

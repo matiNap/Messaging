@@ -17,6 +17,7 @@ export type User = {
   name: string;
   online: boolean;
   photoURL: string;
+  uid: string;
 };
 
 export type UserChat = {
@@ -28,18 +29,36 @@ export type UserChat = {
   fname: string;
 };
 
-export type Message = {
-  _id: string;
-  createdAt: number;
+export type LocalMessage = {
   text: string;
-  sendedBy: string;
+  createdAt: string;
+  _id: string;
+  user: {
+    _id: string | number;
+    fname: string;
+    name: string;
+    email: string;
+    photoURL: string;
+    sname: string;
+    uid: string;
+  };
+};
+
+export type Message = {
+  text: string;
+  createdAt: string;
+  _id: string;
+  user: {
+    _id: string | number;
+  };
 };
 
 export type ChatData = {
   user: UserChat;
   messages: Message[];
   latestMessage: Message;
-  toRead: number;
+  byMe: boolean;
+  byUser: boolean;
 };
 
 export type FriendRequest = {
