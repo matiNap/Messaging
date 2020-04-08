@@ -18,6 +18,7 @@ import FriendState from '../Online/components/FriendState';
 import globals from '_globals';
 import Touchable from '_components/Touchable';
 import navigate from '_navigation';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface Props {
   results: null | User[];
@@ -56,78 +57,80 @@ class SearchFriend extends React.Component<Props> {
     const { loading, notFound } = this.state;
 
     return (
-      <KeyboardAvoidingView
-        enabled
-        behavior="height"
-        style={{ flex: 1 }}
-      >
-        <View
-          style={[
-            StyleSheet.absoluteFill,
-            { backgroundColor: palette.secondary },
-          ]}
+      <SafeAreaView style={{ flex: 1 }}>
+        <KeyboardAvoidingView
+          enabled
+          behavior="height"
+          style={{ flex: 1 }}
         >
-          <View style={styles.container}>
-            <View style={styles.search}>
-              <Back />
-              <Input
-                placeholder="Search user"
-                noOutlined
-                style={styles.input}
-                textInputStyle={styles.textInputStyle}
-                onChangeText={text => {
-                  if (text.length !== 0) {
-                    this.props.searchOwnFriends(
-                      text,
-                      this.onSucces,
-                      this.onFailed,
-                    );
-                    this.setState({ loading: true });
-                  } else {
-                    this.setState({ loading: false });
-                    this.props.deleteSearchedOwnFriends();
-                  }
-                }}
-              />
-            </View>
+          <View
+            style={[
+              StyleSheet.absoluteFill,
+              { backgroundColor: palette.secondary },
+            ]}
+          >
+            <View style={styles.container}>
+              <View style={styles.search}>
+                <Back />
+                <Input
+                  placeholder="Search user"
+                  noOutlined
+                  style={styles.input}
+                  textInputStyle={styles.textInputStyle}
+                  onChangeText={text => {
+                    if (text.length !== 0) {
+                      this.props.searchOwnFriends(
+                        text,
+                        this.onSucces,
+                        this.onFailed,
+                      );
+                      this.setState({ loading: true });
+                    } else {
+                      this.setState({ loading: false });
+                      this.props.deleteSearchedOwnFriends();
+                    }
+                  }}
+                />
+              </View>
 
-            {!loading && (
-              <List scrollEnabled>
-                {results?.map(data => {
-                  const { online, name, photoURL } = data;
-                  const avatarUri = photoURL
-                    ? photoURL
-                    : globals.primaryAvatar;
-                  return (
-                    <Touchable
-                      onPress={() => {
-                        this.onUserPress(data);
-                      }}
-                    >
-                      <FriendState
-                        name={name}
-                        avatarUri={avatarUri}
-                        state={online}
-                      />
-                    </Touchable>
-                  );
-                })}
-              </List>
-            )}
-            <ContentLoader visible={loading} />
-            {notFound && (
-              <Text style={styles.notFoundText}>Not found</Text>
-            )}
+              {!loading && (
+                <List scrollEnabled>
+                  {results?.map(data => {
+                    const { online, name, photoURL } = data;
+                    const avatarUri = photoURL
+                      ? photoURL
+                      : globals.primaryAvatar;
+                    return (
+                      <Touchable
+                        onPress={() => {
+                          this.onUserPress(data);
+                        }}
+                      >
+                        <FriendState
+                          name={name}
+                          avatarUri={avatarUri}
+                          state={online}
+                        />
+                      </Touchable>
+                    );
+                  })}
+                </List>
+              )}
+              <ContentLoader visible={loading} />
+              {notFound && (
+                <Text style={styles.notFoundText}>Not found</Text>
+              )}
+            </View>
           </View>
-        </View>
-      </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: metrics.statusBarHeight + metrics.margin.normal,
+    marginTop: metrics.margin.normal,
     paddingHorizontal: metrics.padding.medium,
     flex: 1,
   },

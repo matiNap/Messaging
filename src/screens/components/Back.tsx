@@ -29,7 +29,8 @@ const Back = (props: Props) => {
 const styles = StyleSheet.create({
   icon: {
     color: palette.text.primary,
-    fontSize: 35,
+    fontSize: 38,
+    padding: 2,
   },
 });
 

@@ -38,11 +38,10 @@ export const signIn = (
       password,
     });
 
-    navigate('loading');
     dispatch({
       type: types.SIGN_IN,
       payload: {
-        ...response,
+        user: { ...response },
       },
     });
   } catch (error) {
@@ -55,7 +54,6 @@ export const signOut = (): AppThunk => async dispatch => {
     dispatch({
       type: 'LOG_OUT',
     });
-    navigate('login');
   } catch (error) {
     console.log(error);
   }
@@ -64,6 +62,7 @@ export const checkAuth = (
   onAuthFailed: Function,
 ) => async dispatch => {
   firebase.auth().onAuthStateChanged(async googleUser => {
+    console.log(googleUser);
     if (googleUser) {
       const userSnapshot = await firestore
         .getUserRef(googleUser.uid)

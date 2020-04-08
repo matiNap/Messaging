@@ -42,8 +42,17 @@ class SignIn extends Component {
     const { password, email, message, loaderVisible } = this.state;
 
     return (
-      <Animated.View style={{ translateY }}>
-        <KeyboardAvoidingView behavior="position">
+      <Animated.View
+        style={[StyleSheet.absoluteFill, { translateY }]}
+      >
+        <View
+          behavior="position"
+          style={{
+            justifyContent: 'center',
+
+            flex: 1,
+          }}
+        >
           <Text style={styles.appName}>{globals.appName}</Text>
           <Text style={styles.title}>Sign in</Text>
 
@@ -79,7 +88,7 @@ class SignIn extends Component {
             onPress={this.handleForm}
           />
           <Text style={styles.warningText}>{message}</Text>
-        </KeyboardAvoidingView>
+        </View>
         <Loader visible={loaderVisible} />
       </Animated.View>
     );
@@ -91,7 +100,7 @@ const styles = StyleSheet.create({
     fontSize: 55,
     color: palette.primary,
     alignSelf: 'center',
-    marginTop: 60,
+
     padding: metrics.padding.normal,
   },
   title: {

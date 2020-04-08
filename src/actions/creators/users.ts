@@ -1,6 +1,6 @@
 import * as types from '_actions/users';
 import { AppThunk } from '_types';
-import database from '_apis/database';
+import * as database from '_apis/database';
 import reactotron from 'reactotron-react-native';
 import * as firestore from '_apis/firestore';
 import firebase from 'firebase';
@@ -175,4 +175,24 @@ export const searchOwnFriends = (
 
 export const deleteSearchedOwnFriends = () => {
   return { type: types.DELETE_SEARCHED_OWN_FRIENDS };
+};
+
+export const removeUser = (friendUid: string) => {
+  const { uid } = firestore.getUserData();
+  database
+    .getFriendsRef(uid)
+    .child(friendUid)
+    .remove();
+
+  database
+    .getFriendsRef(friendUid)
+    .child(uid)
+    .remove();
+
+  return {
+    type: types.REMOVE_USER,
+    payload: {
+      friendUid,
+    },
+  };
 };

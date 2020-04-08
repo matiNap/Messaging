@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { AppState, StatusBar } from 'react-native';
-import { List } from 'native-base';
+import { AppState, StatusBar, View, StyleSheet } from 'react-native';
+import { Text } from 'native-base';
 import Header from '../components/Header';
 import { Container } from 'native-base';
 
@@ -13,8 +13,8 @@ import { changeStatus } from '_actions/creators/app';
 import {
   fetchNewMessages,
   sendNotSended,
+  removeChat,
 } from '_actions/creators/chat';
-import { RootState } from '_rootReducer';
 import { ChatData } from '_types';
 import ContentLoader from '_components/ContentLoader';
 import { Notifications } from 'expo';
@@ -23,6 +23,14 @@ import _ from 'lodash';
 import * as firestore from '_apis/firestore';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import palette from '_palette';
+import SlideItem from '_components/SlideItem';
+import metrics from '_metrics';
+import { Feather, Ionicons } from '@expo/vector-icons';
+import Touchable from '_components/Touchable';
+import typography from '_typography';
+import { RootState } from '_rootReducer';
+import { ScrollView } from 'react-native-gesture-handler';
+
 interface Props {
   changeStatus: typeof changeStatus;
   fetchOnlineUsers: typeof fetchOnlineUsers;
@@ -31,6 +39,7 @@ interface Props {
   sendNotSended: typeof sendNotSended;
   chats: ChatData[];
   uid: string;
+  removeChat: typeof removeChat;
 }
 
 class Latest extends Component<Props> {
@@ -83,39 +92,100 @@ class Latest extends Component<Props> {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
         <Container>
-          <List>
+          <ScrollView
+            contentContainerStyle={{
+              flex: 1,
+            }}
+          >
             <Header title="Chat" />
             <FriendSearch />
-            {chats &&
-              chats.map(currentChat => {
-                const {
-                  user,
-                  latestMessage,
-                  byMe,
-                  byUser,
-                } = currentChat;
 
-                if (user) {
-                  return (
-                    <ListItem
-                      key={user.name}
-                      user={user}
-                      latestMessage={latestMessage}
-                      readed={{
-                        byMe,
-                        byUser,
-                      }}
-                    />
-                  );
-                }
-              })}
-          </List>
+            {chats.length !== 0 ? (
+              <View style={{ marginTop: metrics.margin.normal }}>
+                {chats.map(currentChat => {
+                  const {
+                    user,
+                    latestMessage,
+                    byMe,
+                    byUser,
+                  } = currentChat;
+
+                  if (user) {
+                    return (
+                      <SlideItem
+                        style={{ height: 60 }}
+                        rightComponent={() => (
+                          <Touchable
+                            onPress={() => {
+                              this.props.removeChat(
+                                currentChat.user.uid,
+                              );
+                            }}
+                          >
+                            <Feather
+                              name="trash"
+                              style={styles.removeChatIcon}
+                            />
+                          </Touchable>
+                        )}
+                      >
+                        <ListItem
+                          key={user.name}
+                          user={user}
+                          latestMessage={latestMessage}
+                          readed={{
+                            byMe,
+                            byUser,
+                          }}
+                        />
+                      </SlideItem>
+                    );
+                  }
+                })}
+              </View>
+            ) : (
+              <View style={styles.infoContainer}>
+                <Ionicons
+                  name="ios-person-add"
+                  style={styles.infoIcon}
+                />
+                <Text style={styles.infoStyle}>
+                  Add friends to chat together
+                </Text>
+              </View>
+            )}
+          </ScrollView>
           <ContentLoader visible={!chats && !empty} />
         </Container>
       </SafeAreaView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  removeChatIcon: {
+    fontSize: 30,
+    color: palette.secondary,
+    alignSelf: 'center',
+  },
+  infoStyle: {
+    color: palette.grayscale.medium,
+    fontSize: typography.fontSize.medium,
+    textAlign: 'center',
+  },
+  infoContainer: {
+    flex: 1,
+    width: '65%',
+    alignSelf: 'center',
+    justifyContent: 'center',
+  },
+  infoIcon: {
+    color: palette.grayscale.medium,
+    fontSize: 35,
+    margin: 5,
+    alignSelf: 'center',
+  },
+});
 
 const mapStateToProps = (state: RootState) => {
   const chats = state.chat.persistedChats
@@ -132,4 +202,5 @@ export default connect(mapStateToProps, {
   fetchOnlineUsers,
   fetchNewMessages,
   sendNotSended,
+  removeChat,
 })(Latest);

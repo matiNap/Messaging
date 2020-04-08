@@ -17,6 +17,7 @@ import { checkAuth } from '_actions/creators/app';
 import reactotron from 'reactotron-react-native';
 import { useNavigation } from '@react-navigation/native';
 import navigate from '_navigation';
+import * as firestore from '_apis/firestore';
 
 class Loading extends React.Component {
   state = {
@@ -34,7 +35,9 @@ class Loading extends React.Component {
     StatusBar.setBackgroundColor(palette.primary);
     StatusBar.setBarStyle('light-content');
     this.props.checkAuth(() => {
-      navigate('login');
+      try {
+        navigate('login');
+      } catch (err) {}
     });
   }
 

@@ -88,6 +88,16 @@ export default (state = initState, action: any) => {
         ],
       };
     }
+    case types.REMOVE_USER: {
+      const { friendUid } = action.payload;
+
+      return {
+        ...state,
+        friendsOnline: _.remove(state.friendsOnline, user => {
+          return user.uid !== friendUid;
+        }),
+      };
+    }
     default:
       return { ...state };
   }

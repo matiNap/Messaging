@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView } from 'react-native';
 import { View } from 'native-base';
 
 import SignUp from './SignUp';
@@ -71,29 +71,39 @@ class Login extends React.Component {
     );
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1 }} behavior="padding">
         <PanGestureHandler
           onGestureEvent={this.gestureHandler}
           onHandlerStateChange={this.gestureHandler}
         >
           <Animated.View style={{ flex: 1 }}>
-            <SignIn translateY={sub(swipeY, metrics.screenHeight)} />
-            <SignUp
-              translateY={swipeY}
-              backToSignIn={() => {
-                this.back.setValue(1);
-                this.opened.setValue(0);
-              }}
-            />
-            <Wave
-              centerX={centerX}
-              waveHeight={waveHeight}
-              opened={this.opened}
-              horizontalRadius={horizontalRadius}
-              verticalRadius={verticalRadius}
-              swipeY={swipeY}
-              fillColor={palette.primary}
-            />
+            <KeyboardAvoidingView
+              style={{ flex: 1 }}
+              behavior="padding"
+              enabled
+            >
+              <SignIn
+                translateY={sub(swipeY, metrics.screenHeight)}
+              />
+
+              <SignUp
+                translateY={swipeY}
+                backToSignIn={() => {
+                  this.back.setValue(1);
+                  this.opened.setValue(0);
+                }}
+              />
+
+              <Wave
+                centerX={centerX}
+                waveHeight={waveHeight}
+                opened={this.opened}
+                horizontalRadius={horizontalRadius}
+                verticalRadius={verticalRadius}
+                swipeY={swipeY}
+                fillColor={palette.primary}
+              />
+            </KeyboardAvoidingView>
           </Animated.View>
         </PanGestureHandler>
       </View>

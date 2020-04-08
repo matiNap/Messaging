@@ -104,6 +104,14 @@ export default (state = initState, action) => {
       };
     }
 
+    case types.REMOVE_CHAT: {
+      const { friendUid } = action.payload;
+      return {
+        ...state,
+        chats: _.omit(state.chats, [friendUid]),
+      };
+    }
+
     default:
       return { ...state };
   }

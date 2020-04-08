@@ -113,7 +113,9 @@ const LatestListItem = (props: Props) => {
 const styles = StyleSheet.create({
   listItem: {
     backgroundColor: palette.secondary,
-    marginTop: metrics.margin.normal,
+    marginLeft: 0,
+    paddingLeft: metrics.margin.medium,
+    height: '100%',
   },
   mainAvatar: { width: 42, height: 42 },
   subAvatar: { width: 20, height: 20 },
@@ -143,7 +145,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state: RootState) => {
   return {
-    userUid: state.app.user.uid,
+    userUid: state.app?.user?.uid,
   };
 };
 

@@ -88,92 +88,97 @@ class SignUp extends Component {
     return (
       <Animated.View style={[styles.container, { translateY }]}>
         <KeyboardAvoidingView behavior="position">
-          <Text style={styles.title}>Sign up</Text>
-          <View style={styles.inputContainer}>
-            <Input
-              autoCapitalize="none"
-              color={palette.secondary}
-              value={inputs[USERNAME]}
-              type="default"
-              placeholder="Username"
-              style={styles.input}
-              secondary
-              onChangeText={text => {
-                this.onInputChange(USERNAME, text);
-              }}
-            />
-            <Input
-              autoCapitalize="none"
-              color={palette.secondary}
-              value={inputs[EMAIL]}
-              type="email-address"
-              placeholder="email"
-              style={styles.input}
-              secondary
-              onChangeText={text => {
-                this.onInputChange(EMAIL, text.replace(/\s/g, ''));
-              }}
-            />
-            <View style={styles.inputNameContainer}>
+          <View
+            behavior="height"
+            style={{ justifyContent: 'center' }}
+          >
+            <Text style={styles.title}>Sign up</Text>
+            <View style={styles.inputContainer}>
               <Input
+                autoCapitalize="none"
                 color={palette.secondary}
-                value={inputs[FNAME]}
+                value={inputs[USERNAME]}
                 type="default"
-                placeholder="First name"
-                style={styles.fnameInput}
+                placeholder="Username"
+                style={styles.input}
                 secondary
                 onChangeText={text => {
-                  this.onInputChange(FNAME, text);
+                  this.onInputChange(USERNAME, text);
+                }}
+              />
+              <Input
+                autoCapitalize="none"
+                color={palette.secondary}
+                value={inputs[EMAIL]}
+                type="email-address"
+                placeholder="email"
+                style={styles.input}
+                secondary
+                onChangeText={text => {
+                  this.onInputChange(EMAIL, text.replace(/\s/g, ''));
+                }}
+              />
+              <View style={styles.inputNameContainer}>
+                <Input
+                  color={palette.secondary}
+                  value={inputs[FNAME]}
+                  type="default"
+                  placeholder="First name"
+                  style={styles.fnameInput}
+                  secondary
+                  onChangeText={text => {
+                    this.onInputChange(FNAME, text);
+                  }}
+                />
+                <Input
+                  color={palette.secondary}
+                  value={inputs[SNAME]}
+                  type="default"
+                  placeholder="Surname"
+                  style={styles.snameInput}
+                  secondary
+                  onChangeText={text => {
+                    this.onInputChange(SNAME, text);
+                  }}
+                />
+              </View>
+              <Input
+                color={palette.secondary}
+                value={inputs[PASS]}
+                secureTextEntry
+                type="default"
+                placeholder="Password"
+                style={styles.input}
+                secondary
+                onChangeText={text => {
+                  this.onInputChange(PASS, text);
                 }}
               />
               <Input
                 color={palette.secondary}
-                value={inputs[SNAME]}
+                value={inputs[RPASS]}
+                secureTextEntry
                 type="default"
-                placeholder="Surname"
-                style={styles.snameInput}
+                placeholder="Repeat password"
+                style={styles.input}
                 secondary
                 onChangeText={text => {
-                  this.onInputChange(SNAME, text);
+                  this.onInputChange(RPASS, text);
                 }}
               />
             </View>
-            <Input
-              color={palette.secondary}
-              value={inputs[PASS]}
-              secureTextEntry
-              type="default"
-              placeholder="Password"
-              style={styles.input}
+
+            <Text style={styles.warningText}>{message}</Text>
+
+            <Button
+              title="Create"
+              style={styles.button}
               secondary
-              onChangeText={text => {
-                this.onInputChange(PASS, text);
-              }}
-            />
-            <Input
-              color={palette.secondary}
-              value={inputs[RPASS]}
-              secureTextEntry
-              type="default"
-              placeholder="Repeat password"
-              style={styles.input}
-              secondary
-              onChangeText={text => {
-                this.onInputChange(RPASS, text);
-              }}
+              onPress={this.handleForms}
             />
           </View>
-
-          <Text style={styles.warningText}>{message}</Text>
-
-          <Button
-            title="Create"
-            style={styles.button}
-            secondary
-            onPress={this.handleForms}
-          />
+          <Loader visible={visible} />
         </KeyboardAvoidingView>
-        <Loader visible={visible} />
       </Animated.View>
     );
   }
@@ -184,15 +189,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: palette.primary,
     width: metrics.screenWidth,
-    height: metrics.screenHeight,
+    height: metrics.screenHeight + 50,
     top: 0,
     left: 0,
+    justifyContent: 'center',
+    paddingBottom: 80,
   },
   title: {
     fontSize: typography.fontSize.big,
     color: palette.secondary,
     alignSelf: 'center',
-    marginTop: 70,
   },
   inputContainer: {
     marginTop: 30,

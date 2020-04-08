@@ -20,7 +20,6 @@ const sendChatMessage = async (
       await database
         .getChatRef(`${uidB}/${uidA}/messages`)
         .push(message);
-
       res(message);
     } catch (error) {
       rej(error);
@@ -160,29 +159,31 @@ export const fetchNewMessages = (
       friendUid: string,
     ) => {
       const readedValues = readedSnapshot.val();
-      const userReaded = readedValues[friendUid];
-      const myReaded = readedValues[uid];
-      const currentChat = getState().chat.chats[friendUid];
+      if (readedValues) {
+        const userReaded = readedValues[friendUid];
+        const myReaded = readedValues[uid];
+        const currentChat = getState().chat.chats[friendUid];
 
-      const latestMessage =
-        currentChat && currentChat.latestMessage
-          ? currentChat.latestMessage
-          : null;
+        const latestMessage =
+          currentChat && currentChat.latestMessage
+            ? currentChat.latestMessage
+            : null;
 
-      dispatch({
-        type: types.UPDATE_READED,
-        payload: {
-          readed: {
-            byUser: userReaded
-              ? isReaded(userReaded, latestMessage)
-              : false,
-            byMe: userReaded
-              ? isReaded(myReaded, latestMessage)
-              : false,
+        dispatch({
+          type: types.UPDATE_READED,
+          payload: {
+            readed: {
+              byUser: userReaded
+                ? isReaded(userReaded, latestMessage)
+                : false,
+              byMe: userReaded
+                ? isReaded(myReaded, latestMessage)
+                : false,
+            },
+            friendUid,
           },
-          friendUid,
-        },
-      });
+        });
+      }
     };
 
     firebase
@@ -216,7 +217,7 @@ export const fetchNewMessages = (
       });
   } catch (error) {
     onFailed();
-    reactotron.log(error);
+    reactotron.log(error.message);
   }
 };
 const NEXT_LENGTH = 2;
@@ -233,16 +234,16 @@ export const fetchChatOnScroll = (
       .limitToFirst(newLength)
       .once('value');
 
-    // dispatch({
-    //   type: types.FETCH_ON_SCROLL,
-    //   payload: {
-    //     messages: _.dropRight(
-    //       Object.values(snapshot.val()),
-    //       currentlength,
-    //     ),
-    //     friendUid,
-    //   },
-    // });
+    dispatch({
+      type: types.FETCH_ON_SCROLL,
+      payload: {
+        messages: _.dropRight(
+          Object.values(snapshot.val()),
+          currentlength,
+        ),
+        friendUid,
+      },
+    });
   } catch (error) {
     reactotron.log(error.message);
   }
@@ -271,4 +272,15 @@ export const readMessage = (
   } catch (error) {
     console.log(error);
   }
+};
+
+export const removeChat = (friendUid: string) => {
+  const { uid } = firestore.getUserData();
+  database.getChatRef(`${uid}/${friendUid}`).remove();
+  return {
+    type: types.REMOVE_CHAT,
+    payload: {
+      friendUid,
+    },
+  };
 };

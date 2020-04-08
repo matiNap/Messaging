@@ -29,7 +29,9 @@ const LatestListItem = (props: Props) => {
             }}
           />
           <View style={styles.body}>
-            <Text style={styles.mainText}>{name}</Text>
+            <Text style={styles.mainText} numberOfLines={1}>
+              {name}
+            </Text>
           </View>
         </Left>
       </Touchable>
@@ -44,12 +46,15 @@ const LatestListItem = (props: Props) => {
 const styles = StyleSheet.create({
   listItem: {
     backgroundColor: palette.secondary,
-    marginTop: metrics.margin.normal,
+    paddingBottom: metrics.margin.small,
+    marginLeft: 0,
+    paddingLeft: metrics.margin.medium,
   },
   mainAvatar: { width: 42, height: 42 },
   mainText: {
     fontSize: typography.fontSize.normal,
     color: palette.text.primary,
+    width: 180,
   },
 
   body: {
