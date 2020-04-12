@@ -1,131 +1,131 @@
-filename, language, JavaScript, JSON, TypeScript, TypeScript React, comment, blank, total
-c:\MobileProjects\Messaging\src\.eslintrc.js, JavaScript, 9, 0, 0, 0, 18, 0, 27
-c:\MobileProjects\Messaging\src\.expo-shared\assets.json, JSON, 0, 4, 0, 0, 0, 0, 4
-c:\MobileProjects\Messaging\src\.prettierrc, JSON, 0, 6, 0, 0, 0, 1, 7
-c:\MobileProjects\Messaging\src\App.js, JavaScript, 56, 0, 0, 0, 0, 6, 62
-c:\MobileProjects\Messaging\src\actions\app.ts, TypeScript, 0, 0, 5, 0, 0, 1, 6
-c:\MobileProjects\Messaging\src\actions\chat.ts, TypeScript, 0, 0, 6, 0, 0, 1, 7
-c:\MobileProjects\Messaging\src\actions\creators\app.ts, TypeScript, 0, 0, 110, 0, 1, 10, 121
-c:\MobileProjects\Messaging\src\actions\creators\chat.ts, TypeScript, 0, 0, 105, 0, 0, 11, 116
-c:\MobileProjects\Messaging\src\actions\creators\notifications.ts, TypeScript, 0, 0, 58, 0, 0, 7, 65
-c:\MobileProjects\Messaging\src\actions\creators\users.ts, TypeScript, 0, 0, 95, 0, 0, 12, 107
-c:\MobileProjects\Messaging\src\actions\notifications.ts, TypeScript, 0, 0, 3, 0, 0, 2, 5
-c:\MobileProjects\Messaging\src\actions\users.ts, TypeScript, 0, 0, 8, 0, 0, 1, 9
-c:\MobileProjects\Messaging\src\app.json, JSON, 0, 19, 0, 0, 6, 0, 25
-c:\MobileProjects\Messaging\src\babel.config.js, JavaScript, 6, 0, 0, 0, 0, 1, 7
-c:\MobileProjects\Messaging\src\config.js, JavaScript, 5, 0, 0, 0, 0, 2, 7
-c:\MobileProjects\Messaging\src\helpers\animations.ts, TypeScript, 0, 0, 75, 0, 0, 8, 83
-c:\MobileProjects\Messaging\src\helpers\chat.ts, TypeScript, 0, 0, 15, 0, 0, 2, 17
-c:\MobileProjects\Messaging\src\helpers\svgHelper.ts, TypeScript, 0, 0, 33, 0, 0, 7, 40
-c:\MobileProjects\Messaging\src\hocs\withAuth.js, JavaScript, 16, 0, 0, 0, 0, 3, 19
-c:\MobileProjects\Messaging\src\native-base-theme\components\Badge.js, JavaScript, 36, 0, 0, 0, 1, 3, 40
-c:\MobileProjects\Messaging\src\native-base-theme\components\Body.js, JavaScript, 8, 0, 0, 0, 1, 3, 12
-c:\MobileProjects\Messaging\src\native-base-theme\components\Button.js, JavaScript, 366, 0, 0, 0, 1, 20, 387
-c:\MobileProjects\Messaging\src\native-base-theme\components\Card.js, JavaScript, 33, 0, 0, 0, 1, 4, 38
-c:\MobileProjects\Messaging\src\native-base-theme\components\CardItem.js, JavaScript, 192, 0, 0, 0, 1, 6, 199
-c:\MobileProjects\Messaging\src\native-base-theme\components\CheckBox.js, JavaScript, 34, 0, 0, 0, 1, 4, 39
-c:\MobileProjects\Messaging\src\native-base-theme\components\Container.js, JavaScript, 12, 0, 0, 0, 1, 5, 18
-c:\MobileProjects\Messaging\src\native-base-theme\components\Content.js, JavaScript, 11, 0, 0, 0, 1, 3, 15
-c:\MobileProjects\Messaging\src\native-base-theme\components\Fab.js, JavaScript, 22, 0, 0, 0, 1, 3, 26
-c:\MobileProjects\Messaging\src\native-base-theme\components\Footer.js, JavaScript, 112, 0, 0, 0, 4, 4, 120
-c:\MobileProjects\Messaging\src\native-base-theme\components\FooterTab.js, JavaScript, 73, 0, 0, 0, 1, 6, 80
-c:\MobileProjects\Messaging\src\native-base-theme\components\Form.js, JavaScript, 83, 0, 0, 0, 1, 3, 87
-c:\MobileProjects\Messaging\src\native-base-theme\components\H1.js, JavaScript, 9, 0, 0, 0, 1, 4, 14
-c:\MobileProjects\Messaging\src\native-base-theme\components\H2.js, JavaScript, 9, 0, 0, 0, 1, 4, 14
-c:\MobileProjects\Messaging\src\native-base-theme\components\H3.js, JavaScript, 9, 0, 0, 0, 1, 4, 14
-c:\MobileProjects\Messaging\src\native-base-theme\components\Header.js, JavaScript, 410, 0, 0, 0, 4, 6, 420
-c:\MobileProjects\Messaging\src\native-base-theme\components\Icon.js, JavaScript, 8, 0, 0, 0, 1, 4, 13
-c:\MobileProjects\Messaging\src\native-base-theme\components\Input.js, JavaScript, 15, 0, 0, 0, 1, 4, 20
-c:\MobileProjects\Messaging\src\native-base-theme\components\InputGroup.js, JavaScript, 125, 0, 0, 0, 1, 7, 133
-c:\MobileProjects\Messaging\src\native-base-theme\components\Item.js, JavaScript, 233, 0, 0, 0, 1, 8, 242
-c:\MobileProjects\Messaging\src\native-base-theme\components\Label.js, JavaScript, 9, 0, 0, 0, 1, 3, 13
-c:\MobileProjects\Messaging\src\native-base-theme\components\Left.js, JavaScript, 8, 0, 0, 0, 1, 3, 12
-c:\MobileProjects\Messaging\src\native-base-theme\components\ListItem.js, JavaScript, 440, 0, 0, 0, 1, 6, 447
-c:\MobileProjects\Messaging\src\native-base-theme\components\Picker.android.js, JavaScript, 10, 0, 0, 0, 2, 3, 15
-c:\MobileProjects\Messaging\src\native-base-theme\components\Picker.ios.js, JavaScript, 4, 0, 0, 0, 1, 3, 8
-c:\MobileProjects\Messaging\src\native-base-theme\components\Picker.js, JavaScript, 10, 0, 0, 0, 2, 3, 15
-c:\MobileProjects\Messaging\src\native-base-theme\components\Radio.js, JavaScript, 26, 0, 0, 0, 1, 5, 32
-c:\MobileProjects\Messaging\src\native-base-theme\components\Right.js, JavaScript, 11, 0, 0, 0, 1, 3, 15
-c:\MobileProjects\Messaging\src\native-base-theme\components\Segment.js, JavaScript, 52, 0, 0, 0, 1, 5, 58
-c:\MobileProjects\Messaging\src\native-base-theme\components\Separator.js, JavaScript, 45, 0, 0, 0, 1, 4, 50
-c:\MobileProjects\Messaging\src\native-base-theme\components\Spinner.js, JavaScript, 6, 0, 0, 0, 1, 3, 10
-c:\MobileProjects\Messaging\src\native-base-theme\components\Subtitle.js, JavaScript, 14, 0, 0, 0, 1, 5, 20
-c:\MobileProjects\Messaging\src\native-base-theme\components\SwipeRow.js, JavaScript, 43, 0, 0, 0, 1, 3, 47
-c:\MobileProjects\Messaging\src\native-base-theme\components\Switch.js, JavaScript, 6, 0, 0, 0, 1, 3, 10
-c:\MobileProjects\Messaging\src\native-base-theme\components\Tab.js, JavaScript, 7, 0, 0, 0, 1, 3, 11
-c:\MobileProjects\Messaging\src\native-base-theme\components\TabBar.js, JavaScript, 53, 0, 0, 0, 1, 4, 58
-c:\MobileProjects\Messaging\src\native-base-theme\components\TabContainer.js, JavaScript, 20, 0, 0, 0, 1, 6, 27
-c:\MobileProjects\Messaging\src\native-base-theme\components\TabHeading.js, JavaScript, 35, 0, 0, 0, 1, 5, 41
-c:\MobileProjects\Messaging\src\native-base-theme\components\Text.js, JavaScript, 13, 0, 0, 0, 1, 4, 18
-c:\MobileProjects\Messaging\src\native-base-theme\components\Textarea.js, JavaScript, 21, 0, 0, 0, 1, 4, 26
-c:\MobileProjects\Messaging\src\native-base-theme\components\Thumbnail.js, JavaScript, 37, 0, 0, 0, 1, 3, 41
-c:\MobileProjects\Messaging\src\native-base-theme\components\Title.js, JavaScript, 16, 0, 0, 0, 1, 5, 22
-c:\MobileProjects\Messaging\src\native-base-theme\components\Toast.js, JavaScript, 36, 0, 0, 0, 1, 5, 42
-c:\MobileProjects\Messaging\src\native-base-theme\components\View.js, JavaScript, 9, 0, 0, 0, 1, 4, 14
-c:\MobileProjects\Messaging\src\native-base-theme\components\index.js, JavaScript, 214, 0, 0, 0, 2, 34, 250
-c:\MobileProjects\Messaging\src\native-base-theme\variables\commonColor.js, JavaScript, 261, 0, 0, 0, 30, 33, 324
-c:\MobileProjects\Messaging\src\native-base-theme\variables\material.js, JavaScript, 241, 0, 0, 0, 30, 34, 305
-c:\MobileProjects\Messaging\src\native-base-theme\variables\platform.js, JavaScript, 271, 0, 0, 0, 30, 34, 335
-c:\MobileProjects\Messaging\src\navigationService.js, JavaScript, 16, 0, 0, 0, 0, 4, 20
-c:\MobileProjects\Messaging\src\package-lock.json, JSON, 0, 10061, 0, 0, 0, 1, 10062
-c:\MobileProjects\Messaging\src\package.json, JSON, 0, 75, 0, 0, 0, 1, 76
-c:\MobileProjects\Messaging\src\reactotronConfig.js, JavaScript, 9, 0, 0, 0, 0, 2, 11
-c:\MobileProjects\Messaging\src\reducers\AppReducer.ts, TypeScript, 0, 0, 59, 0, 0, 4, 63
-c:\MobileProjects\Messaging\src\reducers\ChatReducer.ts, TypeScript, 0, 0, 63, 0, 0, 5, 68
-c:\MobileProjects\Messaging\src\reducers\NotificationsReducer.ts, TypeScript, 0, 0, 28, 0, 0, 5, 33
-c:\MobileProjects\Messaging\src\reducers\UsersReducer.ts, TypeScript, 0, 0, 68, 0, 0, 4, 72
-c:\MobileProjects\Messaging\src\reducers\index.ts, TypeScript, 0, 0, 18, 0, 0, 5, 23
-c:\MobileProjects\Messaging\src\screens\AppContainer.js, JavaScript, 11, 0, 0, 0, 0, 4, 15
-c:\MobileProjects\Messaging\src\screens\Auth\Loading\animationHelpers.ts, TypeScript, 0, 0, 18, 0, 0, 4, 22
-c:\MobileProjects\Messaging\src\screens\Auth\Loading\componenets\Wave.js, JavaScript, 77, 0, 0, 0, 0, 8, 85
-c:\MobileProjects\Messaging\src\screens\Auth\Loading\index.js, JavaScript, 97, 0, 0, 0, 0, 10, 107
-c:\MobileProjects\Messaging\src\screens\Auth\Login\SignIn.js, JavaScript, 120, 0, 0, 0, 0, 7, 127
-c:\MobileProjects\Messaging\src\screens\Auth\Login\SignUp.js, JavaScript, 219, 0, 0, 0, 1, 12, 232
-c:\MobileProjects\Messaging\src\screens\Auth\Login\animationHelpers.ts, TypeScript, 0, 0, 195, 0, 0, 11, 206
-c:\MobileProjects\Messaging\src\screens\Auth\Login\components\Wave.js, JavaScript, 185, 0, 0, 0, 0, 7, 192
-c:\MobileProjects\Messaging\src\screens\Auth\Login\index.js, JavaScript, 99, 0, 0, 0, 0, 8, 107
-c:\MobileProjects\Messaging\src\screens\Auth\nav.js, JavaScript, 7, 0, 0, 0, 0, 2, 9
-c:\MobileProjects\Messaging\src\screens\Main\Chat\components\Bubble.tsx, TypeScript React, 0, 0, 0, 26, 0, 4, 30
-c:\MobileProjects\Messaging\src\screens\Main\Chat\components\ChatHeader.tsx, TypeScript React, 0, 0, 0, 74, 0, 7, 81
-c:\MobileProjects\Messaging\src\screens\Main\Chat\index.tsx, TypeScript React, 0, 0, 0, 188, 0, 17, 205
-c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\ItemAdd.tsx, TypeScript React, 0, 0, 0, 82, 0, 5, 87
-c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\ItemRequest.tsx, TypeScript React, 0, 0, 0, 33, 0, 4, 37
-c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\RequestButtons.tsx, TypeScript React, 0, 0, 0, 61, 0, 6, 67
-c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\Requests.tsx, TypeScript React, 0, 0, 0, 41, 0, 6, 47
-c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\Results.tsx, TypeScript React, 0, 0, 0, 51, 0, 7, 58
-c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\index.tsx, TypeScript React, 0, 0, 0, 175, 0, 11, 186
-c:\MobileProjects\Messaging\src\screens\Main\Latest\components\ListItem.tsx, TypeScript React, 0, 0, 0, 147, 0, 15, 162
-c:\MobileProjects\Messaging\src\screens\Main\Latest\index.tsx, TypeScript React, 0, 0, 0, 98, 0, 14, 112
-c:\MobileProjects\Messaging\src\screens\Main\Online\components\FriendState.tsx, TypeScript React, 0, 0, 0, 53, 0, 7, 60
-c:\MobileProjects\Messaging\src\screens\Main\Online\index.tsx, TypeScript React, 0, 0, 0, 50, 0, 5, 55
-c:\MobileProjects\Messaging\src\screens\Main\Profile\components\ItemDivider.tsx, TypeScript React, 0, 0, 0, 26, 0, 5, 31
-c:\MobileProjects\Messaging\src\screens\Main\Profile\components\Option.tsx, TypeScript React, 0, 0, 0, 39, 0, 5, 44
-c:\MobileProjects\Messaging\src\screens\Main\Profile\index.tsx, TypeScript React, 0, 0, 0, 157, 0, 11, 168
-c:\MobileProjects\Messaging\src\screens\Main\SearchFriend\index.tsx, TypeScript React, 0, 0, 0, 147, 0, 11, 158
-c:\MobileProjects\Messaging\src\screens\Main\components\BadgeButton.tsx, TypeScript React, 0, 0, 0, 61, 1, 5, 67
-c:\MobileProjects\Messaging\src\screens\Main\components\FriendItem.tsx, TypeScript React, 0, 0, 0, 61, 0, 7, 68
-c:\MobileProjects\Messaging\src\screens\Main\components\FriendSearch.tsx, TypeScript React, 0, 0, 0, 64, 0, 6, 70
-c:\MobileProjects\Messaging\src\screens\Main\components\Header.tsx, TypeScript React, 0, 0, 0, 90, 0, 8, 98
-c:\MobileProjects\Messaging\src\screens\Main\components\LatestButton.tsx, TypeScript React, 0, 0, 0, 64, 0, 9, 73
-c:\MobileProjects\Messaging\src\screens\Main\components\OnlineButton.tsx, TypeScript React, 0, 0, 0, 51, 0, 5, 56
-c:\MobileProjects\Messaging\src\screens\Main\components\TabBarButton.tsx, TypeScript React, 0, 0, 0, 57, 1, 5, 63
-c:\MobileProjects\Messaging\src\screens\Main\components\TabBarComponent.js, JavaScript, 26, 0, 0, 0, 0, 6, 32
-c:\MobileProjects\Messaging\src\screens\Main\nav.js, JavaScript, 47, 0, 0, 0, 1, 3, 51
-c:\MobileProjects\Messaging\src\screens\components\Back.tsx, TypeScript React, 0, 0, 0, 31, 0, 5, 36
-c:\MobileProjects\Messaging\src\screens\components\Button.tsx, TypeScript React, 0, 0, 0, 43, 0, 5, 48
-c:\MobileProjects\Messaging\src\screens\components\ContentLoader.tsx, TypeScript React, 0, 0, 0, 32, 0, 5, 37
-c:\MobileProjects\Messaging\src\screens\components\IconBackground.tsx, TypeScript React, 0, 0, 0, 34, 0, 5, 39
-c:\MobileProjects\Messaging\src\screens\components\Input.tsx, TypeScript React, 0, 0, 0, 113, 0, 5, 118
-c:\MobileProjects\Messaging\src\screens\components\Loader.js, JavaScript, 29, 0, 0, 0, 0, 4, 33
-c:\MobileProjects\Messaging\src\screens\components\Notification.tsx, TypeScript React, 0, 0, 0, 113, 0, 11, 124
-c:\MobileProjects\Messaging\src\screens\components\StatusBar.js, JavaScript, 19, 0, 0, 0, 0, 4, 23
-c:\MobileProjects\Messaging\src\screens\components\Touchable.tsx, TypeScript React, 0, 0, 0, 47, 0, 3, 50
-c:\MobileProjects\Messaging\src\store.js, JavaScript, 20, 0, 0, 0, 0, 5, 25
-c:\MobileProjects\Messaging\src\theme\globals.js, JavaScript, 5, 0, 0, 0, 0, 1, 6
-c:\MobileProjects\Messaging\src\theme\metrics.js, JavaScript, 33, 0, 0, 0, 0, 3, 36
-c:\MobileProjects\Messaging\src\theme\palette.js, JavaScript, 18, 0, 0, 0, 0, 1, 19
-c:\MobileProjects\Messaging\src\theme\typography.js, JavaScript, 18, 0, 0, 0, 0, 3, 21
-c:\MobileProjects\Messaging\src\theme\zIndex.js, JavaScript, 5, 0, 0, 0, 0, 1, 6
-c:\MobileProjects\Messaging\src\tsconfig.json, JSON, 0, 7, 0, 0, 35, 0, 42
-c:\MobileProjects\Messaging\src\types\index.ts, TypeScript, 0, 0, 54, 0, 0, 9, 63
-Total, -, 4870, 10172, 1016, 2309, 208, 778, 19353
+"filename", "language", "JavaScript", "JSON", "TypeScript", "TypeScript React", "comment", "blank", "total"
+"c:\MobileProjects\Messaging\src\.eslintrc.js", "JavaScript", 9, 0, 0, 0, 18, 0, 27
+"c:\MobileProjects\Messaging\src\.expo-shared\assets.json", "JSON", 0, 4, 0, 0, 0, 0, 4
+"c:\MobileProjects\Messaging\src\.prettierrc", "JSON", 0, 6, 0, 0, 0, 1, 7
+"c:\MobileProjects\Messaging\src\App.js", "JavaScript", 49, 0, 0, 0, 0, 6, 55
+"c:\MobileProjects\Messaging\src\actions\app.ts", "TypeScript", 0, 0, 5, 0, 0, 1, 6
+"c:\MobileProjects\Messaging\src\actions\chat.ts", "TypeScript", 0, 0, 7, 0, 0, 2, 9
+"c:\MobileProjects\Messaging\src\actions\creators\app.ts", "TypeScript", 0, 0, 105, 0, 0, 8, 113
+"c:\MobileProjects\Messaging\src\actions\creators\chat.ts", "TypeScript", 0, 0, 263, 0, 0, 24, 287
+"c:\MobileProjects\Messaging\src\actions\creators\notifications.ts", "TypeScript", 0, 0, 66, 0, 13, 7, 86
+"c:\MobileProjects\Messaging\src\actions\creators\users.ts", "TypeScript", 0, 0, 177, 0, 0, 22, 199
+"c:\MobileProjects\Messaging\src\actions\notifications.ts", "TypeScript", 0, 0, 3, 0, 0, 2, 5
+"c:\MobileProjects\Messaging\src\actions\users.ts", "TypeScript", 0, 0, 9, 0, 0, 1, 10
+"c:\MobileProjects\Messaging\src\apis\database.ts", "TypeScript", 0, 0, 8, 0, 0, 4, 12
+"c:\MobileProjects\Messaging\src\apis\firestore.ts", "TypeScript", 0, 0, 65, 0, 0, 7, 72
+"c:\MobileProjects\Messaging\src\app.json", "JSON", 0, 20, 0, 0, 6, 0, 26
+"c:\MobileProjects\Messaging\src\babel.config.js", "JavaScript", 6, 0, 0, 0, 0, 1, 7
+"c:\MobileProjects\Messaging\src\config.js", "JavaScript", 5, 0, 0, 0, 0, 2, 7
+"c:\MobileProjects\Messaging\src\helpers\animations.ts", "TypeScript", 0, 0, 75, 0, 0, 8, 83
+"c:\MobileProjects\Messaging\src\helpers\chat.ts", "TypeScript", 0, 0, 15, 0, 0, 2, 17
+"c:\MobileProjects\Messaging\src\helpers\svgHelper.ts", "TypeScript", 0, 0, 33, 0, 0, 7, 40
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Badge.js", "JavaScript", 36, 0, 0, 0, 1, 3, 40
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Body.js", "JavaScript", 8, 0, 0, 0, 1, 3, 12
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Button.js", "JavaScript", 366, 0, 0, 0, 1, 20, 387
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Card.js", "JavaScript", 33, 0, 0, 0, 1, 4, 38
+"c:\MobileProjects\Messaging\src\native-base-theme\components\CardItem.js", "JavaScript", 192, 0, 0, 0, 1, 6, 199
+"c:\MobileProjects\Messaging\src\native-base-theme\components\CheckBox.js", "JavaScript", 34, 0, 0, 0, 1, 4, 39
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Container.js", "JavaScript", 12, 0, 0, 0, 1, 5, 18
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Content.js", "JavaScript", 11, 0, 0, 0, 1, 3, 15
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Fab.js", "JavaScript", 22, 0, 0, 0, 1, 3, 26
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Footer.js", "JavaScript", 112, 0, 0, 0, 4, 4, 120
+"c:\MobileProjects\Messaging\src\native-base-theme\components\FooterTab.js", "JavaScript", 73, 0, 0, 0, 1, 6, 80
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Form.js", "JavaScript", 83, 0, 0, 0, 1, 3, 87
+"c:\MobileProjects\Messaging\src\native-base-theme\components\H1.js", "JavaScript", 9, 0, 0, 0, 1, 4, 14
+"c:\MobileProjects\Messaging\src\native-base-theme\components\H2.js", "JavaScript", 9, 0, 0, 0, 1, 4, 14
+"c:\MobileProjects\Messaging\src\native-base-theme\components\H3.js", "JavaScript", 9, 0, 0, 0, 1, 4, 14
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Header.js", "JavaScript", 410, 0, 0, 0, 4, 6, 420
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Icon.js", "JavaScript", 8, 0, 0, 0, 1, 4, 13
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Input.js", "JavaScript", 15, 0, 0, 0, 1, 4, 20
+"c:\MobileProjects\Messaging\src\native-base-theme\components\InputGroup.js", "JavaScript", 125, 0, 0, 0, 1, 7, 133
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Item.js", "JavaScript", 233, 0, 0, 0, 1, 8, 242
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Label.js", "JavaScript", 9, 0, 0, 0, 1, 3, 13
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Left.js", "JavaScript", 8, 0, 0, 0, 1, 3, 12
+"c:\MobileProjects\Messaging\src\native-base-theme\components\ListItem.js", "JavaScript", 440, 0, 0, 0, 1, 6, 447
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Picker.android.js", "JavaScript", 10, 0, 0, 0, 2, 3, 15
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Picker.ios.js", "JavaScript", 4, 0, 0, 0, 1, 3, 8
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Picker.js", "JavaScript", 10, 0, 0, 0, 2, 3, 15
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Radio.js", "JavaScript", 26, 0, 0, 0, 1, 5, 32
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Right.js", "JavaScript", 11, 0, 0, 0, 1, 3, 15
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Segment.js", "JavaScript", 52, 0, 0, 0, 1, 5, 58
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Separator.js", "JavaScript", 45, 0, 0, 0, 1, 4, 50
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Spinner.js", "JavaScript", 6, 0, 0, 0, 1, 3, 10
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Subtitle.js", "JavaScript", 14, 0, 0, 0, 1, 5, 20
+"c:\MobileProjects\Messaging\src\native-base-theme\components\SwipeRow.js", "JavaScript", 43, 0, 0, 0, 1, 3, 47
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Switch.js", "JavaScript", 6, 0, 0, 0, 1, 3, 10
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Tab.js", "JavaScript", 7, 0, 0, 0, 1, 3, 11
+"c:\MobileProjects\Messaging\src\native-base-theme\components\TabBar.js", "JavaScript", 53, 0, 0, 0, 1, 4, 58
+"c:\MobileProjects\Messaging\src\native-base-theme\components\TabContainer.js", "JavaScript", 20, 0, 0, 0, 1, 6, 27
+"c:\MobileProjects\Messaging\src\native-base-theme\components\TabHeading.js", "JavaScript", 35, 0, 0, 0, 1, 5, 41
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Text.js", "JavaScript", 13, 0, 0, 0, 1, 4, 18
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Textarea.js", "JavaScript", 21, 0, 0, 0, 1, 4, 26
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Thumbnail.js", "JavaScript", 37, 0, 0, 0, 1, 3, 41
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Title.js", "JavaScript", 16, 0, 0, 0, 1, 5, 22
+"c:\MobileProjects\Messaging\src\native-base-theme\components\Toast.js", "JavaScript", 36, 0, 0, 0, 1, 5, 42
+"c:\MobileProjects\Messaging\src\native-base-theme\components\View.js", "JavaScript", 9, 0, 0, 0, 1, 4, 14
+"c:\MobileProjects\Messaging\src\native-base-theme\components\index.js", "JavaScript", 214, 0, 0, 0, 2, 34, 250
+"c:\MobileProjects\Messaging\src\native-base-theme\variables\commonColor.js", "JavaScript", 261, 0, 0, 0, 30, 33, 324
+"c:\MobileProjects\Messaging\src\native-base-theme\variables\material.js", "JavaScript", 241, 0, 0, 0, 30, 34, 305
+"c:\MobileProjects\Messaging\src\native-base-theme\variables\platform.js", "JavaScript", 271, 0, 0, 0, 30, 34, 335
+"c:\MobileProjects\Messaging\src\navigate.ts", "TypeScript", 0, 0, 5, 0, 0, 3, 8
+"c:\MobileProjects\Messaging\src\package-lock.json", "JSON", 0, 10029, 0, 0, 0, 1, 10030
+"c:\MobileProjects\Messaging\src\package.json", "JSON", 0, 77, 0, 0, 0, 1, 78
+"c:\MobileProjects\Messaging\src\reactotronConfig.js", "JavaScript", 9, 0, 0, 0, 0, 2, 11
+"c:\MobileProjects\Messaging\src\reducers\AppReducer.ts", "TypeScript", 0, 0, 41, 0, 0, 4, 45
+"c:\MobileProjects\Messaging\src\reducers\ChatReducer.ts", "TypeScript", 0, 0, 107, 0, 0, 12, 119
+"c:\MobileProjects\Messaging\src\reducers\NotificationsReducer.ts", "TypeScript", 0, 0, 29, 0, 0, 5, 34
+"c:\MobileProjects\Messaging\src\reducers\UsersReducer.ts", "TypeScript", 0, 0, 94, 0, 0, 11, 105
+"c:\MobileProjects\Messaging\src\reducers\index.ts", "TypeScript", 0, 0, 18, 0, 0, 5, 23
+"c:\MobileProjects\Messaging\src\screens\AppContainer.tsx", "TypeScript React", 0, 0, 0, 33, 0, 6, 39
+"c:\MobileProjects\Messaging\src\screens\Auth\Loading\animationHelpers.ts", "TypeScript", 0, 0, 18, 0, 0, 4, 22
+"c:\MobileProjects\Messaging\src\screens\Auth\Loading\componenets\Wave.js", "JavaScript", 85, 0, 0, 0, 0, 8, 93
+"c:\MobileProjects\Messaging\src\screens\Auth\Loading\index.js", "JavaScript", 81, 0, 0, 0, 0, 8, 89
+"c:\MobileProjects\Messaging\src\screens\Auth\Login\SignIn.js", "JavaScript", 129, 0, 0, 0, 0, 9, 138
+"c:\MobileProjects\Messaging\src\screens\Auth\Login\SignUp.js", "JavaScript", 225, 0, 0, 0, 1, 12, 238
+"c:\MobileProjects\Messaging\src\screens\Auth\Login\animationHelpers.ts", "TypeScript", 0, 0, 195, 0, 0, 11, 206
+"c:\MobileProjects\Messaging\src\screens\Auth\Login\components\Wave.js", "JavaScript", 185, 0, 0, 0, 0, 7, 192
+"c:\MobileProjects\Messaging\src\screens\Auth\Login\index.js", "JavaScript", 107, 0, 0, 0, 0, 10, 117
+"c:\MobileProjects\Messaging\src\screens\Auth\index.tsx", "TypeScript React", 0, 0, 0, 13, 0, 3, 16
+"c:\MobileProjects\Messaging\src\screens\Main\Chat\components\Bubble.tsx", "TypeScript React", 0, 0, 0, 26, 0, 4, 30
+"c:\MobileProjects\Messaging\src\screens\Main\Chat\components\ChatHeader.tsx", "TypeScript React", 0, 0, 0, 88, 0, 7, 95
+"c:\MobileProjects\Messaging\src\screens\Main\Chat\index.tsx", "TypeScript React", 0, 0, 0, 229, 0, 23, 252
+"c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\ItemAdd.tsx", "TypeScript React", 0, 0, 0, 82, 0, 5, 87
+"c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\ItemRequest.tsx", "TypeScript React", 0, 0, 0, 33, 0, 4, 37
+"c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\RequestButtons.tsx", "TypeScript React", 0, 0, 0, 61, 0, 6, 67
+"c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\Requests.tsx", "TypeScript React", 0, 0, 0, 41, 0, 6, 47
+"c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\Results.tsx", "TypeScript React", 0, 0, 0, 52, 0, 7, 59
+"c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\index.tsx", "TypeScript React", 0, 0, 0, 180, 0, 11, 191
+"c:\MobileProjects\Messaging\src\screens\Main\Latest\components\ListItem.tsx", "TypeScript React", 0, 0, 0, 139, 0, 14, 153
+"c:\MobileProjects\Messaging\src\screens\Main\Latest\index.tsx", "TypeScript React", 0, 0, 0, 190, 0, 17, 207
+"c:\MobileProjects\Messaging\src\screens\Main\Online\components\FriendState.tsx", "TypeScript React", 0, 0, 0, 55, 0, 7, 62
+"c:\MobileProjects\Messaging\src\screens\Main\Online\index.tsx", "TypeScript React", 0, 0, 0, 127, 0, 7, 134
+"c:\MobileProjects\Messaging\src\screens\Main\Profile\components\ItemDivider.tsx", "TypeScript React", 0, 0, 0, 26, 0, 5, 31
+"c:\MobileProjects\Messaging\src\screens\Main\Profile\components\Option.tsx", "TypeScript React", 0, 0, 0, 39, 0, 5, 44
+"c:\MobileProjects\Messaging\src\screens\Main\Profile\index.tsx", "TypeScript React", 0, 0, 0, 162, 0, 10, 172
+"c:\MobileProjects\Messaging\src\screens\Main\SearchFriend\index.tsx", "TypeScript React", 0, 0, 0, 161, 0, 12, 173
+"c:\MobileProjects\Messaging\src\screens\Main\components\BadgeButton.tsx", "TypeScript React", 0, 0, 0, 61, 1, 5, 67
+"c:\MobileProjects\Messaging\src\screens\Main\components\FriendItem.tsx", "TypeScript React", 0, 0, 0, 66, 0, 7, 73
+"c:\MobileProjects\Messaging\src\screens\Main\components\FriendSearch.tsx", "TypeScript React", 0, 0, 0, 65, 0, 6, 71
+"c:\MobileProjects\Messaging\src\screens\Main\components\Header.tsx", "TypeScript React", 0, 0, 0, 93, 0, 7, 100
+"c:\MobileProjects\Messaging\src\screens\Main\components\LatestButton.tsx", "TypeScript React", 0, 0, 0, 53, 0, 8, 61
+"c:\MobileProjects\Messaging\src\screens\Main\components\OnlineButton.tsx", "TypeScript React", 0, 0, 0, 48, 0, 5, 53
+"c:\MobileProjects\Messaging\src\screens\Main\components\TabBarButton.tsx", "TypeScript React", 0, 0, 0, 57, 1, 5, 63
+"c:\MobileProjects\Messaging\src\screens\Main\index.tsx", "TypeScript React", 0, 0, 0, 52, 0, 4, 56
+"c:\MobileProjects\Messaging\src\screens\components\Back.tsx", "TypeScript React", 0, 0, 0, 33, 0, 5, 38
+"c:\MobileProjects\Messaging\src\screens\components\Button.tsx", "TypeScript React", 0, 0, 0, 43, 0, 5, 48
+"c:\MobileProjects\Messaging\src\screens\components\ContentLoader.tsx", "TypeScript React", 0, 0, 0, 32, 0, 5, 37
+"c:\MobileProjects\Messaging\src\screens\components\IconBackground.tsx", "TypeScript React", 0, 0, 0, 34, 0, 5, 39
+"c:\MobileProjects\Messaging\src\screens\components\Input.tsx", "TypeScript React", 0, 0, 0, 113, 0, 5, 118
+"c:\MobileProjects\Messaging\src\screens\components\Loader.js", "JavaScript", 29, 0, 0, 0, 0, 4, 33
+"c:\MobileProjects\Messaging\src\screens\components\Notification.tsx", "TypeScript React", 0, 0, 0, 113, 0, 11, 124
+"c:\MobileProjects\Messaging\src\screens\components\SlideItem.tsx", "TypeScript React", 0, 0, 0, 112, 0, 9, 121
+"c:\MobileProjects\Messaging\src\screens\components\Touchable.tsx", "TypeScript React", 0, 0, 0, 47, 0, 3, 50
+"c:\MobileProjects\Messaging\src\store.js", "JavaScript", 20, 0, 0, 0, 0, 5, 25
+"c:\MobileProjects\Messaging\src\theme\globals.js", "JavaScript", 5, 0, 0, 0, 0, 1, 6
+"c:\MobileProjects\Messaging\src\theme\metrics.js", "JavaScript", 33, 0, 0, 0, 0, 3, 36
+"c:\MobileProjects\Messaging\src\theme\palette.js", "JavaScript", 18, 0, 0, 0, 0, 1, 19
+"c:\MobileProjects\Messaging\src\theme\typography.js", "JavaScript", 18, 0, 0, 0, 0, 3, 21
+"c:\MobileProjects\Messaging\src\theme\zIndex.js", "JavaScript", 5, 0, 0, 0, 0, 1, 6
+"c:\MobileProjects\Messaging\src\tsconfig.json", "JSON", 0, 7, 0, 0, 35, 0, 42
+"c:\MobileProjects\Messaging\src\types\index.ts", "TypeScript", 0, 0, 72, 0, 0, 10, 82
+"Total", "-", 4736, 10143, 1410, 2759, 219, 835, 20102

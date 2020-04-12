@@ -20,17 +20,6 @@ import navigate from '_navigation';
 import * as firestore from '_apis/firestore';
 
 class Loading extends React.Component {
-  state = {
-    isConnected: false,
-  };
-
-  constructor(props) {
-    super(props);
-    this.unsubscribe = NetInfo.addEventListener(state => {
-      this.setState({ isConnected: state.isConnected });
-    });
-  }
-
   componentDidMount() {
     StatusBar.setBackgroundColor(palette.primary);
     StatusBar.setBarStyle('light-content');

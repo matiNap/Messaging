@@ -15,7 +15,7 @@ import {
   sendNotSended,
   removeChat,
 } from '_actions/creators/chat';
-import { ChatData } from '_types';
+import { ChatData, Message, LocalMessage, UserChat } from '_types';
 import ContentLoader from '_components/ContentLoader';
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
@@ -30,6 +30,7 @@ import Touchable from '_components/Touchable';
 import typography from '_typography';
 import { RootState } from '_rootReducer';
 import { ScrollView } from 'react-native-gesture-handler';
+import reactotron from 'reactotronConfig';
 
 interface Props {
   changeStatus: typeof changeStatus;
@@ -113,6 +114,7 @@ class Latest extends Component<Props> {
                   if (user) {
                     return (
                       <SlideItem
+                        key={user.name}
                         style={{ height: 60 }}
                         rightComponent={() => (
                           <Touchable
@@ -130,7 +132,6 @@ class Latest extends Component<Props> {
                         )}
                       >
                         <ListItem
-                          key={user.name}
                           user={user}
                           latestMessage={latestMessage}
                           readed={{
@@ -192,7 +193,15 @@ const mapStateToProps = (state: RootState) => {
     ? state.chat.persistedChats
     : state.chat.chats;
   return {
-    chats: Object.values(_.omit(chats, 'messages')),
+    chats: Object.values(_.omit(chats, 'messages')).sort(
+      (a: ChatData, b: ChatData) => {
+        if (!a.latestMessage || !b.latestMessage) return -1;
+        return (
+          new Date(b.latestMessage.createdAt) -
+          new Date(a.latestMessage.createdAt)
+        );
+      },
+    ),
   };
 };
 

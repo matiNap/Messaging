@@ -1,53 +1,53 @@
-Date : 2020-03-21 21:06:38
+Date : 2020-04-09 16:08:17
 Directory : c:\MobileProjects\Messaging\src
-Total : 129 files,  18367 codes, 208 comments, 778 blanks, all 19353 lines
+Total : 129 files,  19048 codes, 219 comments, 835 blanks, all 20102 lines
 
 Languages
 +------------------+------------+------------+------------+------------+------------+
 | language         | files      | code       | comment    | blank      | total      |
 +------------------+------------+------------+------------+------------+------------+
-| JSON             |          6 |     10,172 |         41 |          3 |     10,216 |
-| JavaScript       |         73 |      4,870 |        164 |        442 |      5,476 |
-| TypeScript React |         31 |      2,309 |          2 |        224 |      2,535 |
-| TypeScript       |         19 |      1,016 |          1 |        109 |      1,126 |
+| JSON             |          6 |     10,143 |         41 |          3 |     10,187 |
+| JavaScript       |         66 |      4,736 |        163 |        418 |      5,317 |
+| TypeScript React |         35 |      2,759 |          2 |        254 |      3,015 |
+| TypeScript       |         22 |      1,410 |         13 |        160 |      1,583 |
 +------------------+------------+------------+------------+------------+------------+
 
 Directories
 +--------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
 | path                                                                                 | files      | code       | comment    | blank      | total      |
 +--------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
-| .                                                                                    |        129 |     18,367 |        208 |        778 |     19,353 |
+| .                                                                                    |        129 |     19,048 |        219 |        835 |     20,102 |
 | .expo-shared                                                                         |          1 |          4 |          0 |          0 |          4 |
-| actions                                                                              |          8 |        390 |          1 |         45 |        436 |
-| actions\creators                                                                     |          4 |        368 |          1 |         40 |        409 |
+| actions                                                                              |          8 |        635 |         13 |         67 |        715 |
+| actions\creators                                                                     |          4 |        611 |         13 |         61 |        685 |
+| apis                                                                                 |          2 |         73 |          0 |         11 |         84 |
 | helpers                                                                              |          3 |        123 |          0 |         17 |        140 |
-| hocs                                                                                 |          1 |         16 |          0 |          3 |         19 |
 | native-base-theme                                                                    |         48 |      3,718 |        144 |        335 |      4,197 |
 | native-base-theme\components                                                         |         45 |      2,945 |         54 |        234 |      3,233 |
 | native-base-theme\variables                                                          |          3 |        773 |         90 |        101 |        964 |
-| reducers                                                                             |          5 |        236 |          0 |         23 |        259 |
-| screens                                                                              |         45 |      3,458 |          4 |        314 |      3,776 |
-| screens\Auth                                                                         |          9 |      1,017 |          1 |         69 |      1,087 |
-| screens\Auth\Loading                                                                 |          3 |        192 |          0 |         22 |        214 |
-| screens\Auth\Loading\componenets                                                     |          1 |         77 |          0 |          8 |         85 |
-| screens\Auth\Login                                                                   |          5 |        818 |          1 |         45 |        864 |
+| reducers                                                                             |          5 |        289 |          0 |         37 |        326 |
+| screens                                                                              |         44 |      3,813 |          3 |        327 |      4,143 |
+| screens\Auth                                                                         |          9 |      1,038 |          1 |         72 |      1,111 |
+| screens\Auth\Loading                                                                 |          3 |        184 |          0 |         20 |        204 |
+| screens\Auth\Loading\componenets                                                     |          1 |         85 |          0 |          8 |         93 |
+| screens\Auth\Login                                                                   |          5 |        841 |          1 |         49 |        891 |
 | screens\Auth\Login\components                                                        |          1 |        185 |          0 |          7 |        192 |
-| screens\Main                                                                         |         26 |      1,969 |          3 |        194 |      2,166 |
-| screens\Main\Chat                                                                    |          3 |        288 |          0 |         28 |        316 |
-| screens\Main\Chat\components                                                         |          2 |        100 |          0 |         11 |        111 |
-| screens\Main\FriendAdd                                                               |          6 |        443 |          0 |         39 |        482 |
-| screens\Main\FriendAdd\components                                                    |          5 |        268 |          0 |         28 |        296 |
-| screens\Main\Latest                                                                  |          2 |        245 |          0 |         29 |        274 |
-| screens\Main\Latest\components                                                       |          1 |        147 |          0 |         15 |        162 |
-| screens\Main\Online                                                                  |          2 |        103 |          0 |         12 |        115 |
-| screens\Main\Online\components                                                       |          1 |         53 |          0 |          7 |         60 |
-| screens\Main\Profile                                                                 |          3 |        222 |          0 |         21 |        243 |
+| screens\Main                                                                         |         25 |      2,186 |          2 |        197 |      2,385 |
+| screens\Main\Chat                                                                    |          3 |        343 |          0 |         34 |        377 |
+| screens\Main\Chat\components                                                         |          2 |        114 |          0 |         11 |        125 |
+| screens\Main\FriendAdd                                                               |          6 |        449 |          0 |         39 |        488 |
+| screens\Main\FriendAdd\components                                                    |          5 |        269 |          0 |         28 |        297 |
+| screens\Main\Latest                                                                  |          2 |        329 |          0 |         31 |        360 |
+| screens\Main\Latest\components                                                       |          1 |        139 |          0 |         14 |        153 |
+| screens\Main\Online                                                                  |          2 |        182 |          0 |         14 |        196 |
+| screens\Main\Online\components                                                       |          1 |         55 |          0 |          7 |         62 |
+| screens\Main\Profile                                                                 |          3 |        227 |          0 |         20 |        247 |
 | screens\Main\Profile\components                                                      |          2 |         65 |          0 |         10 |         75 |
-| screens\Main\SearchFriend                                                            |          1 |        147 |          0 |         11 |        158 |
-| screens\Main\components                                                              |          8 |        474 |          2 |         51 |        527 |
-| screens\components                                                                   |          9 |        461 |          0 |         47 |        508 |
+| screens\Main\SearchFriend                                                            |          1 |        161 |          0 |         12 |        173 |
+| screens\Main\components                                                              |          7 |        443 |          2 |         43 |        488 |
+| screens\components                                                                   |          9 |        556 |          0 |         52 |        608 |
 | theme                                                                                |          5 |         79 |          0 |          9 |         88 |
-| types                                                                                |          1 |         54 |          0 |          9 |         63 |
+| types                                                                                |          1 |         72 |          0 |         10 |         82 |
 +--------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
 
 Files
@@ -57,22 +57,23 @@ Files
 | c:\MobileProjects\Messaging\src\.eslintrc.js                                         | JavaScript       |          9 |         18 |          0 |         27 |
 | c:\MobileProjects\Messaging\src\.expo-shared\assets.json                             | JSON             |          4 |          0 |          0 |          4 |
 | c:\MobileProjects\Messaging\src\.prettierrc                                          | JSON             |          6 |          0 |          1 |          7 |
-| c:\MobileProjects\Messaging\src\App.js                                               | JavaScript       |         56 |          0 |          6 |         62 |
+| c:\MobileProjects\Messaging\src\App.js                                               | JavaScript       |         49 |          0 |          6 |         55 |
 | c:\MobileProjects\Messaging\src\actions\app.ts                                       | TypeScript       |          5 |          0 |          1 |          6 |
-| c:\MobileProjects\Messaging\src\actions\chat.ts                                      | TypeScript       |          6 |          0 |          1 |          7 |
-| c:\MobileProjects\Messaging\src\actions\creators\app.ts                              | TypeScript       |        110 |          1 |         10 |        121 |
-| c:\MobileProjects\Messaging\src\actions\creators\chat.ts                             | TypeScript       |        105 |          0 |         11 |        116 |
-| c:\MobileProjects\Messaging\src\actions\creators\notifications.ts                    | TypeScript       |         58 |          0 |          7 |         65 |
-| c:\MobileProjects\Messaging\src\actions\creators\users.ts                            | TypeScript       |         95 |          0 |         12 |        107 |
+| c:\MobileProjects\Messaging\src\actions\chat.ts                                      | TypeScript       |          7 |          0 |          2 |          9 |
+| c:\MobileProjects\Messaging\src\actions\creators\app.ts                              | TypeScript       |        105 |          0 |          8 |        113 |
+| c:\MobileProjects\Messaging\src\actions\creators\chat.ts                             | TypeScript       |        263 |          0 |         24 |        287 |
+| c:\MobileProjects\Messaging\src\actions\creators\notifications.ts                    | TypeScript       |         66 |         13 |          7 |         86 |
+| c:\MobileProjects\Messaging\src\actions\creators\users.ts                            | TypeScript       |        177 |          0 |         22 |        199 |
 | c:\MobileProjects\Messaging\src\actions\notifications.ts                             | TypeScript       |          3 |          0 |          2 |          5 |
-| c:\MobileProjects\Messaging\src\actions\users.ts                                     | TypeScript       |          8 |          0 |          1 |          9 |
-| c:\MobileProjects\Messaging\src\app.json                                             | JSON             |         19 |          6 |          0 |         25 |
+| c:\MobileProjects\Messaging\src\actions\users.ts                                     | TypeScript       |          9 |          0 |          1 |         10 |
+| c:\MobileProjects\Messaging\src\apis\database.ts                                     | TypeScript       |          8 |          0 |          4 |         12 |
+| c:\MobileProjects\Messaging\src\apis\firestore.ts                                    | TypeScript       |         65 |          0 |          7 |         72 |
+| c:\MobileProjects\Messaging\src\app.json                                             | JSON             |         20 |          6 |          0 |         26 |
 | c:\MobileProjects\Messaging\src\babel.config.js                                      | JavaScript       |          6 |          0 |          1 |          7 |
 | c:\MobileProjects\Messaging\src\config.js                                            | JavaScript       |          5 |          0 |          2 |          7 |
 | c:\MobileProjects\Messaging\src\helpers\animations.ts                                | TypeScript       |         75 |          0 |          8 |         83 |
 | c:\MobileProjects\Messaging\src\helpers\chat.ts                                      | TypeScript       |         15 |          0 |          2 |         17 |
 | c:\MobileProjects\Messaging\src\helpers\svgHelper.ts                                 | TypeScript       |         33 |          0 |          7 |         40 |
-| c:\MobileProjects\Messaging\src\hocs\withAuth.js                                     | JavaScript       |         16 |          0 |          3 |         19 |
 | c:\MobileProjects\Messaging\src\native-base-theme\components\Badge.js                | JavaScript       |         36 |          1 |          3 |         40 |
 | c:\MobileProjects\Messaging\src\native-base-theme\components\Body.js                 | JavaScript       |          8 |          1 |          3 |         12 |
 | c:\MobileProjects\Messaging\src\native-base-theme\components\Button.js               | JavaScript       |        366 |          1 |         20 |        387 |
@@ -121,59 +122,58 @@ Files
 | c:\MobileProjects\Messaging\src\native-base-theme\variables\commonColor.js           | JavaScript       |        261 |         30 |         33 |        324 |
 | c:\MobileProjects\Messaging\src\native-base-theme\variables\material.js              | JavaScript       |        241 |         30 |         34 |        305 |
 | c:\MobileProjects\Messaging\src\native-base-theme\variables\platform.js              | JavaScript       |        271 |         30 |         34 |        335 |
-| c:\MobileProjects\Messaging\src\navigationService.js                                 | JavaScript       |         16 |          0 |          4 |         20 |
-| c:\MobileProjects\Messaging\src\package-lock.json                                    | JSON             |     10,061 |          0 |          1 |     10,062 |
-| c:\MobileProjects\Messaging\src\package.json                                         | JSON             |         75 |          0 |          1 |         76 |
+| c:\MobileProjects\Messaging\src\navigate.ts                                          | TypeScript       |          5 |          0 |          3 |          8 |
+| c:\MobileProjects\Messaging\src\package-lock.json                                    | JSON             |     10,029 |          0 |          1 |     10,030 |
+| c:\MobileProjects\Messaging\src\package.json                                         | JSON             |         77 |          0 |          1 |         78 |
 | c:\MobileProjects\Messaging\src\reactotronConfig.js                                  | JavaScript       |          9 |          0 |          2 |         11 |
-| c:\MobileProjects\Messaging\src\reducers\AppReducer.ts                               | TypeScript       |         59 |          0 |          4 |         63 |
-| c:\MobileProjects\Messaging\src\reducers\ChatReducer.ts                              | TypeScript       |         63 |          0 |          5 |         68 |
-| c:\MobileProjects\Messaging\src\reducers\NotificationsReducer.ts                     | TypeScript       |         28 |          0 |          5 |         33 |
-| c:\MobileProjects\Messaging\src\reducers\UsersReducer.ts                             | TypeScript       |         68 |          0 |          4 |         72 |
+| c:\MobileProjects\Messaging\src\reducers\AppReducer.ts                               | TypeScript       |         41 |          0 |          4 |         45 |
+| c:\MobileProjects\Messaging\src\reducers\ChatReducer.ts                              | TypeScript       |        107 |          0 |         12 |        119 |
+| c:\MobileProjects\Messaging\src\reducers\NotificationsReducer.ts                     | TypeScript       |         29 |          0 |          5 |         34 |
+| c:\MobileProjects\Messaging\src\reducers\UsersReducer.ts                             | TypeScript       |         94 |          0 |         11 |        105 |
 | c:\MobileProjects\Messaging\src\reducers\index.ts                                    | TypeScript       |         18 |          0 |          5 |         23 |
-| c:\MobileProjects\Messaging\src\screens\AppContainer.js                              | JavaScript       |         11 |          0 |          4 |         15 |
+| c:\MobileProjects\Messaging\src\screens\AppContainer.tsx                             | TypeScript React |         33 |          0 |          6 |         39 |
 | c:\MobileProjects\Messaging\src\screens\Auth\Loading\animationHelpers.ts             | TypeScript       |         18 |          0 |          4 |         22 |
-| c:\MobileProjects\Messaging\src\screens\Auth\Loading\componenets\Wave.js             | JavaScript       |         77 |          0 |          8 |         85 |
-| c:\MobileProjects\Messaging\src\screens\Auth\Loading\index.js                        | JavaScript       |         97 |          0 |         10 |        107 |
-| c:\MobileProjects\Messaging\src\screens\Auth\Login\SignIn.js                         | JavaScript       |        120 |          0 |          7 |        127 |
-| c:\MobileProjects\Messaging\src\screens\Auth\Login\SignUp.js                         | JavaScript       |        219 |          1 |         12 |        232 |
+| c:\MobileProjects\Messaging\src\screens\Auth\Loading\componenets\Wave.js             | JavaScript       |         85 |          0 |          8 |         93 |
+| c:\MobileProjects\Messaging\src\screens\Auth\Loading\index.js                        | JavaScript       |         81 |          0 |          8 |         89 |
+| c:\MobileProjects\Messaging\src\screens\Auth\Login\SignIn.js                         | JavaScript       |        129 |          0 |          9 |        138 |
+| c:\MobileProjects\Messaging\src\screens\Auth\Login\SignUp.js                         | JavaScript       |        225 |          1 |         12 |        238 |
 | c:\MobileProjects\Messaging\src\screens\Auth\Login\animationHelpers.ts               | TypeScript       |        195 |          0 |         11 |        206 |
 | c:\MobileProjects\Messaging\src\screens\Auth\Login\components\Wave.js                | JavaScript       |        185 |          0 |          7 |        192 |
-| c:\MobileProjects\Messaging\src\screens\Auth\Login\index.js                          | JavaScript       |         99 |          0 |          8 |        107 |
-| c:\MobileProjects\Messaging\src\screens\Auth\nav.js                                  | JavaScript       |          7 |          0 |          2 |          9 |
+| c:\MobileProjects\Messaging\src\screens\Auth\Login\index.js                          | JavaScript       |        107 |          0 |         10 |        117 |
+| c:\MobileProjects\Messaging\src\screens\Auth\index.tsx                               | TypeScript React |         13 |          0 |          3 |         16 |
 | c:\MobileProjects\Messaging\src\screens\Main\Chat\components\Bubble.tsx              | TypeScript React |         26 |          0 |          4 |         30 |
-| c:\MobileProjects\Messaging\src\screens\Main\Chat\components\ChatHeader.tsx          | TypeScript React |         74 |          0 |          7 |         81 |
-| c:\MobileProjects\Messaging\src\screens\Main\Chat\index.tsx                          | TypeScript React |        188 |          0 |         17 |        205 |
+| c:\MobileProjects\Messaging\src\screens\Main\Chat\components\ChatHeader.tsx          | TypeScript React |         88 |          0 |          7 |         95 |
+| c:\MobileProjects\Messaging\src\screens\Main\Chat\index.tsx                          | TypeScript React |        229 |          0 |         23 |        252 |
 | c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\ItemAdd.tsx        | TypeScript React |         82 |          0 |          5 |         87 |
 | c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\ItemRequest.tsx    | TypeScript React |         33 |          0 |          4 |         37 |
 | c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\RequestButtons.tsx | TypeScript React |         61 |          0 |          6 |         67 |
 | c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\Requests.tsx       | TypeScript React |         41 |          0 |          6 |         47 |
-| c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\Results.tsx        | TypeScript React |         51 |          0 |          7 |         58 |
-| c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\index.tsx                     | TypeScript React |        175 |          0 |         11 |        186 |
-| c:\MobileProjects\Messaging\src\screens\Main\Latest\components\ListItem.tsx          | TypeScript React |        147 |          0 |         15 |        162 |
-| c:\MobileProjects\Messaging\src\screens\Main\Latest\index.tsx                        | TypeScript React |         98 |          0 |         14 |        112 |
-| c:\MobileProjects\Messaging\src\screens\Main\Online\components\FriendState.tsx       | TypeScript React |         53 |          0 |          7 |         60 |
-| c:\MobileProjects\Messaging\src\screens\Main\Online\index.tsx                        | TypeScript React |         50 |          0 |          5 |         55 |
+| c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\components\Results.tsx        | TypeScript React |         52 |          0 |          7 |         59 |
+| c:\MobileProjects\Messaging\src\screens\Main\FriendAdd\index.tsx                     | TypeScript React |        180 |          0 |         11 |        191 |
+| c:\MobileProjects\Messaging\src\screens\Main\Latest\components\ListItem.tsx          | TypeScript React |        139 |          0 |         14 |        153 |
+| c:\MobileProjects\Messaging\src\screens\Main\Latest\index.tsx                        | TypeScript React |        190 |          0 |         17 |        207 |
+| c:\MobileProjects\Messaging\src\screens\Main\Online\components\FriendState.tsx       | TypeScript React |         55 |          0 |          7 |         62 |
+| c:\MobileProjects\Messaging\src\screens\Main\Online\index.tsx                        | TypeScript React |        127 |          0 |          7 |        134 |
 | c:\MobileProjects\Messaging\src\screens\Main\Profile\components\ItemDivider.tsx      | TypeScript React |         26 |          0 |          5 |         31 |
 | c:\MobileProjects\Messaging\src\screens\Main\Profile\components\Option.tsx           | TypeScript React |         39 |          0 |          5 |         44 |
-| c:\MobileProjects\Messaging\src\screens\Main\Profile\index.tsx                       | TypeScript React |        157 |          0 |         11 |        168 |
-| c:\MobileProjects\Messaging\src\screens\Main\SearchFriend\index.tsx                  | TypeScript React |        147 |          0 |         11 |        158 |
+| c:\MobileProjects\Messaging\src\screens\Main\Profile\index.tsx                       | TypeScript React |        162 |          0 |         10 |        172 |
+| c:\MobileProjects\Messaging\src\screens\Main\SearchFriend\index.tsx                  | TypeScript React |        161 |          0 |         12 |        173 |
 | c:\MobileProjects\Messaging\src\screens\Main\components\BadgeButton.tsx              | TypeScript React |         61 |          1 |          5 |         67 |
-| c:\MobileProjects\Messaging\src\screens\Main\components\FriendItem.tsx               | TypeScript React |         61 |          0 |          7 |         68 |
-| c:\MobileProjects\Messaging\src\screens\Main\components\FriendSearch.tsx             | TypeScript React |         64 |          0 |          6 |         70 |
-| c:\MobileProjects\Messaging\src\screens\Main\components\Header.tsx                   | TypeScript React |         90 |          0 |          8 |         98 |
-| c:\MobileProjects\Messaging\src\screens\Main\components\LatestButton.tsx             | TypeScript React |         64 |          0 |          9 |         73 |
-| c:\MobileProjects\Messaging\src\screens\Main\components\OnlineButton.tsx             | TypeScript React |         51 |          0 |          5 |         56 |
+| c:\MobileProjects\Messaging\src\screens\Main\components\FriendItem.tsx               | TypeScript React |         66 |          0 |          7 |         73 |
+| c:\MobileProjects\Messaging\src\screens\Main\components\FriendSearch.tsx             | TypeScript React |         65 |          0 |          6 |         71 |
+| c:\MobileProjects\Messaging\src\screens\Main\components\Header.tsx                   | TypeScript React |         93 |          0 |          7 |        100 |
+| c:\MobileProjects\Messaging\src\screens\Main\components\LatestButton.tsx             | TypeScript React |         53 |          0 |          8 |         61 |
+| c:\MobileProjects\Messaging\src\screens\Main\components\OnlineButton.tsx             | TypeScript React |         48 |          0 |          5 |         53 |
 | c:\MobileProjects\Messaging\src\screens\Main\components\TabBarButton.tsx             | TypeScript React |         57 |          1 |          5 |         63 |
-| c:\MobileProjects\Messaging\src\screens\Main\components\TabBarComponent.js           | JavaScript       |         26 |          0 |          6 |         32 |
-| c:\MobileProjects\Messaging\src\screens\Main\nav.js                                  | JavaScript       |         47 |          1 |          3 |         51 |
-| c:\MobileProjects\Messaging\src\screens\components\Back.tsx                          | TypeScript React |         31 |          0 |          5 |         36 |
+| c:\MobileProjects\Messaging\src\screens\Main\index.tsx                               | TypeScript React |         52 |          0 |          4 |         56 |
+| c:\MobileProjects\Messaging\src\screens\components\Back.tsx                          | TypeScript React |         33 |          0 |          5 |         38 |
 | c:\MobileProjects\Messaging\src\screens\components\Button.tsx                        | TypeScript React |         43 |          0 |          5 |         48 |
 | c:\MobileProjects\Messaging\src\screens\components\ContentLoader.tsx                 | TypeScript React |         32 |          0 |          5 |         37 |
 | c:\MobileProjects\Messaging\src\screens\components\IconBackground.tsx                | TypeScript React |         34 |          0 |          5 |         39 |
 | c:\MobileProjects\Messaging\src\screens\components\Input.tsx                         | TypeScript React |        113 |          0 |          5 |        118 |
 | c:\MobileProjects\Messaging\src\screens\components\Loader.js                         | JavaScript       |         29 |          0 |          4 |         33 |
 | c:\MobileProjects\Messaging\src\screens\components\Notification.tsx                  | TypeScript React |        113 |          0 |         11 |        124 |
-| c:\MobileProjects\Messaging\src\screens\components\StatusBar.js                      | JavaScript       |         19 |          0 |          4 |         23 |
+| c:\MobileProjects\Messaging\src\screens\components\SlideItem.tsx                     | TypeScript React |        112 |          0 |          9 |        121 |
 | c:\MobileProjects\Messaging\src\screens\components\Touchable.tsx                     | TypeScript React |         47 |          0 |          3 |         50 |
 | c:\MobileProjects\Messaging\src\store.js                                             | JavaScript       |         20 |          0 |          5 |         25 |
 | c:\MobileProjects\Messaging\src\theme\globals.js                                     | JavaScript       |          5 |          0 |          1 |          6 |
@@ -182,6 +182,6 @@ Files
 | c:\MobileProjects\Messaging\src\theme\typography.js                                  | JavaScript       |         18 |          0 |          3 |         21 |
 | c:\MobileProjects\Messaging\src\theme\zIndex.js                                      | JavaScript       |          5 |          0 |          1 |          6 |
 | c:\MobileProjects\Messaging\src\tsconfig.json                                        | JSON             |          7 |         35 |          0 |         42 |
-| c:\MobileProjects\Messaging\src\types\index.ts                                       | TypeScript       |         54 |          0 |          9 |         63 |
-| Total                                                                                |                  |     18,367 |        208 |        778 |     19,353 |
+| c:\MobileProjects\Messaging\src\types\index.ts                                       | TypeScript       |         72 |          0 |         10 |         82 |
+| Total                                                                                |                  |     19,048 |        219 |        835 |     20,102 |
 +--------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+

@@ -23,6 +23,7 @@ const {
   eq,
   and,
   set,
+  not,
   greaterThan,
 } = Animated;
 
@@ -83,7 +84,10 @@ export default class SlideItem extends React.Component<Props> {
                     }),
                   ),
                   cond(
-                    greaterOrEq(this.translationX, 70),
+                    and(
+                      greaterOrEq(this.translationX, 70),
+                      not(eq(this.offsetX, 0)),
+                    ),
                     set(
                       this.offsetX,
                       timing({

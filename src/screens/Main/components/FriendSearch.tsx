@@ -50,6 +50,7 @@ const FriendSearch = (props: Props) => {
           onChangeText={(text: string) => {
             onChangeText(text);
           }}
+          type="default"
         />
       </View>
     </TouchableWithoutFeedback>

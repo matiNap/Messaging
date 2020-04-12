@@ -24,6 +24,7 @@ import {
   readMessage,
   fetchChatOnScroll,
 } from '_actions/creators/chat';
+import reactotron from 'reactotronConfig';
 
 interface Props {
   user: UserChat;
@@ -167,7 +168,7 @@ class Chat extends Component<Props> {
   render() {
     const { user } = this.getParms();
     const { messages } = this.props;
-
+    reactotron.log('render');
     return (
       <KeyboardAvoidingView
         enabled
