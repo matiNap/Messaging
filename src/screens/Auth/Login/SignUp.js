@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Container, Text, View } from 'native-base';
 import Input from '_components/Input';
-import { StyleSheet, KeyboardAvoidingView } from 'react-native';
+import {
+  StyleSheet,
+  KeyboardAvoidingView,
+  ScrollView,
+} from 'react-native';
 import typography from '_typography';
 import metrics from '_metrics';
 import palette from '_palette';
@@ -87,13 +91,11 @@ class SignUp extends Component {
 
     return (
       <Animated.View style={[styles.container, { translateY }]}>
-        <KeyboardAvoidingView behavior="position">
-          <View
-            behavior="height"
-            style={{ justifyContent: 'center' }}
-          >
+        <View behavior="height" style={{ justifyContent: 'center' }}>
+          <KeyboardAvoidingView behavior="position">
             <Text style={styles.title}>Sign up</Text>
-            <View style={styles.inputContainer}>
+
+            <ScrollView style={styles.inputContainer}>
               <Input
                 autoCapitalize="none"
                 color={palette.secondary}
@@ -166,7 +168,7 @@ class SignUp extends Component {
                   this.onInputChange(RPASS, text);
                 }}
               />
-            </View>
+            </ScrollView>
 
             <Text style={styles.warningText}>{message}</Text>
 
@@ -176,9 +178,10 @@ class SignUp extends Component {
               secondary
               onPress={this.handleForms}
             />
-          </View>
-          <Loader visible={visible} />
-        </KeyboardAvoidingView>
+          </KeyboardAvoidingView>
+        </View>
+
+        <Loader visible={visible} />
       </Animated.View>
     );
   }

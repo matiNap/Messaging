@@ -74,7 +74,7 @@ const Input = (props: Props) => {
         </View>
       )}
       <TextInput
-        keyboardType=""
+        keyboardType={type}
         placeholderTextColor={placeholderColor}
         value={value}
         secureTextEntry={secureTextEntry}

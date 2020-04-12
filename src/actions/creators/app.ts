@@ -4,7 +4,6 @@ import { AppThunk } from '_types';
 import * as firestore from '_apis/firestore';
 import reactotron from 'reactotron-react-native';
 import firebase from 'firebase';
-import navigate from '_navigation';
 
 export const createUser = (
   userData: {
@@ -62,7 +61,6 @@ export const checkAuth = (
   onAuthFailed: Function,
 ) => async dispatch => {
   firebase.auth().onAuthStateChanged(async googleUser => {
-    console.log(googleUser);
     if (googleUser) {
       const userSnapshot = await firestore
         .getUserRef(googleUser.uid)

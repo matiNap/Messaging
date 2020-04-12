@@ -2,15 +2,16 @@
   "expo": {
     "name": "Messaging",
     "slug": "Messaging",
-    "privacy": "public",
+    "privacy": "unlisted",
     "sdkVersion": "36.0.0",
-    "platforms": ["ios", "android", "web"],
+    "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "androidShowExponentNotificationInShellApp": true,
+    "primaryColor": "#811cb0",
+    "androidShowExponentNotificationInShellApp": false,
     "splash": {
-      "image": "./assets/splash.png",
+      // "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,7 +20,7 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false
     }
   }
 }

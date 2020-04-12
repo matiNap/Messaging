@@ -7,7 +7,7 @@ import firebase from 'firebase';
 import NetInfo from '@react-native-community/netinfo';
 import _ from 'lodash';
 
-const sendChatMessage = async (
+export const sendChatMessage = async (
   uidA: string,
   uidB: string,
   message: Message,
