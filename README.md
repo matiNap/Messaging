@@ -5,8 +5,8 @@ Application uses React Native and firebase
 
 ![](messaging.gif)
 
-![](online.gif)
+![alt text](online.png)
 
-![](profile.gif)
+![alt text](profile.png)
 
-![](requests.gif)
+![alt text](requests.png)
